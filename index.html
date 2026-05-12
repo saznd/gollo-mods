@@ -18,16 +18,33 @@ body {
   position: relative;
   z-index: 1;
   color: white;
-
-  /* NUEVA IMAGEN DE FONDO ACTUALIZADA */
-  background-image: url('https://cdn.discordapp.com/attachments/1462277507456831671/1503271880520634378/38edf23a5abe3dea8848d5c32baf4d21.jpg?ex=6a02be89&is=6a016d09&hm=c014d3e9f46a4cd127de885cc277692bd5f260419ca9329a3d6c0ce6d75e4177&');
-  
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
+  overflow-x: hidden;
   padding-bottom: 80px;
+  background-color: #000;
+}
+
+/* VIDEO DE FONDO */
+#video-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Capa oscura semitransparente encima del video para mejorar legibilidad */
+.overlay-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .card:hover{
@@ -526,13 +543,6 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
-    background-image: url('https://cdn.discordapp.com/attachments/1462277507456831671/1503271880520634378/38edf23a5abe3dea8848d5c32baf4d21.jpg?ex=6a02be89&is=6a016d09&hm=c014d3e9f46a4cd127de885cc277692bd5f260419ca9329a3d6c0ce6d75e4177&');
-    background-size: cover;
-    background-position: center;
-    background-attachment: scroll;
-  }
-
   .titulo {
     font-size: 48px;
   }
@@ -561,20 +571,16 @@ body {
   }
 }
 
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-
 </style>
 </head>
 
 <body>
+
+<!-- VIDEO DE FONDO -->
+<video autoplay muted loop id="video-fondo">
+  <source src="https://cdn.discordapp.com/attachments/1462277507456831671/1503563514680315915/KRIS_R_GEEZYDEE_-_TUKI_TUKI__HD.mp4?ex=6a03ce24&is=6a027ca4&hm=b6d4939c9f61ede0c12f9e4819a09b6d7ff8b6134c72dea9625ea1f97b293754&" type="video/mp4">
+</video>
+<div class="overlay-video"></div>
 
 <audio id="musica" loop autoplay>
   <source src="music/fondo.mp3" type="audio/mpeg">
@@ -628,7 +634,7 @@ body {
 </p>
    <p class="peso">PESO: <span class="rojo">219MB</span></p>
    <div class="video-thumb">
-  <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a0223b5&is=6a00d235&hm=f9399da7516b39aa2ff52314dfdb2e3cf8a220d798921f5f74c14ebef6e4a7b7&" alt="Suprisse aport">
+  <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&">
 </div>
     <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
   </div>
@@ -639,7 +645,7 @@ body {
     <p class="password">CONTRASEÑA: <span class="verde">Diavlo</span>
     <p class="peso">PESO: <span class="rojo">460MB</span></p>
     <div class="video-thumb">
-  <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492234517245595859/sa-mp-000-1.png?ex=6a022431&is=6a00d2b1&hm=b94ea9f332c25fa6bcefc52fa363107c31a165d8d572786b7a0ba7134324fc57&" alt="Nice aport">
+  <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492234517245595859/sa-mp-000-1.png?ex=6a0375b1&is=6a022431&hm=e27b2ef5f97b9ba4eac67bbfca58bd19248cf410c992cb0d747865d6718b4c24&" alt="Nice aport">
 </div>
     <a href="https://www.mediafire.com/file/497z7youfbo0ppv/Gta+Satanico.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
   </div>
@@ -650,7 +656,7 @@ body {
     <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span>
       <p class="peso">PESO: <span class="rojo">231MB</span></p>
     <div class="video-thumb">
-    <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1500609247258480763/sa-mp-000.png?ex=6a024944&is=6a00f7c4&hm=fe60115fd484be6a53a8ae26171ae60c106bb00731b232945ee0d1b94545232b&" alt="True tears">
+    <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1500609247258480763/sa-mp-000.png?ex=6a039ac4&is=6a024944&hm=4dcc35e5d7f49dc9b4ef246b34e6451661c4c31c6080b28a0e9cb2d714dfcafa&" alt="True tears">
     </div>
     <a href="https://www.mediafire.com/file/vjbckjuf9zdyfv2/GTA+RZ.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
   </div>
@@ -700,7 +706,7 @@ body {
     <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
     <p class="peso">PESO: <span class="rojo">401MB</span></p>
     <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1496402847967744010/Screenshot_20260421-215226.png?ex=6a022500&is=6a00d380&hm=6553486094bfe513f1b6799c921adce8eaa9294eeb756a2b21c55f0960be0f44&">
+      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1496402847967744010/Screenshot_20260421-215226.png?ex=6a037680&is=6a022500&hm=33de1a8fed12816d797bbb1bc832e0d2279343f32c72e713162e8a2aa4dac892&">
     </div>
     <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">DESCARGAR DATA</a>
   </div>
@@ -711,7 +717,7 @@ body {
     <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
     <p class="peso">PESO: <span class="rojo">400MB</span></p>
     <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1494823118177570889/Screenshot_20260417-160241.png?ex=6a025483&is=6a010303&hm=4a9b8a0af992c849995f9dd2625fa7fd35d2d49e42d7e818ad79d7b69ee0b4e7&">
+      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1494823118177570889/Screenshot_20260417-160241.png?ex=6a03a603&is=6a025483&hm=04ce7ec6e99b0f362f9558ef8c30504c0ad88fad43cb73dfd669c3442f23c3db&">
     </div>
     <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">DESCARGAR DATA</a>
   </div>
@@ -722,19 +728,19 @@ body {
   
   <!-- Nuevo aporte 1 -->
   <div class="aporte-card">
-    <h3>GTA RAR</h3>
+    <h3>GTA</h3>
     <p class="creator">CREADOR: Santi Gollo</p>
     <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
     <p class="peso">PESO: <span class="rojo">219MB</span></p>
     <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a0223b5&is=6a00d235&hm=f9399da7516b39aa2ff52314dfdb2e3cf8a220d798921f5f74c14ebef6e4a7b7&" alt="GTA RAR">
+      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&" alt="GTA RAR">
     </div>
     <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
   </div>
   
   <!-- Nuevo aporte 2 -->
   <div class="aporte-card">
-    <h3>King Of Kings TOP</h3>
+    <h3>King Of Kings</h3>
     <p class="creator">CREADOR: Betrayedd</p>
     <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
     <p class="peso">PESO: <span class="rojo">228MB</span></p>
@@ -791,4 +797,5 @@ if(btnMusic && audio) {
 }
 
 // Mostrar equipo por defecto
-documen
+document.addEventListener('DOMContentLoaded', () => {
+  mostrar('equipo', document.querySelector('.menu but
