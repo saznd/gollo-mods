@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title> GOLLO MODS</title>
+<title> GOLLO MODS | INFIERNO</title>
 <link rel="icon" type="image/png" href="img/akala.png">
-</head>
-
 <link href="fuentes/css1.css" rel="stylesheet">
 <link href="fuentes/css2.css" rel="stylesheet">
 
 <style> 
-
 * {
   margin: 0;
   padding: 0;
@@ -28,8 +25,8 @@ body {
   background-color: #000;
 }
 
-/* VIDEO DE FONDO */
-#video-fondo {
+/* VIDEO DE FONDO PRINCIPAL (TAMBIÉN EN SPLASH) */
+#video-fondo, #video-fondo-splash {
   position: fixed;
   top: 0;
   left: 0;
@@ -40,29 +37,156 @@ body {
   pointer-events: none;
 }
 
-/* Capa oscura semitransparente encima del video para mejorar legibilidad */
+#video-fondo-splash {
+  z-index: -1;
+}
+
 .overlay-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.7);
   z-index: -1;
   pointer-events: none;
 }
 
-/* ========== ESTILOS GENERALES NEGRO/BLANCO + FUEGO ========== */
+/* ========== PANTALLA DE INGRESO CON VIDEO Y TEXTO INFIERNO ========== */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.85), #000000);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(1px);
+}
+
+.splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-logo {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 2;
+}
+
+.splash-logo .titulo-splash {
+  font-family: 'Ethnocentric', sans-serif;
+  font-size: 68px;
+  letter-spacing: 6px;
+  color: #fff;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3300, 0 0 40px #ff6600, 0 0 80px #ff0000;
+  animation: flamePulse 1.4s infinite alternate;
+}
+
+@keyframes flamePulse {
+  0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff3300; }
+  100% { text-shadow: 0 0 25px #ff4400, 0 0 50px #ff6600, 0 0 90px #ff0000; }
+}
+
+.splash-logo .subtitulo-splash {
+  font-family: "Orbitronht", sans-serif;
+  color: #ff6644;
+  letter-spacing: 4px;
+  font-size: 20px;
+  text-shadow: 0 0 12px #ff3300;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.splash-logo .leyenda-infierno {
+  font-family: "Orbitronht", monospace;
+  font-size: 14px;
+  color: #ffaa77;
+  letter-spacing: 2px;
+  background: rgba(0,0,0,0.6);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 40px;
+  margin-top: 20px;
+  border: 1px solid #ff4400;
+  box-shadow: 0 0 15px rgba(255,68,0,0.4);
+}
+
+.btn-ingresar {
+  background: #000000;
+  color: #ff5500;
+  border: 2px solid #ff3300;
+  padding: 16px 48px;
+  font-size: 28px;
+  font-family: "Orbitronht", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 60px;
+  box-shadow: 0 0 15px #ff3300, inset 0 0 5px #ff6600;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.btn-ingresar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 60, 0, 0.8), rgba(255, 140, 0, 0.9), rgba(255, 60, 0, 0.8), transparent);
+  transition: left 0.5s ease;
+  filter: blur(6px);
+}
+
+.btn-ingresar:hover::before {
+  left: 100%;
+}
+
+.btn-ingresar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 45px #ff4400, 0 0 25px #ff6600, inset 0 0 10px #ffaa44;
+  border-color: #ff8844;
+  color: #ffaa66;
+  text-shadow: 0 0 8px #ff3300;
+}
+
+/* CONTENIDO PRINCIPAL */
+.contenido-principal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+}
+
+.contenido-principal.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========== EFECTOS FUEGO/NEGRO EN TODOS LOS BOTONES ========== */
 button, .btn-descarga, .menu button {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  transition: all 0.3s ease !important;
+  background: #0a0a0a !important;
+  color: #ff8844 !important;
+  border: 2px solid #ff3300 !important;
+  transition: all 0.25s ease !important;
   font-weight: bold;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  box-shadow: 0 0 6px rgba(255, 60, 0, 0.5);
 }
 
 button::before, .btn-descarga::before, .menu button::before {
@@ -72,10 +196,10 @@ button::before, .btn-descarga::before, .menu button::before {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 80, 40, 0.7), rgba(255, 200, 50, 0.9), rgba(255, 80, 40, 0.7), transparent);
-  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 60, 0, 0.7), rgba(255, 100, 0, 0.9), rgba(255, 60, 0, 0.7), transparent);
+  transition: left 0.5s ease;
   z-index: -1;
-  filter: blur(5px);
+  filter: blur(6px);
 }
 
 button:hover::before, .btn-descarga:hover::before, .menu button:hover::before {
@@ -84,298 +208,50 @@ button:hover::before, .btn-descarga:hover::before, .menu button:hover::before {
 
 button:hover, .btn-descarga:hover, .menu button:hover {
   transform: scale(1.05) translateY(-3px);
-  box-shadow: 0 0 20px rgba(255, 80, 40, 0.8), 0 0 35px rgba(255, 100, 0, 0.6);
-  border-color: #ff6600 !important;
+  box-shadow: 0 0 25px #ff4400, 0 0 40px #ff2200, inset 0 0 8px #ffaa55;
+  border-color: #ff7744 !important;
   color: #ffcc88 !important;
-  text-shadow: 0 0 8px #ff5500;
+  text-shadow: 0 0 5px #ff4400;
 }
 
-.discord-box{
-  margin-top: 30px;
-  padding: 20px;
-  width: 260px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  background: rgba(0,0,0,0.85);
-  border: 1px solid #ff4444;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #ff0000, 0 0 25px #cc0000, 0 0 40px #8B0000;
-  animation: glowBox 2s infinite alternate;
-}
-
-.discord-title{
-  font-family: "Orbitronht", sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #ff6666;
-  margin-bottom: 10px;
-}
-
-#discord-count{
-  font-family: "Ethnocentric", sans-serif;
-  font-size: 28px;
-  color: #ff4444;
-  text-shadow: 0 0 5px #ff0000, 0 0 15px #ff0000, 0 0 30px #cc0000;
-}
-
-@keyframes glowBox {
-  0%{ box-shadow: 0 0 10px #ff0000, 0 0 25px #cc0000; }
-  100%{ box-shadow: 0 0 20px #ff6666, 0 0 40px #ff0000; }
-}
-
-.redes-container{
-  display:flex;
-  justify-content:center;
-  gap:50px;
-  margin-top:20px;
-}
-
-.icono-red{
-  width:95px;
-  transition: all 0.3s ease;
-  cursor:pointer;
-  border-radius: 1px solid #ff4444;
-  box-shadow: 0 0 15px rgba(255,0,0,0.3);
-}
-
-.icono-red:hover{
-  transform: scale(1.08);
-  box-shadow: 0 0 15px rgba(255,0,0,0.5);
-}
-
-.seccion{
-  padding-bottom: 40px;
-}
-
-.aportes-grid{
-  padding-bottom: 30px;
-}
-
-.music-ui{
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(0,0,0,0.95);
-  padding: 10px 14px;
-  border-radius: 50px;
-  border: 1px solid #ffffff;
-  box-shadow: 0 0 15px rgba(255,80,40,0.4);
-  backdrop-filter: blur(6px);
-  z-index: 9999;
-}
-
-#btn-music{
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: #000000 !important;
-  color: white !important;
-  border: 2px solid white !important;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.3s ease;
-}
-
-#btn-music:hover{
-  transform: scale(1.12);
-  box-shadow: 0 0 20px rgba(255,80,40,0.8);
-  border-color: #ff6600 !important;
-}
-
-.barra{
-  width: 140px;
-  height: 7px;
-  background: #222;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
-
-.progreso{
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #ffffff, #ffaa66);
-  box-shadow: 0 0 8px #ffaa66;
-  transition: width 0.15s linear;
-}
-
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.ttf");
-}
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.otf");
-}
-@font-face {
-  font-family: "Orbitronht";
-  src: url("fonts/Orbitronht.ttf");
-}
-@font-face {
-  font-family: "HighriseFont";
-  src: url("fonts/HighriseFont.otf");
-}
-
-.texto-redes{
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 200;
-  letter-spacing: 0.4px;
-  max-width: 780px;
-  margin: 10px auto 25px auto;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.titulo-redes{
-  font-family: "Orbitron-Black", sans-serif;
-  letter-spacing: 2px;
-  color: #ff6666;
-  text-shadow: 0 0 10px #ff0000;
-}
-
-.creator, .password, .peso{
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  font-size: 13px;
-  margin: 6px 0;
-}
-
-.creator{
-  color: #ffaa88;
-}
-.password{
-  color: #dddddd;
-}
-.verde{
-  color: #88ff88;
-}
-.peso{
-  color: #dddddd;
-}
-.rojo{
-  color: #ff8888;
-  font-weight: bold;
-}
-
-.hero {
-  text-align: center;
-  padding-top: 60px;
-}
-
-.titulo {
-  font-family: 'Ethnocentric', sans-serif;
-  font-size: 64px;
-  letter-spacing: 6px;
-  color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #ff0000, 0 0 20px #cc0000, 0 0 40px #8B0000, 0 0 80px #550000;
-  animation: glowTitulo 2s infinite alternate;
-}
-
-@keyframes glowTitulo {
-  0% { text-shadow: 0 0 10px #ff0000; }
-  100% { text-shadow: 0 0 30px #ff6666; }
-}
-
-.subtitulo {
-  margin-top: 8px;
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: rgba(255, 200, 200, 0.9);
-}
-
-.menu{
-  margin-top: 40px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: nowrap;
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.menu-wrapper{
-  width: 100%;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-.menu{
-  background: rgba(0, 0, 0, 0.85);
+/* Menu estilo llamarada */
+.menu {
+  background: rgba(0, 0, 0, 0.9);
   padding: 12px 20px;
-  border-top: 1px solid #ffffff;
-  border-bottom: 1px solid #ffffff;
+  border-top: 2px solid #ff4400;
+  border-bottom: 2px solid #ff4400;
   border-radius: 6px;
-  box-shadow: 0 0 15px rgba(255,80,40,0.3);
+  box-shadow: 0 0 20px rgba(255, 60, 0, 0.5), inset 0 0 10px rgba(255, 60, 0, 0.2);
 }
 
-.menu button{
-  background: #000000 !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  padding: 10px 22px;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
+.menu button {
   transform: skew(-12deg);
-  transition: all 0.3s ease;
-  font-family: "Orbitronht", sans-serif;
-  letter-spacing: 1px;
 }
 
-.menu button span{
+.menu button span {
   display: inline-block;
   transform: skew(12deg);
 }
 
-.menu button:hover{
-  background: #000000 !important;
-  color: #ffcc88 !important;
-  transform: skew(-12deg) translateY(-3px);
-  border-color: #ff6600 !important;
-  box-shadow: 0 0 25px rgba(255,80,40,0.8);
+.menu button.activo {
+  background: #1a0500 !important;
+  color: #ffaa55 !important;
+  box-shadow: 0 0 30px #ff3300, 0 0 15px #ff7700;
+  border-color: #ff8844 !important;
+  text-shadow: 0 0 8px #ff4400;
 }
 
-.menu button.activo{
-  background: #000000 !important;
-  color: #ffaa66 !important;
-  box-shadow: 0 0 25px #ff6600, 0 0 12px #ffaa44;
-  transform: skew(-12deg) translateY(-3px);
-  border-color: #ffaa44 !important;
-  animation: pulsarBoton 0.6s ease-out;
-}
-
-@keyframes pulsarBoton {
-  0% { transform: skew(-12deg) scale(1); box-shadow: 0 0 0px #ff6600; }
-  50% { transform: skew(-12deg) scale(1.08); box-shadow: 0 0 40px #ffaa44; }
-  100% { transform: skew(-12deg) translateY(-3px); box-shadow: 0 0 25px #ff6600; }
-}
-
-.seccion {
-  display: none;
-}
-
-/* ========== EQUIPO NUEVO: SOLO CIRCULO + RANGO, SIN CUADRADO ========== */
+/* EQUIPO: solo circulo + rango, con borde fuego */
 #equipo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  gap: 40px;
+  gap: 50px;
   max-width: 1100px;
   margin: 70px auto;
   padding: 20px;
 }
 
-/* Tarjeta minimalista sin borde cuadrado grande, solo circulo y texto */
 .staff-card-minimal {
   display: flex;
   flex-direction: column;
@@ -383,11 +259,8 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   justify-content: center;
   background: transparent !important;
   border: none !important;
-  box-shadow: none !important;
   padding: 15px 5px;
   transition: transform 0.3s ease;
-  backdrop-filter: none;
-  position: relative;
 }
 
 .staff-card-minimal:hover {
@@ -395,22 +268,22 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 }
 
 .staff-card-minimal .avatar {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  border: 3px solid #ffffff;
-  background: rgba(0,0,0,0.6);
+  border: 3px solid #ff4400;
+  background: #000000cc;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+  box-shadow: 0 0 20px rgba(255, 68, 0, 0.6), inset 0 0 10px rgba(255, 100, 0, 0.4);
 }
 
 .staff-card-minimal:hover .avatar {
   border-color: #ff8844;
-  box-shadow: 0 0 30px rgba(255,100,0,0.8);
+  box-shadow: 0 0 45px rgba(255, 70, 0, 0.9), 0 0 20px #ff4400;
   transform: scale(1.02);
 }
 
@@ -422,65 +295,60 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 
 .staff-card-minimal .name {
   margin-top: 18px;
-  color: white;
+  color: #ffaa77;
   font-size: 22px;
   font-weight: bold;
   font-family: "Ethnocentric", sans-serif;
   letter-spacing: 1.5px;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  text-shadow: 0 0 4px #ff3300;
 }
 
 .staff-card-minimal .role {
-  margin-top: 8px;
-  color: #ffaa77;
+  margin-top: 10px;
+  color: #ff8844;
   font-size: 16px;
   font-family: "Orbitronht", monospace;
   letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: bold;
-  background: rgba(0,0,0,0.5);
-  padding: 4px 12px;
-  border-radius: 30px;
+  background: rgba(0,0,0,0.7);
+  padding: 5px 18px;
+  border-radius: 40px;
   backdrop-filter: blur(4px);
+  border: 1px solid #ff5522;
+  box-shadow: 0 0 8px #ff3300;
 }
 
-/* Eliminamos cualquier pseudo-elemento de barrido que moleste */
-.staff-card-minimal::before {
-  display: none;
-}
-
-/* Cards de aportes - fondo negro, texto blanco, botones negros con blanco */
+/* Cards de aportes con fuego */
 .aporte-card {
-  background: rgba(0,0,0,0.95);
-  border: 1px solid #ffffff;
+  background: #0c0502;
+  border: 2px solid #ff4400;
   padding: 20px;
   text-align: left;
   transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 0 5px rgba(255,80,0,0.2);
 }
 
 .aporte-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 0 20px rgba(255,80,40,0.6), 0 0 10px rgba(255,100,0,0.4);
+  box-shadow: 0 0 35px #ff3300, 0 0 25px #ff5500, inset 0 0 8px #ffaa55;
   border-color: #ff8844;
 }
 
 .aporte-card h3 {
-  color: #ffffff;
+  color: #ffaa55;
   font-family: "Ethnocentric", sans-serif;
-  margin-top: 6px;
-  margin-bottom: 5px;
-  letter-spacing: 1px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 4px #ff4400;
 }
 
 .video-thumb {
-  position: relative;
   margin: 12px 0;
-  border: 1px solid #ffffff;
-  border-radius: 6px;
+  border: 1px solid #ff5522;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 0 8px rgba(255,68,0,0.4);
 }
 
 .video-thumb img {
@@ -491,31 +359,26 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 .btn-descarga {
   display: block;
   text-align: center;
-  background: #000000 !important;
-  color: #ffffff !important;
+  background: #0a0000 !important;
+  color: #ff8844 !important;
   text-decoration: none;
   padding: 14px;
   font-family: "Orbitronht", sans-serif;
   font-size: 16px;
-  letter-spacing: 2px;
-  border: 2px solid #ffffff !important;
-  transition: all 0.35s ease;
-  border-radius: 8px;
+  letter-spacing: 3px;
+  border: 2px solid #ff4400 !important;
+  transition: all 0.3s ease;
+  border-radius: 40px;
   font-weight: bold;
+  box-shadow: 0 0 6px #ff3300;
 }
 
 .btn-descarga:hover {
-  box-shadow: 0 0 20px rgba(255,80,40,0.9);
+  box-shadow: 0 0 25px #ff5500, 0 0 15px #ff3300;
   transform: translateY(-4px) scale(1.02);
-  letter-spacing: 3px;
-  border-color: #ff8844 !important;
+  border-color: #ffaa55 !important;
   color: #ffdd99 !important;
-}
-
-@keyframes latido {
-  0% { transform: translateY(-4px) scale(1.02); }
-  50% { transform: translateY(-6px) scale(1.05); }
-  100% { transform: translateY(-4px) scale(1.02); }
+  letter-spacing: 4px;
 }
 
 .aportes-grid {
@@ -528,266 +391,246 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   margin: 60px auto 0 auto;
 }
 
-/* Ajustes responsivos */
-@media (max-width: 850px) {
-  #equipo {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
+.creator, .password, .peso {
+  font-family: "Orbitronht", sans-serif;
+  font-size: 13px;
+  margin: 8px 0;
+}
+.creator { color: #ffaa77; text-shadow: 0 0 2px #ff3300; }
+.password { color: #dddddd; }
+.verde { color: #88ff88; text-shadow: 0 0 3px #00aa00; }
+.rojo { color: #ff6666; }
+
+/* Music UI con llamas */
+.music-ui {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #0a0000dd;
+  padding: 10px 14px;
+  border-radius: 60px;
+  border: 1px solid #ff4400;
+  box-shadow: 0 0 20px rgba(255, 60, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+}
+
+#btn-music {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #0a0000 !important;
+  color: #ff8844 !important;
+  border: 2px solid #ff5500 !important;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 0 12px #ff4400;
+}
+
+#btn-music:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff6600;
+}
+
+.barra {
+  width: 140px;
+  height: 7px;
+  background: #2a0a00;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 6px #ff4400;
+}
+
+.progreso {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff4400, #ffaa44, #ff4400);
+  box-shadow: 0 0 15px #ff6600;
+  transition: width 0.15s linear;
+}
+
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("fonts/Ethnocentric.ttf");
+}
+@font-face {
+  font-family: "Orbitronht";
+  src: url("fonts/Orbitronht.ttf");
+}
+
+.hero {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.titulo {
+  font-family: 'Ethnocentric', sans-serif;
+  font-size: 64px;
+  letter-spacing: 6px;
+  color: #fff;
+  text-shadow: 0 0 8px #ff0000, 0 0 15px #ff4400, 0 0 30px #ff6600, 0 0 60px #ff3300;
+  animation: flameGlow 1.5s infinite alternate;
+}
+
+@keyframes flameGlow {
+  0% { text-shadow: 0 0 8px #ff0000, 0 0 15px #ff3300; }
+  100% { text-shadow: 0 0 25px #ff6600, 0 0 45px #ff4400, 0 0 80px #ff2200; }
+}
+
+.subtitulo {
+  margin-top: 8px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #ffaa77;
+  text-shadow: 0 0 5px #ff3300;
 }
 
 @media (max-width: 768px) {
-  .titulo {
-    font-size: 48px;
-  }
-  .menu {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .menu button {
-    width: 45%;
-    padding: 12px 0;
-  }
-  #equipo {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 35px;
-  }
-  .staff-card-minimal .avatar {
-    width: 110px;
-    height: 110px;
-  }
-  .aportes-grid {
-    grid-template-columns: 1fr;
-    width: 90%;
-  }
+  .titulo { font-size: 48px; }
+  .menu { flex-wrap: wrap; gap: 10px; }
+  .menu button { width: 45%; padding: 12px 0; }
+  #equipo { grid-template-columns: 1fr; gap: 40px; }
+  .staff-card-minimal .avatar { width: 120px; height: 120px; }
+  .splash-logo .titulo-splash { font-size: 42px; }
+  .btn-ingresar { font-size: 22px; padding: 12px 32px; }
+  .splash-logo .subtitulo-splash { font-size: 16px; }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO DE FONDO -->
+<!-- VIDEO DE FONDO PRINCIPAL (se muestra siempre, pero debajo del splash al inicio) -->
 <video autoplay muted loop id="video-fondo">
   <source src="https://cdn.discordapp.com/attachments/1462277507456831671/1503563514680315915/KRIS_R_GEEZYDEE_-_TUKI_TUKI__HD.mp4?ex=6a03ce24&is=6a027ca4&hm=b6d4939c9f61ede0c12f9e4819a09b6d7ff8b6134c72dea9625ea1f97b293754&" type="video/mp4">
 </video>
 <div class="overlay-video"></div>
 
-<audio id="musica" loop autoplay>
-  <source src="music/fondo.mp3" type="audio/mpeg">
-</audio>
-
-<div class="hero">
-  <div class="titulo"> GOLLO MODS</div>
-  <div class="subtitulo">¡Gollo Mods Domina!</div>
-
-  <div class="menu-wrapper">
-  <div class="menu">
-    <button onclick="mostrar('equipo', this)"><span>EQUIPO </span></button>
-    <button onclick="mostrar('aportes', this)"><span>APORTES </span></button>
-    <button onclick="mostrar('datas', this)"><span>DATAS </span></button>
-    <button onclick="mostrar('descargas', this)"><span>APORTES TOP </span></button>
-  </div>
-</div>
-
-<!-- ====== EQUIPO - SIN CUADRADOS, SOLO FOTO Y RANGO ====== -->
-<div id="equipo" class="seccion">
-  <!-- Santi Gollo -->
-  <div class="staff-card-minimal">
-    <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1378819868668727388/362461e5f40f76b41ec44a5e43db1dd5.png?size=1024" alt="Santi Gollo"></div>
-    <div class="name">SANTI GOLLO</div>
-    <div class="role">OWNER</div>
-  </div>
-  <!-- Andrew -->
-  <div class="staff-card-minimal">
-    <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024" alt="Andrew"></div>
-    <div class="name">ANDREW</div>
-    <div class="role">OWNER</div>
-  </div>
-  <!-- Betrayedd -->
-  <div class="staff-card-minimal">
-    <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024" alt="Betrayedd"></div>
-    <div class="name">BETRAYEDD</div>
-    <div class="role">OWNER</div>
-  </div>
-</div>
-
-<!-- ====== APORTES ====== -->
-<div id="aportes" class="seccion aportes-grid">
-  <div class="aporte-card">
-    <h3>GTA</h3>
-   <p class="creator">CREADOR: Santi Gollo</p>
-   <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-   <p class="peso">PESO: <span class="rojo">219MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&" alt="GTA">
-   </div>
-    <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>GTA SATANICO</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">Diavlo</span></p>
-    <p class="peso">PESO: <span class="rojo">460MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492234517245595859/sa-mp-000-1.png?ex=6a0375b1&is=6a022431&hm=e27b2ef5f97b9ba4eac67bbfca58bd19248cf410c992cb0d747865d6718b4c24&" alt="GTA SATANICO">
-    </div>
-    <a href="https://www.mediafire.com/file/497z7youfbo0ppv/Gta+Satanico.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>GTA RZ</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">231MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1500609247258480763/sa-mp-000.png?ex=6a039ac4&is=6a024944&hm=4dcc35e5d7f49dc9b4ef246b34e6451661c4c31c6080b28a0e9cb2d714dfcafa&" alt="GTA RZ">
-    </div>
-    <a href="https://www.mediafire.com/file/vjbckjuf9zdyfv2/GTA+RZ.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>Aporte Morau</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-   <p class="peso">PESO: <span class="rojo">241MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1494814233467027506/1497036091780366427/sa-mp-094.png?ex=6a027881&is=6a012701&hm=01bae0b29e1a36ad0f2b962a881d7bcfcc67bc583a22cd4bf0c9294d3051d1a9&" alt="Aporte Morau">
-   </div>
-    <a href="https://www.mediafire.com/file/tmnuy3lm8jzyf7v/purple+$$.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>King Of Kings</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-   <p class="peso">PESO: <span class="rojo">228MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503250535262982224/sa-mp-013.png?ex=6a02aaa8&is=6a015928&hm=ae39067b66fc44b9ad4840b3790eaa47613c5dab4fb2dd29d5938683a8337fb5&" alt="King Of Kings">
-   </div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-   <div class="aporte-card">
-    <h3>Mendigo Style</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">gollomods$</span></p>
-   <p class="peso">PESO: <span class="rojo">233MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503251143646646312/Screenshot_20260510_222241_Discord.png?ex=6a02ab39&is=6a0159b9&hm=c39f6dc305239d21814a2efd0f73428e4f1b9ed030e443cff4d45357108f784b&" alt="Mendigo Style">
-   </div>
-    <a href="https://www.mediafire.com/file/u175lyovmythq74/Aporte_mendigo_style.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-</div>
-
-<!-- DATAS -->
-<div id="datas" class="seccion aportes-grid">
-  <div class="aporte-card">
-    <h3>$</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">401MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1496402847967744010/Screenshot_20260421-215226.png?ex=6a037680&is=6a022500&hm=33de1a8fed12816d797bbb1bc832e0d2279343f32c72e713162e8a2aa4dac892&" alt="Data $">
-    </div>
-    <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">DESCARGAR DATA</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>Hzk</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">400MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1494823118177570889/Screenshot_20260417-160241.png?ex=6a03a603&is=6a025483&hm=04ce7ec6e99b0f362f9558ef8c30504c0ad88fad43cb73dfd669c3442f23c3db&" alt="Data Hzk">
-    </div>
-    <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">DESCARGAR DATA</a>
-  </div>
-</div>
-
-<!-- Sección APORTES TOP (descargas) -->
-<div id="descargas" class="seccion aportes-grid">
-  <div class="aporte-card">
-    <h3>GTA TOP</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">219MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&" alt="GTA TOP">
-    </div>
-    <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
+<!-- PANTALLA DE INGRESO CON EL MISMO VIDEO DE FONDO (visible) -->
+<div id="splashScreen" class="splash-screen">
+  <!-- Mismo video de fondo para el splash -->
+  <video autoplay muted loop id="video-fondo-splash" style="position: fixed; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index: -1; pointer-events: none;">
+    <source src="https://cdn.discordapp.com/attachments/1462277507456831671/1503563514680315915/KRIS_R_GEEZYDEE_-_TUKI_TUKI__HD.mp4?ex=6a03ce24&is=6a027ca4&hm=b6d4939c9f61ede0c12f9e4819a09b6d7ff8b6134c72dea9625ea1f97b293754&" type="video/mp4">
+  </video>
+  <div style="position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75); z-index: 0; pointer-events: none;"></div>
   
-  <div class="aporte-card">
-    <h3>King Of Kings TOP</h3>
-    <p class="creator">CREADOR: Betrayedd</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">228MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503250535262982224/sa-mp-013.png?ex=6a02aaa8&is=6a015928&hm=ae39067b66fc44b9ad4840b3790eaa47613c5dab4fb2dd29d5938683a8337fb5&" alt="King of kings TOP">
+  <div class="splash-logo" style="position: relative; z-index: 2;">
+    <div class="titulo-splash">GOLLO MODS</div>
+    <div class="subtitulo-splash">✦ DOMINANDO DESDE EL INFIERNO ✦</div>
+    <div class="leyenda-infierno">⚡ Gollo Mods Dominando Desde El Infierno ⚡</div>
+  </div>
+  <button id="btnIngresar" class="btn-ingresar">INGRESAR</button>
+  <div style="margin-top: 30px; font-family: monospace; font-size: 13px; color: #ff6633; text-shadow: 0 0 3px #ff3300; position: relative; z-index:2;">Llamas eternas | Poder extremo</div>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div id="contenidoPrincipal" class="contenido-principal">
+  <audio id="musica" loop autoplay>
+    <source src="music/fondo.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="hero">
+    <div class="titulo"> GOLLO MODS</div>
+    <div class="subtitulo">⚡ Mods con alma de fuego ⚡</div>
+
+    <div class="menu-wrapper" style="width:100%; display:flex; justify-content:center; margin-top:30px;">
+      <div class="menu">
+        <button onclick="mostrar('equipo', this)"><span>EQUIPO </span></button>
+        <button onclick="mostrar('aportes', this)"><span>APORTES </span></button>
+        <button onclick="mostrar('datas', this)"><span>DATAS </span></button>
+        <button onclick="mostrar('descargas', this)"><span>APORTES TOP </span></button>
+      </div>
     </div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-</div>
 
-<script>
-function mostrar(seccionId, btn) {
-  const secciones = document.querySelectorAll('.seccion');
-  secciones.forEach(sec => sec.style.display = 'none');
-  
-  const seccionMostrar = document.getElementById(seccionId);
-  if(seccionMostrar) {
-    seccionMostrar.style.display = 'grid';
-  }
-  
-  const botones = document.querySelectorAll('.menu button');
-  botones.forEach(boton => boton.classList.remove('activo'));
-  
-  if(btn) btn.classList.add('activo');
-}
+    <!-- EQUIPO - SOLO FOTO Y RANGO -->
+    <div id="equipo" class="seccion">
+      <div class="staff-card-minimal">
+        <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1378819868668727388/362461e5f40f76b41ec44a5e43db1dd5.png?size=1024" alt="Santi Gollo"></div>
+        <div class="name">SANTI GOLLO</div>
+        <div class="role">OWNER</div>
+      </div>
+      <div class="staff-card-minimal">
+        <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024" alt="Andrew"></div>
+        <div class="name">ANDREW</div>
+        <div class="role">OWNER</div>
+      </div>
+      <div class="staff-card-minimal">
+        <div class="avatar"><img src="https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024" alt="Betrayedd"></div>
+        <div class="name">BETRAYEDD</div>
+        <div class="role">OWNER</div>
+      </div>
+    </div>
 
-// Music player
-const audio = document.getElementById('musica');
-const btnMusic = document.getElementById('btn-music');
-const progresoBar = document.querySelector('.progreso');
+    <!-- APORTES -->
+    <div id="aportes" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>GTA</h3>
+        <p class="creator">CREADOR: Santi Gollo</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">219MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&" alt="GTA"></div>
+        <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+      <div class="aporte-card">
+        <h3>GTA SATANICO</h3>
+        <p class="creator">CREADOR: Santi Gollo</p>
+        <p class="password">CONTRASEÑA: <span class="verde">Diavlo</span></p>
+        <p class="peso">PESO: <span class="rojo">460MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492234517245595859/sa-mp-000-1.png?ex=6a0375b1&is=6a022431&hm=e27b2ef5f97b9ba4eac67bbfca58bd19248cf410c992cb0d747865d6718b4c24&" alt="SATANICO"></div>
+        <a href="https://www.mediafire.com/file/497z7youfbo0ppv/Gta+Satanico.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+      <div class="aporte-card">
+        <h3>GTA RZ</h3>
+        <p class="creator">CREADOR: Santi Gollo</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">231MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1500609247258480763/sa-mp-000.png?ex=6a039ac4&is=6a024944&hm=4dcc35e5d7f49dc9b4ef246b34e6451661c4c31c6080b28a0e9cb2d714dfcafa&" alt="RZ"></div>
+        <a href="https://www.mediafire.com/file/vjbckjuf9zdyfv2/GTA+RZ.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+      <div class="aporte-card">
+        <h3>Aporte Morau</h3>
+        <p class="creator">CREADOR: Betrayedd</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">241MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1494814233467027506/1497036091780366427/sa-mp-094.png?ex=6a027881&is=6a012701&hm=01bae0b29e1a36ad0f2b962a881d7bcfcc67bc583a22cd4bf0c9294d3051d1a9&" alt="Morau"></div>
+        <a href="https://www.mediafire.com/file/tmnuy3lm8jzyf7v/purple+$$.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+      <div class="aporte-card">
+        <h3>King Of Kings</h3>
+        <p class="creator">CREADOR: Betrayedd</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">228MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503250535262982224/sa-mp-013.png?ex=6a02aaa8&is=6a015928&hm=ae39067b66fc44b9ad4840b3790eaa47613c5dab4fb2dd29d5938683a8337fb5&" alt="Kings"></div>
+        <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+      <div class="aporte-card">
+        <h3>Mendigo Style</h3>
+        <p class="creator">CREADOR: Betrayedd</p>
+        <p class="password">CONTRASEÑA: <span class="verde">gollomods$</span></p>
+        <p class="peso">PESO: <span class="rojo">233MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503251143646646312/Screenshot_20260510_222241_Discord.png?ex=6a02ab39&is=6a0159b9&hm=c39f6dc305239d21814a2efd0f73428e4f1b9ed030e443cff4d45357108f784b&" alt="Mendigo"></div>
+        <a href="https://www.mediafire.com/file/u175lyovmythq74/Aporte_mendigo_style.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
+      </div>
+    </div>
 
-if(btnMusic && audio) {
-  btnMusic.addEventListener('click', () => {
-    if(audio.paused) {
-      audio.play();
-      btnMusic.textContent = '⏸️';
-    } else {
-      audio.pause();
-      btnMusic.textContent = '▶️';
-    }
-  });
-  
-  audio.addEventListener('timeupdate', () => {
-    if(progresoBar && audio.duration) {
-      const porcentaje = (audio.currentTime / audio.duration) * 100;
-      progresoBar.style.width = porcentaje + '%';
-    }
-  });
-}
-
-// Mostrar equipo por defecto + audio intent
-document.addEventListener('DOMContentLoaded', () => {
-  mostrar('equipo', document.querySelector('.menu button'));
-  if(audio) {
-    audio.volume = 0.4;
-  }
-});
-</script>
-
-<!-- Music UI -->
-<div class="music-ui">
-  <button id="btn-music">▶️</button>
-  <div class="barra">
-    <div class="progreso"></div>
-  </div>
-</div>
-
-</body>
-</html>
+    <!-- DATAS -->
+    <div id="datas" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>$</h3>
+        <p class="creator">CREADOR: Santi Gollo</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">401MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1487301798384369815/1496402847967744010/Screenshot_20260421-215226.png?ex=6a037680&is=6a022500&hm=33de1a8fed12816d797bbb1bc832e0d2279343f32c72e713162e8a2aa4dac892&" alt="$ data"></div>
+        <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">DESCARGAR DATA</a>
+      </div>
+      <div class="aporte-card">
+        <h3>Hzk</h3>
+        <p class="creator">CREADOR: Santi Gollo</p>
+        <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p class="peso">PESO: <span class="rojo">400MB</span></p>
+        <div class="video-thumb"><img src="https://cdn.discordapp.com/attachments/1487301798384369815/1494823118177570889/Screenshot_20260417-160241.png?ex=6a03a603&is=6a025483&hm=04ce7ec6e99b0f362f9558ef8c30504c0ad88fad43cb73dfd669c3442f23c3db&" alt="Hzk"></div>
+        <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">DESCARGAR DATA</a>
+      </
