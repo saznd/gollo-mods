@@ -560,10 +560,366 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   }
 }
 
+/* ===== PANTALLA DE ENTRADA ULTRA EPIC ===== */
+
+#pantalla-inicio{
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  overflow:hidden;
+
+  background:
+  radial-gradient(circle at center,
+  rgba(255,0,0,0.25),
+  rgba(0,0,0,0.98));
+
+  animation:
+  fondoLoco 0.15s infinite,
+  shakeScreen 0.25s infinite;
+}
+
+/* FLASHES */
+#pantalla-inicio::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+  repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+
+  mix-blend-mode: screen;
+
+  animation:
+  scanlines 0.08s infinite linear,
+  rgbFlash 0.2s infinite;
+}
+
+#pantalla-inicio::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(circle,
+  rgba(255,255,255,0.08),
+  transparent 60%);
+
+  animation:
+  flashBg 0.2s infinite;
+}
+
+/* ===== CONTENIDO ===== */
+
+.contenido-inicio{
+  position:relative;
+  z-index:10;
+  text-align:center;
+}
+
+/* ===== TITULO ===== */
+
+.contenido-inicio h1{
+
+  font-family:'Ethnocentric', sans-serif;
+
+  font-size:110px;
+
+  color:white;
+
+  letter-spacing:10px;
+
+  text-transform:uppercase;
+
+  animation:
+  glitchCrazy 0.08s infinite,
+  glowHard 0.2s infinite alternate,
+  vibrar 0.06s infinite;
+
+  text-shadow:
+    -5px 0 red,
+    5px 0 cyan,
+    0 0 20px #ff0000,
+    0 0 50px #ff5500,
+    0 0 100px #ff0000;
+
+}
+
+/* ===== BOTON ===== */
+
+#btn-entrar{
+
+  position:relative;
+
+  margin-top:45px;
+
+  padding:24px 75px;
+
+  font-size:24px;
+
+  font-family:"Orbitronht", sans-serif;
+
+  letter-spacing:6px;
+
+  color:white;
+
+  background:
+  linear-gradient(
+    45deg,
+    #000,
+    #220000,
+    #000
+  );
+
+  border:3px solid #ff3300;
+
+  border-radius:20px;
+
+  cursor:pointer;
+
+  overflow:hidden;
+
+  transition:0.2s;
+
+  animation:
+  btnCrazy 0.25s infinite alternate,
+  rgbBorder 0.15s infinite;
+
+  box-shadow:
+    0 0 20px red,
+    0 0 60px orange,
+    0 0 120px red;
+
+}
+
+/* brillo loco */
+#btn-entrar::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-50%;
+  left:-50%;
+
+  width:200%;
+  height:200%;
+
+  background:
+  linear-gradient(
+    45deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+
+  transform:rotate(25deg);
+
+  animation:shineFast 0.6s infinite linear;
+
+}
+
+/* HOVER */
+#btn-entrar:hover{
+
+  transform:
+  scale(1.15)
+  rotate(-2deg);
+
+  color:#ffcc88;
+
+  box-shadow:
+    0 0 30px #ff0000,
+    0 0 80px orange,
+    0 0 160px red;
+
+}
+
+/* ===== ANIMACIONES ===== */
+
+@keyframes fondoLoco{
+
+  0%{ background-color:#000; }
+  25%{ background-color:#100000; }
+  50%{ background-color:#220000; }
+  75%{ background-color:#000; }
+  100%{ background-color:#330000; }
+
+}
+
+@keyframes glowHard{
+
+  from{
+    filter:brightness(1);
+  }
+
+  to{
+    filter:brightness(1.7);
+  }
+
+}
+
+@keyframes glitchCrazy{
+
+  0%{
+    transform:translate(0px,0px);
+  }
+
+  20%{
+    transform:translate(-4px,2px);
+  }
+
+  40%{
+    transform:translate(5px,-3px);
+  }
+
+  60%{
+    transform:translate(-6px,3px);
+  }
+
+  80%{
+    transform:translate(6px,-2px);
+  }
+
+  100%{
+    transform:translate(0px,0px);
+  }
+
+}
+
+@keyframes vibrar{
+
+  0%{ transform:translateX(0px); }
+  25%{ transform:translateX(-2px); }
+  50%{ transform:translateX(2px); }
+  75%{ transform:translateX(-2px); }
+  100%{ transform:translateX(0px); }
+
+}
+
+@keyframes shakeScreen{
+
+  0%{ transform:translate(0px,0px); }
+  25%{ transform:translate(1px,-1px); }
+  50%{ transform:translate(-1px,1px); }
+  75%{ transform:translate(2px,-1px); }
+  100%{ transform:translate(0px,0px); }
+
+}
+
+@keyframes flashBg{
+
+  0%{ opacity:0.1; }
+  50%{ opacity:0.4; }
+  100%{ opacity:0.1; }
+
+}
+
+@keyframes rgbFlash{
+
+  0%{ opacity:0.2; }
+  50%{ opacity:0.45; }
+  100%{ opacity:0.2; }
+
+}
+
+@keyframes scanlines{
+
+  from{
+    transform:translateY(0);
+  }
+
+  to{
+    transform:translateY(6px);
+  }
+
+}
+
+@keyframes btnCrazy{
+
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.06);
+  }
+
+}
+
+@keyframes rgbBorder{
+
+  0%{
+    border-color:red;
+  }
+
+  50%{
+    border-color:orange;
+  }
+
+  100%{
+    border-color:white;
+  }
+
+}
+
+@keyframes shineFast{
+
+  from{
+    transform:
+    translateX(-100%)
+    rotate(25deg);
+  }
+
+  to{
+    transform:
+    translateX(100%)
+    rotate(25deg);
+  }
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+
+  .contenido-inicio h1{
+    font-size:58px;
+    letter-spacing:4px;
+  }
+
+  #btn-entrar{
+    width:85%;
+    font-size:17px;
+    padding:20px;
+  }
+
+}
 </style>
-</head>
 
 <body>
+
+  <!-- PANTALLA DE ENTRADA -->
+<div id="pantalla-inicio">
+  <div class="contenido-inicio">
+    <h1>GOLLO MODS</h1>
+
+    <button id="btn-entrar" onclick="entrarWeb()">
+      ENTRAR AL SITIO
+    </button>
+
+  </div>
+</div>
 
 <!-- VIDEO DE FONDO -->
 <video autoplay muted loop id="video-fondo">
@@ -571,8 +927,8 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 </video>
 <div class="overlay-video"></div>
 
-<audio id="musica" loop autoplay>
-  <source src="music/fondo.mp3" type="audio/mpeg">
+<audio id="musica" loop>
+  <source src="KRIS R  GEEZYDEE - TUKI TUKI.mp3" type="audio/mpeg">
 </audio>
 
 <div class="hero">
@@ -642,87 +998,4 @@ button:hover, .btn-descarga:hover, .menu button:hover {
     <div class="video-thumb">
       <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1500609247258480763/sa-mp-000.png?ex=6a039ac4&is=6a024944&hm=4dcc35e5d7f49dc9b4ef246b34e6451661c4c31c6080b28a0e9cb2d714dfcafa&" alt="GTA RZ">
     </div>
-    <a href="https://www.mediafire.com/file/vjbckjuf9zdyfv2/GTA+RZ.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>Aporte Morau</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-   <p class="peso">PESO: <span class="rojo">241MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1494814233467027506/1497036091780366427/sa-mp-094.png?ex=6a027881&is=6a012701&hm=01bae0b29e1a36ad0f2b962a881d7bcfcc67bc583a22cd4bf0c9294d3051d1a9&" alt="Aporte Morau">
-   </div>
-    <a href="https://www.mediafire.com/file/tmnuy3lm8jzyf7v/purple+$$.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>King Of Kings</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-   <p class="peso">PESO: <span class="rojo">228MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503250535262982224/sa-mp-013.png?ex=6a02aaa8&is=6a015928&hm=ae39067b66fc44b9ad4840b3790eaa47613c5dab4fb2dd29d5938683a8337fb5&" alt="King Of Kings">
-   </div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-
-   <div class="aporte-card">
-    <h3>Mendigo Style</h3>
-   <p class="creator">CREADOR: Betrayedd</p>
-   <p class="password">CONTRASEÑA: <span class="verde">gollomods$</span></p>
-   <p class="peso">PESO: <span class="rojo">233MB</span></p>
-   <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503251143646646312/Screenshot_20260510_222241_Discord.png?ex=6a02ab39&is=6a0159b9&hm=c39f6dc305239d21814a2efd0f73428e4f1b9ed030e443cff4d45357108f784b&" alt="Mendigo Style">
-   </div>
-    <a href="https://www.mediafire.com/file/u175lyovmythq74/Aporte_mendigo_style.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-</div>
-
-<!-- DATAS -->
-<div id="datas" class="seccion aportes-grid">
-  <div class="aporte-card">
-    <h3>$</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">401MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1496402847967744010/Screenshot_20260421-215226.png?ex=6a037680&is=6a022500&hm=33de1a8fed12816d797bbb1bc832e0d2279343f32c72e713162e8a2aa4dac892&" alt="Data $">
-    </div>
-    <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">DESCARGAR DATA</a>
-  </div>
-
-  <div class="aporte-card">
-    <h3>Hzk</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">400MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1487301798384369815/1494823118177570889/Screenshot_20260417-160241.png?ex=6a03a603&is=6a025483&hm=04ce7ec6e99b0f362f9558ef8c30504c0ad88fad43cb73dfd669c3442f23c3db&" alt="Data Hzk">
-    </div>
-    <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">DESCARGAR DATA</a>
-  </div>
-</div>
-
-<!-- Sección APORTES TOP (descargas) -->
-<div id="descargas" class="seccion aportes-grid">
-  <div class="aporte-card">
-    <h3>GTA TOP</h3>
-    <p class="creator">CREADOR: Santi Gollo</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">219MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1492232687505903868/1492233996699177071/sa-mp-004-2.png?ex=6a037535&is=6a0223b5&hm=7a381c844ee0e2632d7b2f53bfec8ab399fd30e67701cf207b883d2ca426375f&" alt="GTA TOP">
-    </div>
-    <a href="https://www.mediafire.com/file/a9brhg80sn1jyaa/Gta.rar/file" class="btn-descarga">DESCARGA EL APORTE</a>
-  </div>
-  
-  <div class="aporte-card">
-    <h3>King Of Kings TOP</h3>
-    <p class="creator">CREADOR: Betrayedd</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">228MB</span></p>
-    <div class="video-thumb">
-      <img src="https://cdn.discordapp.com/attachments/1495697395672154254/1503250535262982224/sa-mp-013.png?ex=6a02aaa8&is=6a015928&hm=ae39067b66fc44b9ad4840b3790eaa47613c5dab4fb2dd29d5938683a8337fb5&" alt="King of kings TOP">
-    </div>
-    <a href="https://www.mediafire.com/file/05r
+    <a hre
