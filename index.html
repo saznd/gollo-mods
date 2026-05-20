@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>GOLLO MODS | LA REVOLUCION HA INICIADO</title>
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23000' stroke='%23ff3333' stroke-width='3'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23ff3333' font-weight='bold'%3EG%3C/text%3E%3C/svg%3E">
+<title>GOLLO MODS | BLACK EDITION</title>
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23000' stroke='%23ffffff' stroke-width='3'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23ffffff' font-weight='bold'%3EG%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * {
@@ -30,6 +30,7 @@ body {
   object-fit: cover;
   z-index: -2;
   pointer-events: none;
+  filter: brightness(0.85) contrast(1.2);
 }
 .overlay-video {
   position: fixed;
@@ -37,91 +38,93 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 30% 20%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.96) 100%);
+  background: radial-gradient(circle at 30% 20%, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.98) 100%);
   z-index: -1;
   pointer-events: none;
 }
 .titulo-principal {
   font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 5rem;
   letter-spacing: -0.02em;
-  background: linear-gradient(145deg, #ffffff 0%, #ff9999 35%, #ff4444 70%, #ffcccc 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 40%, #f5f5f5 70%, #ffffff 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 0 2px 20px rgba(255, 80, 80, 0.5);
-  animation: subtlePulse 3s infinite alternate;
+  text-shadow: 0 0 30px rgba(255,255,255,0.4);
+  animation: brilliantPulse 2.5s infinite alternate;
 }
-@keyframes subtlePulse {
-  0% { text-shadow: 0 0 5px rgba(255,60,60,0.3); }
-  100% { text-shadow: 0 0 25px rgba(255, 100, 100, 0.7); }
+@keyframes brilliantPulse {
+  0% { text-shadow: 0 0 10px rgba(255,255,255,0.3); opacity: 0.95; }
+  100% { text-shadow: 0 0 40px rgba(255,255,255,0.8); opacity: 1; }
 }
 .subtitulo-premium {
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 4px;
+  font-weight: 600;
+  letter-spacing: 5px;
   font-size: 0.85rem;
-  color: #ffaaaa;
+  color: #dddddd;
   text-transform: uppercase;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.7);
   display: inline-block;
-  padding: 8px 22px;
-  backdrop-filter: blur(5px);
-  margin-top: 8px;
-  border-left: 3px solid #ff5555;
-  border-right: 3px solid #ff5555;
+  padding: 10px 28px;
+  backdrop-filter: blur(10px);
+  margin-top: 10px;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 button, .btn-descarga, .menu button {
-  background: #0a0a0a !important;
-  color: #ffdddd !important;
-  border: none !important;
+  background: #050505 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   cursor: pointer;
   position: relative;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   overflow: hidden;
   z-index: 1;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.8);
   border-radius: 0px !important;
 }
 button::after, .btn-descarga::after, .menu button::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #3a0a0a, #1f0000);
+  background: linear-gradient(135deg, #2a2a2a, #111111);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease;
   z-index: -1;
 }
 button:hover, .btn-descarga:hover, .menu button:hover {
   transform: translateY(-3px);
   color: #ffffff !important;
-  box-shadow: 0 10px 25px -8px #ff3333, 0 0 0 1.5px #ff6666 inset;
+  box-shadow: 0 10px 28px -6px rgba(255,255,255,0.4), 0 0 0 1.5px #ffffff inset;
+  border-color: #ffffff !important;
 }
 button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   opacity: 1;
 }
 .menu {
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(20px);
-  padding: 8px 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255, 70, 70, 0.6);
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(24px);
+  padding: 8px 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.4);
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 .menu button {
   background: #080808 !important;
-  padding: 12px 38px;
+  padding: 14px 42px;
   font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   backdrop-filter: blur(4px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255, 80, 80, 0.4);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.2);
 }
 .menu button::before {
   content: '';
@@ -129,17 +132,17 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   bottom: 0px;
   left: 0%;
   width: 0%;
-  height: 2.5px;
-  background: linear-gradient(90deg, #ff6666, #ffaaaa);
-  transition: width 0.25s ease;
+  height: 2px;
+  background: linear-gradient(90deg, #aaaaaa, #ffffff, #aaaaaa);
+  transition: width 0.3s ease;
 }
 .menu button:hover::before {
   width: 100%;
 }
 .menu button.activo {
-  background: #1f0505 !important;
+  background: #141414 !important;
   color: #ffffff !important;
-  box-shadow: 0 0 15px rgba(255, 80, 80, 0.7), inset 0 0 0 1.5px #ff7777;
+  box-shadow: 0 0 20px rgba(255,255,255,0.5), inset 0 0 0 1.5px #ffffff;
 }
 .menu button.activo::before {
   width: 100%;
@@ -148,9 +151,9 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  gap: 60px;
+  gap: 70px;
   max-width: 1100px;
-  margin: 70px auto;
+  margin: 80px auto;
   padding: 20px;
 }
 .staff-card {
@@ -160,27 +163,27 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   justify-content: center;
   background: transparent;
   padding: 20px 10px 30px;
-  transition: all 0.3s ease;
+  transition: all 0.35s ease;
   cursor: pointer;
 }
 .staff-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px);
 }
 .avatar-glow {
-  width: 160px;
-  height: 160px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 .avatar-glow .ring {
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ff8888, #ff3333);
+  background: radial-gradient(circle at 30% 30%, #ffffff, #555555);
   opacity: 0;
-  transition: opacity 0.4s;
-  filter: blur(12px);
+  transition: opacity 0.45s;
+  filter: blur(14px);
   z-index: 0;
 }
 .avatar-glow img {
@@ -188,180 +191,204 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #ff5555;
+  border: 3px solid #ffffff;
   position: relative;
   z-index: 2;
-  background: #0a0202;
-  transition: all 0.3s;
-  box-shadow: 0 0 20px rgba(255, 60, 60, 0.4);
+  background: #050505;
+  transition: all 0.35s;
+  box-shadow: 0 0 25px rgba(255,255,255,0.3);
 }
 .staff-card:hover .avatar-glow img {
-  border-color: #ff9999;
+  border-color: #ffffff;
   transform: scale(1.02);
-  box-shadow: 0 0 35px #ff5e5e;
+  box-shadow: 0 0 45px rgba(255,255,255,0.7);
 }
 .staff-card:hover .avatar-glow .ring {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .name-staff {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   font-size: 28px;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #ffffff, #ffb3b3);
+  background: linear-gradient(135deg, #ffffff, #cccccc);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   margin-top: 8px;
 }
 .role-staff {
-  background: rgba(20, 5, 5, 0.7);
+  background: rgba(20, 20, 20, 0.9);
   backdrop-filter: blur(8px);
-  padding: 6px 28px;
-  border-radius: 30px;
+  padding: 8px 32px;
+  border-radius: 40px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ffbbbb;
-  border: 1px solid #ff6666;
-  margin-top: 14px;
-  transition: all 0.2s;
+  color: #dddddd;
+  border: 1px solid rgba(255,255,255,0.6);
+  margin-top: 16px;
+  transition: all 0.25s;
 }
 .staff-card:hover .role-staff {
-  border-color: #ffaaaa;
+  border-color: #ffffff;
   color: #ffffff;
-  background: rgba(40, 10, 10, 0.8);
-  box-shadow: 0 0 12px #ff4d4d;
+  background: rgba(30, 30, 30, 0.9);
+  box-shadow: 0 0 18px rgba(255,255,255,0.4);
 }
 .aportes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 370px));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 380px));
   justify-content: center;
-  gap: 45px;
+  gap: 50px;
   width: 92%;
-  max-width: 1350px;
-  margin: 55px auto;
+  max-width: 1400px;
+  margin: 60px auto;
 }
 .content-card {
-  background: rgba(8, 8, 12, 0.92);
-  border: 1.5px solid rgba(255, 80, 80, 0.7);
-  padding: 28px 26px 32px;
-  backdrop-filter: blur(12px);
-  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.2);
-  box-shadow: 0 20px 30px -12px rgba(0,0,0,0.8);
+  background: rgba(6, 6, 8, 0.95);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 32px 28px 36px;
+  backdrop-filter: blur(14px);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+  box-shadow: 0 20px 35px -15px rgba(0,0,0,0.9);
   position: relative;
+  overflow: hidden;
 }
 .content-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(145deg, rgba(255,70,70,0.05), rgba(255,200,200,0.02));
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
   pointer-events: none;
 }
+.content-card:hover::before {
+  opacity: 1;
+}
 .content-card:hover {
-  transform: translateY(-10px);
-  border-color: #ff7777;
-  background: rgba(15, 8, 8, 0.98);
-  box-shadow: 0 30px 40px -14px #aa3333, 0 0 0 1px #ff8888 inset;
+  transform: translateY(-12px);
+  border-color: #ffffff;
+  background: rgba(10, 10, 14, 0.98);
+  box-shadow: 0 35px 45px -18px rgba(255,255,255,0.25), 0 0 0 1px #ffffff inset;
 }
 .content-card h3 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   font-size: 2rem;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #ffb3b3);
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .info-line {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 0.85rem;
-  color: #ffdddd;
-  margin: 10px 0;
+  color: #f0f0f0;
+  margin: 12px 0;
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 .creator-text {
-  color: #ffaaaa;
+  color: #ffffff;
   font-weight: 700;
-  background: rgba(255,80,80,0.15);
-  padding: 2px 8px;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 12px;
   display: inline-block;
+  letter-spacing: 0.3px;
 }
 .pass-text .green-pass {
-  color: #ffbb99;
+  color: #ffffff;
   font-weight: 700;
-  background: rgba(200,40,40,0.2);
-  padding: 2px 8px;
-  border-left: 2px solid #ff7777;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-left: 2px solid #ffffff;
 }
 .weight-text .red-weight {
-  color: #ff9999;
+  color: #ffffff;
   font-weight: 700;
-  background: rgba(255,70,70,0.2);
-  padding: 2px 8px;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 12px;
 }
 .video-thumbnail {
-  margin: 18px 0 15px;
+  margin: 20px 0 18px;
   overflow: hidden;
-  border: 1px solid #ff4f4f;
-  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: all 0.35s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 .video-thumbnail img {
   width: 100%;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform 0.4s ease;
+  filter: brightness(1.02) contrast(1.05);
 }
 .content-card:hover .video-thumbnail img {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 .btn-descarga {
   display: block;
   text-align: center;
   text-decoration: none;
-  padding: 15px 12px;
+  padding: 16px 14px;
   font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-top: 18px;
-  background: #0a0000 !important;
-  border: 1px solid #ff5a5a !important;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  margin-top: 22px;
+  background: #080808 !important;
+  border: 1.5px solid rgba(255,255,255,0.6) !important;
   transition: all 0.3s;
-  color: #fff0f0 !important;
+  color: #ffffff !important;
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+.btn-descarga::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+.btn-descarga:hover::before {
+  left: 100%;
 }
 .btn-descarga:hover {
-  transform: translateY(-3px);
-  letter-spacing: 2.5px;
-  background: #2a0606 !important;
-  border-color: #ffaaaa !important;
+  transform: translateY(-4px);
+  letter-spacing: 3px;
+  background: #151515 !important;
+  border-color: #ffffff !important;
   color: #ffffff !important;
-  box-shadow: 0 5px 15px rgba(255,60,60,0.4);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.3);
 }
 @media (max-width: 850px) {
   .titulo-principal { font-size: 3.2rem; }
-  #equipo { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-  .avatar-glow { width: 130px; height: 130px; }
+  #equipo { grid-template-columns: repeat(2, 1fr); gap: 45px; }
+  .avatar-glow { width: 140px; height: 140px; }
   .name-staff { font-size: 24px; }
-  .menu button { padding: 10px 26px; font-size: 0.75rem; }
+  .menu button { padding: 10px 28px; font-size: 0.75rem; }
 }
 @media (max-width: 680px) {
-  #equipo { grid-template-columns: 1fr; gap: 35px; }
-  .titulo-principal { font-size: 2.6rem; }
-  .menu { padding: 6px 12px; gap: 8px; }
-  .menu button { padding: 8px 20px; font-size: 0.7rem; }
-  .aportes-grid { width: 90%; grid-template-columns: 1fr; gap: 30px; }
-  .content-card { padding: 22px; }
-  .avatar-glow { width: 130px; height: 130px; }
-  .role-staff { padding: 4px 20px; font-size: 11px; }
+  #equipo { grid-template-columns: 1fr; gap: 40px; }
+  .titulo-principal { font-size: 2.4rem; }
+  .menu { padding: 8px 12px; gap: 10px; }
+  .menu button { padding: 8px 22px; font-size: 0.7rem; }
+  .aportes-grid { width: 90%; grid-template-columns: 1fr; gap: 35px; }
+  .content-card { padding: 24px; }
+  .avatar-glow { width: 140px; height: 140px; }
+  .role-staff { padding: 5px 22px; font-size: 11px; }
 }
 </style>
 </head>
@@ -375,7 +402,7 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
 <div class="hero" style="text-align: center; padding-top: 52px;">
   <div class="titulo-principal">𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</div>
   <div class="subtitulo-premium">𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖍𝖆 𝖎𝖓𝖎𝖈𝖎𝖆𝖉𝖔</div>
-  <div class="menu-wrapper" style="margin: 38px auto 20px;">
+  <div class="menu-wrapper" style="margin: 40px auto 20px;">
     <div class="menu">
       <button onclick="mostrar('equipo', this)"><span>𝕺𝖜𝖓𝖊𝖗𝖘</span></button>
       <button onclick="mostrar('aportes', this)"><span>𝕲𝖙𝖆'𝖘</span></button>
