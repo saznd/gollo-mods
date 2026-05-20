@@ -74,7 +74,7 @@ body {
   border-right: 2px solid #ffffff;
   box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
-button, .btn-descarga, .menu button {
+button, .btn-descarga, .menu button, .btn-ingresar {
   background: #050505 !important;
   color: #ffffff !important;
   border: 1px solid rgba(255,255,255,0.3) !important;
@@ -89,7 +89,7 @@ button, .btn-descarga, .menu button {
   box-shadow: 0 2px 12px rgba(0,0,0,0.8);
   border-radius: 0px !important;
 }
-button::after, .btn-descarga::after, .menu button::after {
+button::after, .btn-descarga::after, .menu button::after, .btn-ingresar::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -98,13 +98,13 @@ button::after, .btn-descarga::after, .menu button::after {
   transition: opacity 0.35s ease;
   z-index: -1;
 }
-button:hover, .btn-descarga:hover, .menu button:hover {
+button:hover, .btn-descarga:hover, .menu button:hover, .btn-ingresar:hover {
   transform: translateY(-3px);
   color: #ffffff !important;
   box-shadow: 0 10px 28px -6px rgba(255,255,255,0.4), 0 0 0 1.5px #ffffff inset;
   border-color: #ffffff !important;
 }
-button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
+button:hover::after, .btn-descarga:hover::after, .menu button:hover::after, .btn-ingresar:hover::after {
   opacity: 1;
 }
 .menu {
@@ -373,12 +373,89 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   color: #ffffff !important;
   box-shadow: 0 8px 20px rgba(255,255,255,0.3);
 }
+
+/* Pantalla de bienvenida con botón INGRESAR */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.96);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.6s ease;
+}
+.welcome-card {
+  background: rgba(5,5,5,0.98);
+  border: 2px solid rgba(255,255,255,0.6);
+  padding: 60px 50px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 100px rgba(255,255,255,0.25);
+  animation: fadeInUp 0.8s ease;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.welcome-card h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 3rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 15px;
+}
+.welcome-card p {
+  color: #aaa;
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+.btn-ingresar {
+  display: inline-block;
+  padding: 18px 50px;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  background: #080808 !important;
+  border: 1.5px solid rgba(255,255,255,0.7) !important;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.btn-ingresar:hover {
+  transform: translateY(-5px);
+  letter-spacing: 6px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.4);
+}
+
+/* Contenido principal oculto inicialmente */
+#main-content {
+  display: none;
+}
+
 @media (max-width: 850px) {
   .titulo-principal { font-size: 3.2rem; }
   #equipo { grid-template-columns: repeat(2, 1fr); gap: 45px; }
   .avatar-glow { width: 140px; height: 140px; }
   .name-staff { font-size: 24px; }
   .menu button { padding: 10px 28px; font-size: 0.75rem; }
+  .welcome-card { padding: 40px 30px; }
+  .welcome-card h2 { font-size: 2.2rem; }
+  .btn-ingresar { padding: 14px 35px; font-size: 1rem; }
 }
 @media (max-width: 680px) {
   #equipo { grid-template-columns: 1fr; gap: 40px; }
@@ -389,6 +466,9 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   .content-card { padding: 24px; }
   .avatar-glow { width: 140px; height: 140px; }
   .role-staff { padding: 5px 22px; font-size: 11px; }
+  .welcome-card { padding: 30px 20px; }
+  .welcome-card h2 { font-size: 1.8rem; }
+  .btn-ingresar { padding: 12px 25px; font-size: 0.9rem; letter-spacing: 3px; }
 }
 </style>
 </head>
@@ -399,117 +479,103 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
 </video>
 <div class="overlay-video"></div>
 
-<div class="hero" style="text-align: center; padding-top: 52px;">
-  <div class="titulo-principal">𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</div>
-  <div class="subtitulo-premium">𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖍𝖆 𝖎𝖓𝖎𝖈𝖎𝖆𝖉𝖔</div>
-  <div class="menu-wrapper" style="margin: 40px auto 20px;">
-    <div class="menu">
-      <button onclick="mostrar('equipo', this)"><span>𝕺𝖜𝖓𝖊𝖗𝖘</span></button>
-      <button onclick="mostrar('aportes', this)"><span>𝕲𝖙𝖆'𝖘</span></button>
+<!-- Pantalla de bienvenida con botón INGRESAR -->
+<div id="welcomeOverlay" class="welcome-overlay">
+  <div class="welcome-card">
+    <h2>𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</h2>
+    <p>⚠️ 𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖙𝖊 𝖊𝖘𝖕𝖊𝖗𝖆 ⚠️</p>
+    <button id="ingresarBtn" class="btn-ingresar">𝕴𝕹𝕲𝕽𝕰𝕾𝕬𝕽</button>
+  </div>
+</div>
+
+<!-- CONTENIDO PRINCIPAL (oculto hasta presionar INGRESAR) -->
+<div id="main-content">
+  <div class="hero" style="text-align: center; padding-top: 52px;">
+    <div class="titulo-principal">𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</div>
+    <div class="subtitulo-premium">𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖍𝖆 𝖎𝖓𝖎𝖈𝖎𝖆𝖉𝖔</div>
+    <div class="menu-wrapper" style="margin: 40px auto 20px;">
+      <div class="menu">
+        <button onclick="mostrar('equipo', this)"><span>𝕺𝖜𝖓𝖊𝖗𝖘</span></button>
+        <button onclick="mostrar('aportes', this)"><span>𝕲𝖙𝖆'𝖘</span></button>
+      </div>
     </div>
   </div>
-</div>
 
-<div id="equipo" class="seccion">
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1506438853911646239/1779090598965.jpg?ex=6a0e4403&is=6a0cf283&hm=e4dbbadbc433e7f7207cf6e42147523b855b02e58d097336eaf26b4775013b53&" alt="Santi Gollo"></div>
-    <div class="name-staff">𝖘𝖆𝖓𝖙𝖎</div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  <div id="equipo" class="seccion">
+    <div class="staff-card">
+      <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1506438853911646239/1779090598965.jpg?ex=6a0e4403&is=6a0cf283&hm=e4dbbadbc433e7f7207cf6e42147523b855b02e58d097336eaf26b4775013b53&" alt="Santi Gollo"></div>
+      <div class="name-staff">𝖘𝖆𝖓𝖙𝖎</div>
+      <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+    </div>
+    <div class="staff-card">
+      <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024" alt="Andrew"></div>
+      <div class="name-staff">𝖆𝖓𝖉𝖗𝖊𝖜</div>
+      <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+    </div>
+    <div class="staff-card">
+      <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024" alt="Betrayedd"></div>
+      <div class="name-staff">𝖇𝖊𝖙𝖗𝖆𝖞𝖊𝖉𝖉</div>
+      <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+    </div>
   </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024" alt="Andrew"></div>
-    <div class="name-staff">𝖆𝖓𝖉𝖗𝖊𝖜</div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
-  </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024" alt="Betrayedd"></div>
-    <div class="name-staff">𝖇𝖊𝖙𝖗𝖆𝖞𝖊𝖉𝖉</div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
-  </div>
-</div>
 
-<div id="aportes" class="seccion aportes-grid">
-  <div class="content-card">
-    <h3>𝕽𝖌4</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">232MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1506436114997710878/sa-mp-000.png?ex=6a0e4176&is=6a0ceff6&hm=0fe3f301f620ab4ee333a801fb1452612fa99064cd8e159058b0fad0c118538f&" alt="GTA"></div>
-    <a href="https://www.mediafire.com/file/5irvsg00ar6mbgf/RG4.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-  <div class="content-card">
-    <h3>𝕲𝖙𝖆 𝕽𝖊𝖉</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">232MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1505370806727741450/sa-mp-002.png?ex=6a0dad10&is=6a0c5b90&hm=5af96abd5e78d87067e9f5918f22cad39b17051f9acb64a952ef7fa8fef6f51c&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/tpxucq42lsa1vj9/GTA+RED+V2.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-   <div class="content-card">
-    <h3>𝕲𝖙𝖆 𝖄𝖑𝖑</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">230MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505766056671711355/sa-mp-004.png?ex=6a0dcbab&is=6a0c7a2b&hm=b50eb4d98991f8721ed5ab069294e999d5c4fcaa86b4a84c8a40f6f5f06c7eae&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/8x3rroavukhgksv/GTA+YLL.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-   <div class="content-card">
-    <h3>𝕬𝖕𝖔𝖗𝖙𝖊 𝕸𝖔𝖗𝖆𝖚</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">241MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1494814233467027506/1497036091780366427/sa-mp-094.png?ex=6a0dad41&is=6a0c5bc1&hm=cef950219a84b86d4cd1f5e48f0ededed4782fc43a9db037deb72c77cc80a37e&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/tmnuy3lm8jzyf7v/purple+$$.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-   <div class="content-card">
-    <h3>𝕶𝖎𝖓𝖌 𝕺𝖋 𝕶𝖎𝖓𝖌𝖘</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">228MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1490112189757915308/1501382783883411596/sa-mp-150.png?ex=6a0dab6e&is=6a0c59ee&hm=7c8b487a967422595859ea2614ecd735ad3aa05993f7814976a5d2afbf016edf&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-  <div class="content-card">
-    <h3>𝕸𝖊𝖓𝖉𝖎𝖌𝖔 𝕾𝖙𝖞𝖑𝖊</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">gollomods$</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">233MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1490112189757915308/1501384750214938664/sa-mp-153.png?ex=6a0dad42&is=6a0c5bc2&hm=19a5585f3a97a6729b0fda4b5eab302d17927420ebb6952e5176f4d3893011bc&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/u175lyovmythq74/Aporte_mendigo_style.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-  <div class="content-card">
-    <h3>𝕭𝖔𝖑𝖆𝖉𝖆𝖔</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">boladao</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">261MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505822036021219418/Screenshot_20260518_003840_Discord.png?ex=6a0dffce&is=6a0cae4e&hm=0809923b42c5b14eadba03a84cb43ef5bf1b1e7ad42d40d5f8f260b74dae080d&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/augle3uo4q7juw7/boladao.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-   <div class="content-card">
-    <h3>𝕲𝖙𝖆 𝕻𝖈𝖉</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">pccondeficiencia</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">218MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505822863834349638/Screenshot_20260518_004220_Discord.png?ex=6a0e0093&is=6a0caf13&hm=582c1fcd8247f44b2513e2ea0edf4f2e8330beae6e9b3afabf8c8d9b56aa0563&" alt="Aporte"></div>
-    <a href="https://www.mediafire.com/file/jgvs8j66ca3yac9/GTA_PCD.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-</div>
-
-<script>
-function mostrar(seccionId, btn) {
-  document.querySelectorAll('.seccion').forEach(sec => sec.style.display = 'none');
-  const seccionMostrar = document.getElementById(seccionId);
-  if(seccionMostrar) seccionMostrar.style.display = 'grid';
-  document.querySelectorAll('.menu button').forEach(boton => boton.classList.remove('activo'));
-  if(btn) btn.classList.add('activo');
-}
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.seccion').forEach(sec => sec.style.display = 'none');
-  const equipoDiv = document.getElementById('equipo');
-  if(equipoDiv) equipoDiv.style.display = 'grid';
-  const primerBoton = document.querySelector('.menu button');
-  if(primerBoton) primerBoton.classList.add('activo');
-});
-</script>
-</body>
-</html>
+  <div id="aportes" class="seccion aportes-grid">
+    <div class="content-card">
+      <h3>𝕽𝖌4</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">232MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1506436114997710878/sa-mp-000.png?ex=6a0e4176&is=6a0ceff6&hm=0fe3f301f620ab4ee333a801fb1452612fa99064cd8e159058b0fad0c118538f&" alt="GTA"></div>
+      <a href="https://www.mediafire.com/file/5irvsg00ar6mbgf/RG4.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+    <div class="content-card">
+      <h3>𝕲𝖙𝖆 𝕽𝖊𝖉</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">232MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1505370806727741450/sa-mp-002.png?ex=6a0dad10&is=6a0c5b90&hm=5af96abd5e78d87067e9f5918f22cad39b17051f9acb64a952ef7fa8fef6f51c&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/tpxucq42lsa1vj9/GTA+RED+V2.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+     <div class="content-card">
+      <h3>𝕲𝖙𝖆 𝖄𝖑𝖑</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">230MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505766056671711355/sa-mp-004.png?ex=6a0dcbab&is=6a0c7a2b&hm=b50eb4d98991f8721ed5ab069294e999d5c4fcaa86b4a84c8a40f6f5f06c7eae&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/8x3rroavukhgksv/GTA+YLL.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+     <div class="content-card">
+      <h3>𝕬𝖕𝖔𝖗𝖙𝖊 𝕸𝖔𝖗𝖆𝖚</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">241MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1494814233467027506/1497036091780366427/sa-mp-094.png?ex=6a0dad41&is=6a0c5bc1&hm=cef950219a84b86d4cd1f5e48f0ededed4782fc43a9db037deb72c77cc80a37e&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/tmnuy3lm8jzyf7v/purple+$$.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+     <div class="content-card">
+      <h3>𝕶𝖎𝖓𝖌 𝕺𝖋 𝕶𝖎𝖓𝖌𝖘</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">228MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1490112189757915308/1501382783883411596/sa-mp-150.png?ex=6a0dab6e&is=6a0c59ee&hm=7c8b487a967422595859ea2614ecd735ad3aa05993f7814976a5d2afbf016edf&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+    <div class="content-card">
+      <h3>𝕸𝖊𝖓𝖉𝖎𝖌𝖔 𝕾𝖙𝖞𝖑𝖊</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">gollomods$</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">233MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1490112189757915308/1501384750214938664/sa-mp-153.png?ex=6a0dad42&is=6a0c5bc2&hm=19a5585f3a97a6729b0fda4b5eab302d17927420ebb6952e5176f4d3893011bc&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/u175lyovmythq74/Aporte_mendigo_style.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+    <div class="content-card">
+      <h3>𝕭𝖔𝖑𝖆𝖉𝖆𝖔</h3>
+      <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
+      <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">boladao</span></div>
+      <div class="info-line weight-text">PESO: <span class="red-weight">261MB</span></div>
+      <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505822036021219418/Screenshot_20260518_003840_Discord.png?ex=6a0dffce&is=6a0cae4e&hm=0809923b42c5b14eadba03a84cb43ef5bf1b1e7ad42d40d5f8f260b74dae080d&" alt="Aporte"></div>
+      <a href="https://www.mediafire.com/file/augle3uo4q7juw7/boladao.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+    </div>
+     <div class="content-card">
+      <h3>𝕲𝖙𝖆 𝕻𝖈𝖉</h3>
+      <div class="info-line"><span class="creator-text">CREA
