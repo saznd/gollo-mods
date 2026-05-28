@@ -560,7 +560,7 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   </div>
 </div>
 
-<div id="equipo" class="seccion">
+<div id="equipo" class="seccion" style="display: grid;">
   <div class="staff-card">
     <div class="avatar-glow" data-owner="santi">
       <div class="ring"></div>
@@ -579,7 +579,7 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
   </div>
 </div>
 
-<div id="aportes" class="seccion aportes-grid">
+<div id="aportes" class="seccion aportes-grid" style="display: none;">
   <div class="content-card">
     <h3>𝐆4</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
@@ -631,11 +631,13 @@ button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
 </div>
 
 <script>
+// Función mejorada para cambiar entre secciones
 function mostrar(seccionId, btn) {
-  document.querySelectorAll('.seccion').forEach(sec => sec.style.display = 'none');
-  const seccionMostrar = document.getElementById(seccionId);
-  if(seccionMostrar) {
-    if (seccionId === 'equipo') seccionMostrar.style.display = 'grid';
-    else seccionMostrar.style.display = 'grid';
-  }
-  document.querySelect
+  // Ocultar todas las secciones
+  const secciones = document.querySelectorAll('.seccion');
+  secciones.forEach(sec => {
+    sec.style.display = 'none';
+  });
+  
+  // Mostrar la sección seleccionada
+  const seccionMost
