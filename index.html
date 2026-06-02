@@ -76,10 +76,10 @@ body {
   border-right: 2px solid #ffffff;
   box-shadow: 0 0 20px rgba(255,255,255,0.25);
 }
-/* ---------- ESTILOS RENOVADOS DE BOTONES (TEMÁTICA INDUSTRIAL / NEON) ---------- */
+/* ---------- ESTILOS RENOVADOS DE BOTONES (ESTILO INVISIBLE / TRANSPARENTE) ---------- */
 button, .btn-descarga, .menu button {
-  background: #0a0a0c !important;
-  color: #f0f0f0 !important;
+  background: rgba(10, 10, 12, 0.35) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
   border: none !important;
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-weight: 700;
@@ -89,9 +89,10 @@ button, .btn-descarga, .menu button {
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   overflow: hidden;
   z-index: 1;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.2), 0 4px 18px rgba(0,0,0,0.8);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 4px 18px rgba(0,0,0,0.5);
   border-radius: 0px !important;
   text-transform: uppercase;
+  backdrop-filter: blur(8px);
 }
 
 /* Efecto de doble borde y brillo láser al hover */
@@ -100,7 +101,7 @@ button::before, .btn-descarga::before, .menu button::before {
   position: absolute;
   inset: 0;
   padding: 1.5px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.1), rgba(255,255,255,0.8));
+  background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.15), rgba(255,255,255,0.7));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -120,7 +121,7 @@ button::after, .btn-descarga::after, .menu button::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
   transition: left 0.5s ease;
   z-index: -1;
 }
@@ -133,16 +134,16 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   transform: translateY(-3px);
   color: #ffffff !important;
   text-shadow: 0 0 8px rgba(255,255,255,0.5);
-  box-shadow: 0 0 0 1.5px #ffffff, 0 10px 28px -6px rgba(255,255,255,0.3);
-  background: #111115 !important;
+  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.8), 0 10px 28px -6px rgba(255,255,255,0.2);
+  background: rgba(20, 20, 25, 0.6) !important;
 }
 
 /* ----- MENU PRINCIPAL (Owners / Gta's) ----- */
 .menu {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(24px);
   padding: 10px 32px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.2);
   display: inline-flex;
   justify-content: center;
   gap: 25px;
@@ -151,29 +152,29 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 }
 
 .menu button {
-  background: #07070a !important;
+  background: rgba(7, 7, 10, 0.5) !important;
   padding: 14px 48px;
   font-size: 0.9rem;
   letter-spacing: 3px;
   font-weight: 800;
   backdrop-filter: blur(4px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 12px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 12px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.15) !important;
 }
 
 .menu button.activo {
-  background: #141414 !important;
+  background: rgba(20, 20, 25, 0.8) !important;
   color: #ffffff !important;
-  box-shadow: 0 0 18px rgba(255,255,255,0.4), inset 0 0 0 1.5px #ffffff;
+  box-shadow: 0 0 18px rgba(255,255,255,0.3), inset 0 0 0 1.5px rgba(255,255,255,0.7);
   text-shadow: 0 0 5px white;
-  border: 1px solid #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.6) !important;
 }
 
 .menu button.activo::before {
   opacity: 1;
 }
 
-/* Cards de Aportes - Botones de descarga */
+/* Cards de Aportes - Botones de descarga (más invisibles) */
 .btn-descarga {
   display: block;
   text-align: center;
@@ -183,40 +184,43 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   font-weight: 800;
   letter-spacing: 3px;
   margin-top: 22px;
-  background: #050507 !important;
-  border: 1px solid rgba(255,255,255,0.4) !important;
+  background: rgba(5, 5, 7, 0.4) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
   transition: all 0.3s;
-  color: #e0e0e0 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(4px);
 }
 
 .btn-descarga:hover {
   transform: translateY(-4px);
   letter-spacing: 4px;
-  background: #101014 !important;
-  border-color: #ffffff !important;
+  background: rgba(20, 20, 30, 0.7) !important;
+  border-color: rgba(255,255,255,0.7) !important;
   color: #ffffff !important;
-  box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.15);
 }
 
-/* SECCION EQUIPO */
+/* SECCION EQUIPO - Grid dinámica para 3 o más owners */
 #equipo {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-items: center;
   gap: 70px;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 80px auto;
   padding: 20px;
 }
+
 @media (min-width: 769px) {
-  #equipo:has(> .staff-card:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 700px;
+  #equipo:has(> .staff-card:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1100px;
   }
 }
+
 .staff-card {
   display: flex;
   flex-direction: column;
@@ -336,9 +340,9 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   transform: translate(-50%, -50%) scale(1);
 }
 .close-modal {
-  background: #111111 !important;
+  background: rgba(17, 17, 17, 0.7) !important;
   color: white !important;
-  border: 1px solid rgba(255,255,255,0.6) !important;
+  border: 1px solid rgba(255,255,255,0.5) !important;
   padding: 10px 24px;
   font-size: 0.8rem;
   font-weight: 700;
@@ -350,7 +354,7 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   border-radius: 0px;
 }
 .close-modal:hover {
-  background: #2a2a2a !important;
+  background: rgba(42, 42, 50, 0.8) !important;
   transform: scale(1.02);
   border-color: #ffffff !important;
   box-shadow: 0 0 15px rgba(255,255,255,0.4);
@@ -382,8 +386,8 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   margin: 60px auto;
 }
 .content-card {
-  background: rgba(6, 6, 8, 0.9);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: rgba(6, 6, 8, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   padding: 32px 28px 36px;
   backdrop-filter: blur(14px);
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.2);
@@ -393,8 +397,8 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 .content-card:hover {
   transform: translateY(-12px);
   border-color: #ffffff;
-  background: rgba(10, 10, 14, 0.98);
-  box-shadow: 0 35px 45px -18px rgba(255,255,255,0.3), 0 0 0 1px #ffffff inset;
+  background: rgba(10, 10, 14, 0.92);
+  box-shadow: 0 35px 45px -18px rgba(255,255,255,0.2), 0 0 0 1px #ffffff inset;
 }
 .content-card h3 {
   font-family: 'Space Grotesk', sans-serif;
@@ -420,7 +424,7 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 .video-thumbnail {
   margin: 20px 0 18px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.4);
   transition: all 0.35s;
 }
 .video-thumbnail img {
@@ -442,12 +446,39 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   .menu button { padding: 8px 22px; font-size: 0.7rem; }
   .aportes-grid { width: 90%; grid-template-columns: 1fr; gap: 35px; }
 }
+/* Estilos para la lista dentro del modal */
+.info-list {
+  text-align: left;
+  margin: 20px 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 8px;
+}
+.bullet {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px white;
+}
+.info-text {
+  color: #eaeaea;
+  font-weight: 500;
+}
 </style>
 </head>
 <body>
 
+<!-- VIDEO DE FONDO -->
 <video autoplay muted loop id="video-fondo">
-  <source src="https://cdn.discordapp.com/attachments/1462277507456831671/1509385365960790087/De_que_pais_me_miras____viralvideo__americaMP4.mp4?ex=6a18fc2a&is=6a17aaaa&hm=052fcc34d61f454d8891da9b457d16eba71796c3320952337ee3f2c0406e35f7&" type="video/mp4">
+  <source src="https://cdn.discordapp.com/attachments/1509117295493120191/1509391615645712476/De_que_pais_me_miras____viralvideo__americaMP4.mp4?ex=6a1ef0bc&is=6a1d9f3c&hm=1bb39bb7f67b06ff7ee38cc0e4ad88d5c957fbeae8b76415009b7550589b7234&" type="video/mp4">
 </video>
 <div class="overlay-video"></div>
 
@@ -462,6 +493,7 @@ button:hover, .btn-descarga:hover, .menu button:hover {
   </div>
 </div>
 
+<!-- SECCIÓN OWNERS: SANTI, BETRAYEDD Y ALEXANDER -->
 <div id="equipo" class="seccion">
   <div class="staff-card">
     <div class="avatar-glow" data-owner="santi">
@@ -479,48 +511,65 @@ button:hover, .btn-descarga:hover, .menu button:hover {
     <div class="name-staff">𝖇𝖊𝖙𝖗𝖆𝖞𝖊𝖉𝖉</div>
     <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
   </div>
+  <div class="staff-card">
+    <div class="avatar-glow" data-owner="alexander">
+      <div class="ring"></div>
+      <img src="https://cdn.discordapp.com/avatars/1392863423544426587/b51dacfd803f32a9db593c6b8968f9f8.png?size=2048" alt="Alexander">
+    </div>
+    <div class="name-staff">𝖆𝖑𝖊𝖝𝖆𝖓𝖉𝖊𝖗</div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  </div>
 </div>
 
+<!-- SECCIÓN APORTES CON LAS NUEVAS IMÁGENES ACTUALIZADAS -->
 <div id="aportes" class="seccion aportes-grid">
-  <!-- Aquí tus 5 cards de aportes, se mantienen intactas -->
+  <!-- G4 - imagen actualizada -->
   <div class="content-card">
     <h3>𝐆4</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
     <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
     <div class="info-line weight-text">PESO: <span class="red-weight">235MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1508224909531283616/sa-mp-057.png?ex=6a18b7e7&is=6a176667&hm=94a9286495e6f746e84f04141047ffd7e2370beb7dd92698585d797a9e575a76&" alt="GTA"></div>
+    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1508162181638918144/sa-mp-057.png?ex=6a1f14fc&is=6a1dc37c&hm=26ef1f3e99d401120c96a82c5041f4baa91018a006fb5960217812a7fdcb4b25&" alt="G4"></div>
     <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
   </div>
+  
+  <!-- GTA RED - imagen actualizada -->
   <div class="content-card">
     <h3>𝕲𝖙𝖆 𝕽𝖊𝖉</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
     <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
     <div class="info-line weight-text">PESO: <span class="red-weight">232MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1505370806727741450/sa-mp-002.png?ex=6a18e1d0&is=6a179050&hm=f99cdc3a7c5243a168bef4b2684b492ca5cca6b50bc6fbdd6e40419ad6894a44&" alt="Aporte"></div>
+    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1492232687505903868/1505370806727741450/sa-mp-002.png?ex=6a1f7950&is=6a1e27d0&hm=efbef598a4d9ba3f8e6f50c3088d25f90be430b4e9d183c91f371d79050c357b&" alt="GTA Red"></div>
     <a href="https://www.mediafire.com/file/tpxucq42lsa1vj9/GTA+RED+V2.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
   </div>
+  
+  <!-- GTA GM - imagen actualizada -->
   <div class="content-card">
     <h3>𝐆𝐓𝐀 𝐆𝐌</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
     <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
     <div class="info-line weight-text">PESO: <span class="red-weight">247MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1508162289298309191/sa-mp-039.png?ex=6a187d96&is=6a172c16&hm=bd56cbc081277d074070ba1169e9d836d20d45bcea2a5880bc046104cdc9267c&" alt="Aporte"></div>
+    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1508162289298309191/sa-mp-039.png?ex=6a1f1516&is=6a1dc396&hm=a53130be36a98f9181641cdd84c8f3725a502a298d538841fc3155deda2e37ec&" alt="GTA GM"></div>
     <a href="https://www.mediafire.com/file/vroxr8sqeyrng0s/GTA_GM.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
   </div>
+  
+  <!-- KING OF KINGS - imagen actualizada -->
   <div class="content-card">
     <h3>𝕶𝖎𝖓𝖌 𝕺𝖋 𝕶𝖎𝖓𝖌𝖘</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
     <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
     <div class="info-line weight-text">PESO: <span class="red-weight">228MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1509394254294814750/sa-mp-150.png?ex=6a190471&is=6a17b2f1&hm=d7d402e948802b6d84a479d0bfb57c094c02ea725cb242ed54bdeeed5831496f&" alt="Aporte"></div>
+    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1509394254294814750/sa-mp-150.png?ex=6a1ef331&is=6a1da1b1&hm=ff574dbdb1b52412367f189cbabf528241aa3f3794b62d18f9e09b10a6939d95&" alt="King Of Kings"></div>
     <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
   </div>
+  
+  <!-- BOLADAO - imagen actualizada -->
   <div class="content-card">
     <h3>𝕭𝖔𝖑𝖆𝖉𝖆𝖔</h3>
     <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
     <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">boladao</span></div>
     <div class="info-line weight-text">PESO: <span class="red-weight">261MB</span></div>
-    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505822036021219418/Screenshot_20260518_003840_Discord.png?ex=6a188bce&is=6a173a4e&hm=564683cf0c2d34c3d2fef0aed91a6c83179b0a20f57eacd4b77079911368f9c7&" alt="Aporte"></div>
+    <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1406502394837074097/1505822036021219418/Screenshot_20260518_003840_Discord.png?ex=6a1f234e&is=6a1dd1ce&hm=d7572ebdf88ab5f8b83d3b263c118529588de92f39d2cea6b4269e69be4f3e89&" alt="Boladao"></div>
     <a href="https://www.mediafire.com/file/augle3uo4q7juw7/boladao.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
   </div>
 </div>
@@ -537,54 +586,20 @@ button:hover, .btn-descarga:hover, .menu button:hover {
 function mostrar(seccionId, btn) {
   document.querySelectorAll('.seccion').forEach(sec => sec.style.display = 'none');
   const seccionMostrar = document.getElementById(seccionId);
-  if(seccionMostrar) seccionMostrar.style.display = 'grid';
+  if(seccionMostrar) {
+    seccionMostrar.style.display = 'grid';
+  }
   document.querySelectorAll('.menu button').forEach(boton => boton.classList.remove('activo'));
   if(btn) btn.classList.add('activo');
 }
 
+// Información actualizada de los tres owners
 const ownerInfo = {
   santi: { name: "𝖘𝖆𝖓𝖙𝖎", details: ["✨ Fundador Principal", "📅 Decidió crear la comunidad el 13/10/25", "🌐 Gestor de página web", "⚙️ Creador de fist, timecyc y skin de armas", "🎮 Creador de aportes y datas"] },
-  betrayedd: { name: "𝖇𝖊𝖙𝖗𝖆𝖞𝖊𝖉𝖉", details: ["🔹 Segundo Owner", "📦 Creador de aportes", "💻 Gestor de página web", "💰 Gestor financiero"] }
+  betrayedd: { name: "𝖇𝖊𝖙𝖗𝖆𝖞𝖊𝖉𝖉", details: ["🔹 Segundo Owner", "📦 Creador de aportes", "💻 Gestor de página web", "💰 Gestor financiero"] },
+  alexander: { name: "𝖆𝖑𝖊𝖝𝖆𝖓𝖉𝖊𝖗", details: ["👑 Tercer Owner y visionario", "🎨 Diseñador gráfico principal", "🚀 Impulsor de nuevas ideas", "🛠️ Creador de mods visuales avanzados", "🌟 Encargado de relaciones comunitarias"] }
 };
 
 function showOwnerModal(ownerId) {
   const info = ownerInfo[ownerId];
-  if (!info) return;
-  document.getElementById('modalTitle').innerHTML = info.name;
-  const listContainer = document.getElementById('modalInfoList');
-  listContainer.innerHTML = '';
-  info.details.forEach(detail => {
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'info-item';
-    itemDiv.innerHTML = `<span class="bullet">✦</span><span class="info-text">${detail}</span>`;
-    listContainer.appendChild(itemDiv);
-  });
-  document.getElementById('infoModal').classList.add('active');
-  document.getElementById('modalOverlay').classList.add('active');
-}
-
-function closeModal() {
-  document.getElementById('infoModal').classList.remove('active');
-  document.getElementById('modalOverlay').classList.remove('active');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.seccion').forEach(sec => sec.style.display = 'none');
-  document.getElementById('equipo').style.display = 'grid';
-  document.querySelector('.menu button')?.classList.add('activo');
-  
-  document.querySelectorAll('.avatar-glow').forEach(container => {
-    container.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const owner = container.getAttribute('data-owner');
-      if (owner === 'santi') showOwnerModal('santi');
-      else if (owner === 'betrayedd') showOwnerModal('betrayedd');
-    });
-  });
-  
-  document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
-  document.getElementById('modalOverlay')?.addEventListener('click', closeModal);
-});
-</script>
-</body>
-</html>
+  if (!info) r
