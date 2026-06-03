@@ -153,7 +153,7 @@ body {
 /* SECCIÓN OWNERS */
 #equipo {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   max-width: 1300px;
   margin: 70px auto 50px;
@@ -578,7 +578,7 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   #equipo { grid-template-columns: repeat(2, 1fr); gap: 35px; margin: 50px 20px 40px; padding: 35px 20px; }
   #equipo::before { font-size: 1rem; letter-spacing: 5px; top: -20px; }
 }
@@ -620,13 +620,13 @@ body {
       <div class="stat-label"><i class="fas fa-users"></i> Usuarios Totales</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">3</div>
+      <div class="stat-number">4</div>
       <div class="stat-label"><i class="fas fa-star"></i> Fundadores</div>
     </div>
   </div>
 </div>
 
-<!-- OWNERS -->
+<!-- OWNERS - Se agregó a Andréw -->
 <div id="equipo">
   <div class="staff-card" data-owner="santi">
     <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1378819868668727388/8fbc5ad7f04c5da00983b9ccf1d964d1.png?size=2048" alt="Santi Gollo"></div>
@@ -646,6 +646,13 @@ body {
     <div class="role-staff"><i class="fas fa-crown"></i> 𝕺𝖜𝖓𝖊𝖗</div>
     <div class="staff-time"><i class="far fa-calendar-alt"></i> Desde Octubre 2025 · 7 meses</div>
   </div>
+  <!-- Nuevo Owner: Andréw -->
+  <div class="staff-card" data-owner="andrew">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://cdn.discordapp.com/avatars/1125573441563664414/4a851b6916fa46823af64b1c9fc7b10d.png?size=2048" alt="Andréw"></div>
+    <div class="name-staff">𝖆𝖓𝖉𝖗é𝖜</div>
+    <div class="role-staff"><i class="fas fa-crown"></i> 𝕺𝖜𝖓𝖊𝖗</div>
+    <div class="staff-time"><i class="far fa-calendar-alt"></i> Desde Enero 2026 · 4 meses</div>
+  </div>
 </div>
 
 <!-- TÍTULO DE LA SECCIÓN GTAS -->
@@ -653,7 +660,7 @@ body {
   <h2><i class="fas fa-gamepad"></i> 𝕲𝖙𝖆'𝖘 𝕸𝖔𝖉𝖘 <i class="fas fa-gamepad"></i></h2>
 </div>
 
-<!-- APORTES GTAS - TODOS VISIBLES DEBAJO DE OWNERS (BOLADAO ELIMINADO) -->
+<!-- APORTES GTAS -->
 <div class="aportes-grid">
   <!-- G4 -->
   <div class="content-card">
@@ -692,18 +699,4 @@ body {
     <div class="info-line"><i class="fas fa-lock"></i> CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
     <div class="info-line"><i class="fas fa-database"></i> PESO: <span class="red-weight">228MB</span></div>
     <div class="video-thumbnail"><img src="https://cdn.discordapp.com/attachments/1462277507456831671/1509394254294814750/sa-mp-150.png?ex=6a1ef331&is=6a1da1b1&hm=ff574dbdb1b52412367f189cbabf528241aa3f3794b62d18f9e09b10a6939d95&" alt="King Of Kings"></div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank" rel="noopener noreferrer"><i class="fas fa-download"></i> 𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗</a>
-  </div>
-</div>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay"></div>
-<div class="info-modal" id="infoModal">
-  <h2 id="modalTitle" style="font-family:'Space Grotesk';">𝖓𝖔𝖒𝖇𝖗𝖊</h2>
-  <div class="info-list" id="modalInfoList"></div>
-  <button class="close-modal" id="closeModalBtn">𝕮𝖊𝖗𝖗𝖆𝖗</button>
-</div>
-
-<script>
-// ========== MODAL DE OWNERS ==========
-const moda
+    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank" rel="noopene
