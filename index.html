@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>GOLLO MODS PRIME</title>
-<link rel="icon" type="image/png" href="img/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+<!-- FUENTES MÁS BONITAS Y MODERNAS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 
 /* ===== RESET Y BASE ===== */
@@ -19,11 +20,11 @@
 body {
   background: #000000;
   color: #eeeeee;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
 }
 
-/* ===== VIDEO DE FONDO FIJO ===== */
+/* ===== VIDEO DE FONDO ===== */
 #video-fondo-global {
   position: fixed;
   top: 0;
@@ -32,7 +33,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  filter: brightness(0.4) grayscale(1);
+  filter: brightness(0.7) contrast(1.1) grayscale(0.7);
   pointer-events: none;
 }
 
@@ -43,12 +44,9 @@ body {
   min-height: 100vh;
 }
 
-/* ===== EFECTOS LIGHTWEIGHT BLANCO/NEGRO ===== */
-
-/* 1. BRILLO SUTIL EN BORDES DE TARJETAS AL HOVER */
+/* ===== EFECTOS ===== */
 .aporte-card, .card, .menu {
   transition: all 0.25s ease-out;
-  will-change: transform;
 }
 
 .aporte-card:hover {
@@ -66,7 +64,6 @@ body {
   box-shadow: 0 0 12px rgba(255,255,255,0.4);
 }
 
-/* 2. EFECTO DE PULSO SUTIL EN EL TÍTULO */
 .titulo {
   animation: pulseSoft 3s infinite alternate;
 }
@@ -76,7 +73,6 @@ body {
   100% { text-shadow: 0 0 18px rgba(255,255,255,0.6); opacity: 1; }
 }
 
-/* 3. LÍNEA NEÓN BLANCA QUE SE DESLIZA EN BOTONES */
 .menu button {
   position: relative;
   overflow: hidden;
@@ -99,7 +95,6 @@ body {
   left: 150%;
 }
 
-/* 4. EFECTO DE BRILLO EN BOTONES DE DESCARGA */
 .btn-descarga {
   position: relative;
   overflow: hidden;
@@ -122,7 +117,6 @@ body {
   left: 100%;
 }
 
-/* 5. EFECTO DE ESCALA SUTIL EN AVATARES */
 .avatar img {
   transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -132,7 +126,6 @@ body {
   filter: grayscale(0%) brightness(1.1);
 }
 
-/* 6. PARPADEO SUTIL EN EL TEXTO DE BIENVENIDA DE LA INTRO */
 .texto-intro {
   animation: textFlicker 2.5s infinite alternate;
 }
@@ -142,7 +135,6 @@ body {
   100% { text-shadow: 0 0 22px rgba(255,255,255,0.8); letter-spacing: 3px; }
 }
 
-/* 7. BORDE QUE RESPIRA EN EL MENÚ */
 .menu {
   animation: borderBreath 3s infinite alternate;
 }
@@ -178,7 +170,7 @@ body {
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
-  filter: brightness(0.5) grayscale(1);
+  filter: brightness(0.6) grayscale(0.8);
 }
 
 .overlay-intro {
@@ -188,47 +180,77 @@ body {
   transition: opacity 0.8s ease;
 }
 
+/* ===== BOTÓN DE ENTRAR CON EFECTOS MEJORADOS ===== */
 #btn-entrar {
-  padding: 18px 50px;
+  padding: 20px 65px;
   font-size: 28px;
-  border-radius: 60px;
-  background: #1a1a1a;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   color: white;
-  border: 2px solid #aaaaaa;
+  border: none;
   cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
-  font-weight: bold;
-  box-shadow: 0 0 12px rgba(255,255,255,0.3);
+  font-weight: 800;
+  letter-spacing: 3px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.5);
   transition: all 0.3s ease;
   display: inline-block;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(4px);
 }
 
+/* Efecto de brillo que pasa */
 #btn-entrar::before {
   content: "";
   position: absolute;
   top: 0;
   left: -100%;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s ease;
 }
 
 #btn-entrar:hover::before {
-  left: 150%;
+  left: 100%;
 }
 
+/* Efecto hover */
 #btn-entrar:hover {
-  transform: scale(1.05);
-  background: #333333;
-  box-shadow: 0 0 20px rgba(255,255,255,0.6);
-  border-color: #ffffff;
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+  box-shadow: 0 0 35px rgba(255,255,255,0.6), 0 8px 20px rgba(0,0,0,0.6);
+  letter-spacing: 5px;
 }
 
-/* ===== CABECERA Y TÍTULOS ===== */
+/* EFECTO DE TOCADO/CLICK - MUY NOTORIO */
+#btn-entrar:active {
+  transform: scale(0.92);
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  box-shadow: 0 0 8px rgba(255,255,255,0.2), 0 2px 5px rgba(0,0,0,0.5);
+  transition: all 0.05s ease;
+}
+
+/* EFECTO DE ONDA AL HACER CLICK (RIPPLE) */
+#btn-entrar .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ===== CABECERA Y TÍTULOS CON FUENTES MEJORADAS ===== */
 .hero {
   text-align: center;
   padding-top: 80px;
@@ -236,10 +258,16 @@ body {
 }
 
 .titulo {
-  font-family: 'Ethnocentric', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 58px;
+  font-weight: 900;
   color: #ffffff;
   letter-spacing: 2px;
+  background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(255,255,255,0.3);
 }
 
 .subtitulo {
@@ -247,6 +275,8 @@ body {
   font-size: 13px;
   letter-spacing: 2px;
   color: #bbbbbb;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
 
 /* ===== MENÚ ===== */
@@ -274,8 +304,8 @@ body {
 .menu button {
   border-radius: 50px;
   border: 1px solid #888;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
   background: #111111;
@@ -355,8 +385,8 @@ body {
 .name {
   color: #ffffff;
   font-size: 18px;
-  font-weight: bold;
-  font-family: "Ethnocentric", sans-serif;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
   letter-spacing: 1px;
   margin-bottom: 6px;
 }
@@ -364,7 +394,8 @@ body {
 .role {
   color: #aaaaaa;
   font-size: 11px;
-  font-family: "Orbitron", monospace;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -387,15 +418,17 @@ body {
 
 .aporte-card h3 {
   color: #dddddd;
-  font-family: "Ethnocentric", sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 18px;
   margin-bottom: 10px;
   letter-spacing: 1px;
 }
 
 .creator, .password, .peso {
-  font-family: "Orbitron", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 12px;
+  font-weight: 400;
   color: #bbbbbb;
   margin: 5px 0;
 }
@@ -426,8 +459,8 @@ body {
   border: 1px solid #888;
   border-radius: 60px;
   padding: 12px 0;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
   font-size: 13px;
   letter-spacing: 1px;
@@ -455,27 +488,40 @@ body {
   .avatar { width: 85px; height: 85px; }
   .name { font-size: 14px; }
   .hero { padding-top: 60px; }
-  .texto-intro { font-size: 1.8rem; }
-  #btn-entrar { font-size: 22px; padding: 14px 35px; }
+  .texto-intro { font-size: 1.5rem; }
+  #btn-entrar { font-size: 18px; padding: 14px 35px; letter-spacing: 2px; }
+  #btn-entrar:hover { letter-spacing: 3px; }
   .menu { max-width: 95%; padding: 15px; }
+}
+
+/* Optimización para evitar lag */
+@media (prefers-reduced-motion: reduce) {
+  *, .titulo, .menu, .texto-intro, #btn-entrar {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+img {
+  content-visibility: auto;
 }
 </style>
 </head>
 <body>
 
-<!-- VIDEO DE FONDO FIJO -->
-<video id="video-fondo-global" autoplay loop muted playsinline>
+<!-- VIDEO DE FONDO -->
+<video id="video-fondo-global" autoplay loop muted playsinline preload="auto">
   <source src="https://files.catbox.moe/6g6xgk.mp4" type="video/mp4">
 </video>
 
 <!-- INTRO -->
 <div id="intro-video">
-  <video muted loop playsinline class="video-intro-file" id="miVideoIntro" autoplay muted loop>
+  <video muted loop playsinline class="video-intro-file" id="miVideoIntro" autoplay muted loop preload="auto">
     <source src="https://files.catbox.moe/6g6xgk.mp4" type="video/mp4">
   </video>
   <div class="overlay-intro">
     <div class="texto-intro">BIENVENIDO A GOLLO MODS</div>
-    <button id="btn-entrar">▶ INGRESO GOLLO PRIME ◀</button>
+    <button id="btn-entrar">▶ ENTRAR AL PRIME ◀</button>
   </div>
 </div>
 
@@ -495,18 +541,18 @@ body {
 
   <!-- STAFF -->
   <div id="equipo" class="seccion staff">
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/u0s9h1.png"></div><div class="name">Santi</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/fb9db2.png"></div><div class="name">Andrew</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/1ialho.png"></div><div class="name">Betrayedd</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png"></div><div class="name">Alexander</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/u0s9h1.png" loading="lazy"></div><div class="name">Santi</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/fb9db2.png" loading="lazy"></div><div class="name">Andrew</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/1ialho.png" loading="lazy"></div><div class="name">Betrayedd</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" loading="lazy"></div><div class="name">Alexander</div><div class="role">OWNER</div></div>
   </div>
 
-  <!-- APORTES GTA - SOLO 2 APORTES (santi y betrayedd) -->
+  <!-- APORTES GTA -->
   <div id="aportes" class="seccion aportes-grid">
-    <div class="aporte-card"><h3>G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 235MB</p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 240MB</p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>KING OF KINGS</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 228MB</p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>SOMTHING NICE</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: betraking</p><p class="peso">PESO: 225MB</p><div class="video-thumb"><img src="https://files.catbox.moe/zs8fid.png"></div><a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
+    <div class="aporte-card"><h3>G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 235MB</p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" loading="lazy"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
+    <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 240MB</p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" loading="lazy"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
+    <div class="aporte-card"><h3>KING OF KINGS</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 228MB</p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" loading="lazy"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
+    <div class="aporte-card"><h3>SOMTHING NICE</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: betraking</p><p class="peso">PESO: 225MB</p><div class="video-thumb"><img src="https://files.catbox.moe/zs8fid.png" loading="lazy"></div><a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
   </div>  
 </div>
 
@@ -536,7 +582,39 @@ body {
   const btnEntrar = document.getElementById("btn-entrar");
   const videoIntro = document.getElementById("miVideoIntro");
 
-  btnEntrar.addEventListener("click", () => {
+  // Función para crear efecto de onda (ripple) al hacer click/tocar
+  function createRipple(event, button) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    ripple.style.position = 'absolute';
+    
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  }
+
+  btnEntrar.addEventListener("click", (event) => {
+    // Crear efecto de onda
+    createRipple(event, btnEntrar);
+    
+    // Efecto de vibración sutil
+    btnEntrar.style.transform = 'scale(0.92)';
+    setTimeout(() => {
+      btnEntrar.style.transform = '';
+    }, 150);
+    
+    // Reproducir video y desaparecer intro
     videoIntro.muted = false;
     videoIntro.play();
     overlay.style.opacity = "0";
@@ -544,6 +622,15 @@ body {
       introContainer.style.opacity = "0";
       setTimeout(() => { introContainer.style.display = "none"; }, 1000);
     }, 500);
+  });
+  
+  // Soporte para dispositivos táctiles (touch)
+  btnEntrar.addEventListener("touchstart", (event) => {
+    createRipple(event, btnEntrar);
+    btnEntrar.style.transform = 'scale(0.92)';
+    setTimeout(() => {
+      btnEntrar.style.transform = '';
+    }, 150);
   });
 </script>
 </body>
