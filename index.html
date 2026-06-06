@@ -32,7 +32,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  filter: brightness(0.7) contrast(1.1);
+  filter: brightness(0.7) contrast(1.1) grayscale(0.7);
   pointer-events: none;
 }
 
@@ -151,7 +151,7 @@ body {
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
-  filter: brightness(0.6);
+  filter: brightness(0.6) grayscale(0.8);
 }
 
 .overlay-intro {
@@ -336,7 +336,6 @@ body {
   align-items: center;
   text-align: center;
   width: 100%;
-  cursor: pointer;
 }
 
 .avatar-circle {
@@ -348,7 +347,6 @@ body {
   border: 3px solid rgba(255,255,255,0.3);
   transition: all 0.3s ease;
   box-shadow: 0 0 20px rgba(255,255,255,0.1);
-  cursor: pointer;
 }
 
 .avatar-circle:hover {
@@ -362,9 +360,11 @@ body {
   height: 100%;
   object-fit: cover;
   transition: all 0.3s ease;
+  filter: grayscale(50%);
 }
 
 .avatar-circle:hover img {
+  filter: grayscale(0%);
   transform: scale(1.1);
 }
 
@@ -378,7 +378,6 @@ body {
   color: transparent;
   margin-bottom: 8px;
   letter-spacing: 1px;
-  cursor: pointer;
 }
 
 .member-date {
@@ -414,129 +413,7 @@ body {
   margin-right: auto;
 }
 
-/* ===== MODAL - CUADRO DE INFORMACIÓN ===== */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(8px);
-  z-index: 1000001;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-content {
-  background: linear-gradient(145deg, rgba(20,20,20,0.98), rgba(10,10,10,0.98));
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 30px;
-  max-width: 350px;
-  width: 85%;
-  padding: 30px 25px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 0 50px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.2);
-  animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  overflow: hidden;
-  border: 3px solid rgba(255,255,255,0.5);
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-}
-
-.modal-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.modal-name {
-  font-size: 28px;
-  font-weight: 800;
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #fff, #ccc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 15px;
-}
-
-.modal-description {
-  text-align: left;
-  margin: 20px 0;
-  padding: 15px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 20px;
-  border-left: 3px solid #ffffff;
-}
-
-.modal-description p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  color: #dddddd;
-  margin: 10px 0;
-  line-height: 1.6;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.modal-description p::before {
-  content: "▸";
-  color: #ffffff;
-  font-size: 14px;
-}
-
-.modal-close {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 50px;
-  padding: 12px 25px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.2s ease;
-  font-size: 14px;
-}
-
-.modal-close:hover {
-  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
-  transform: scale(1.02);
-  border-color: white;
-}
-
-.modal-close:active {
-  transform: scale(0.98);
-}
-
-/* ===== TARJETAS DE APORTES - IMÁGENES A COLOR ===== */
+/* ===== TARJETAS DE APORTES ===== */
 .aportes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -580,7 +457,12 @@ body {
 .video-thumb img {
   width: 100%;
   display: block;
-  /* ELIMINADO EL FILTRO GRIS */
+  filter: grayscale(100%);
+  transition: filter 0.2s ease;
+}
+
+.aporte-card:hover .video-thumb img {
+  filter: grayscale(0%);
 }
 
 .btn-descarga {
@@ -624,10 +506,6 @@ body {
   .member-date { font-size: 12px; }
   .member-role { font-size: 10px; }
   .staff { gap: 35px; }
-  
-  .modal-content { width: 90%; padding: 25px 20px; }
-  .modal-name { font-size: 24px; }
-  .modal-description p { font-size: 12px; }
 }
 
 @media (max-width: 480px) {
@@ -682,7 +560,7 @@ img {
 
   <!-- STAFF - LISTA VERTICAL EN CÍRCULOS -->
   <div id="equipo" class="seccion staff">
-    <div class="member" onclick="mostrarModal('santi')">
+    <div class="member">
       <div class="avatar-circle">
         <img src="https://files.catbox.moe/u0s9h1.png" loading="lazy">
       </div>
@@ -690,7 +568,7 @@ img {
       <div class="member-date">Octubre 2025</div>
       <div class="member-role">OWNER</div>
     </div>
-    <div class="member" onclick="mostrarModal('andrew')">
+    <div class="member">
       <div class="avatar-circle">
         <img src="https://files.catbox.moe/fb9db2.png" loading="lazy">
       </div>
@@ -698,7 +576,7 @@ img {
       <div class="member-date">12 Enero 2026</div>
       <div class="member-role">OWNER</div>
     </div>
-    <div class="member" onclick="mostrarModal('betrayedd')">
+    <div class="member">
       <div class="avatar-circle">
         <img src="https://files.catbox.moe/1ialho.png" loading="lazy">
       </div>
@@ -706,7 +584,7 @@ img {
       <div class="member-date">9 Enero 2026</div>
       <div class="member-role">OWNER</div>
     </div>
-    <div class="member" onclick="mostrarModal('alexander')">
+    <div class="member">
       <div class="avatar-circle">
         <img src="https://files.catbox.moe/sjrh0t.png" loading="lazy">
       </div>
@@ -716,7 +594,7 @@ img {
     </div>
   </div>
 
-  <!-- APORTES GTA - IMÁGENES A COLOR -->
+  <!-- APORTES GTA -->
   <div id="aportes" class="seccion aportes-grid">
     <div class="aporte-card"><h3>G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 235MB</p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" loading="lazy"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
     <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 240MB</p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" loading="lazy"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
@@ -725,87 +603,92 @@ img {
   </div>  
 </div>
 
-<!-- MODAL DE INFORMACIÓN -->
-<div id="modal" class="modal" onclick="cerrarModal(event)">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <div id="modal-avatar" class="modal-avatar"></div>
-    <div id="modal-name" class="modal-name"></div>
-    <div id="modal-description" class="modal-description"></div>
-    <button class="modal-close" onclick="cerrarModal()">✕ CERRAR</button>
-  </div>
-</div>
-
 <script>
-  // Datos de los miembros del staff
-  const staffData = {
-    santi: {
-      nombre: "Santi",
-      avatar: "https://files.catbox.moe/u0s9h1.png",
-      descripcion: [
-        "Owner Fundador principal de la comunidad",
-        "Gestor página web",
-        "Creador contenido Android y PC",
-        "Desarrollador de mods GTA"
-      ]
-    },
-    andrew: {
-      nombre: "Andrew",
-      avatar: "https://files.catbox.moe/fb9db2.png",
-      descripcion: [
-        "Gestor financiero",
-        "Segundo al mando",
-        "Administrador de redes",
-        "Soporte técnico"
-      ]
-    },
-    betrayedd: {
-      nombre: "Betrayedd",
-      avatar: "https://files.catbox.moe/1ialho.png",
-      descripcion: [
-        "Creador de contenido exclusivo",
-        "Desarrollador de mods",
-        "Beta tester",
-        "Community manager"
-      ]
-    },
-    alexander: {
-      nombre: "Alexander",
-      avatar: "https://files.catbox.moe/sjrh0t.png",
-      descripcion: [
-        "Co-fundador",
-        "Gestor de seguridad",
-        "Moderador principal",
-        "Organizador de eventos"
-      ]
+  function mostrar(id, boton) {
+    document.querySelectorAll(".seccion").forEach(s => { s.style.display = "none"; });
+    const seccionMostrar = document.getElementById(id);
+    if (id === "equipo") {
+      seccionMostrar.style.display = "flex";
+    } else {
+      seccionMostrar.style.display = "grid";
     }
-  };
-
-  function mostrarModal(id) {
-    const miembro = staffData[id];
-    if (!miembro) return;
-    
-    const modal = document.getElementById('modal');
-    const modalAvatar = document.getElementById('modal-avatar');
-    const modalName = document.getElementById('modal-name');
-    const modalDescription = document.getElementById('modal-description');
-    
-    // Llenar el modal con la información
-    modalAvatar.innerHTML = `<img src="${miembro.avatar}" alt="${miembro.nombre}">`;
-    modalName.textContent = miembro.nombre;
-    
-    // Crear los párrafos de descripción
-    let descripcionHTML = '';
-    miembro.descripcion.forEach(texto => {
-      descripcionHTML += `<p>${texto}</p>`;
-    });
-    modalDescription.innerHTML = descripcionHTML;
-    
-    // Mostrar el modal
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
+    boton.classList.add("activo");
   }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".seccion").forEach(s => { s.style.display = "none"; });
+    const equipoSeccion = document.getElementById("equipo");
+    equipoSeccion.style.display = "flex";
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
+    document.querySelector(".menu button").classList.add("activo");
+  });
+
+  const introContainer = document.getElementById("intro-video");
+  const overlay = document.querySelector(".overlay-intro");
+  const btnEntrar = document.getElementById("btn-entrar");
+  const videoIntro = document.getElementById("miVideoIntro");
+
+  function createRipple(event, button) {
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    let x, y;
+    
+    if (event.touches) {
+      x = event.touches[0].clientX - rect.left - size / 2;
+      y = event.touches[0].clientY - rect.top - size / 2;
+    } else {
+      x = event.clientX - rect.left - size / 2;
+      y = event.clientY - rect.top - size / 2;
+    }
+    
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    ripple.style.position = 'absolute';
+    
+    button.appendChild(ripple);
+    
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
+  }
+
+  btnEntrar.addEventListener("click", (event) => {
+    createRipple(event, btnEntrar);
+    btnEntrar.style.transform = 'scale(0.92)';
+    setTimeout(() => {
+      btnEntrar.style.transform = '';
+    }, 150);
+    
+    videoIntro.muted = false;
+    videoIntro.play();
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      introContainer.style.opacity = "0";
+      setTimeout(() => { introContainer.style.display = "none"; }, 1000);
+    }, 500);
+  });
   
-  function cerrarModal(event) {
-    const modal = document.getElementById('modal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'aut
+  btnEntrar.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    createRipple(event, btnEntrar);
+    btnEntrar.style.transform = 'scale(0.92)';
+    setTimeout(() => {
+      btnEntrar.style.transform = '';
+    }, 150);
+    
+    videoIntro.muted = false;
+    videoIntro.play();
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      introContainer.style.opacity = "0";
+      setTimeout(() => { introContainer.style.display = "none"; }, 1000);
+    }, 500);
+  });
+</script>
+</body>
+</html>
