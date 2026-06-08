@@ -52,7 +52,6 @@ body {
   z-index: -1;
   filter: brightness(0.85) contrast(1.1);
   opacity: 1 !important;
-  pointer-events: none;
 }
 
 /* VIDEO DE FONDO PRINCIPAL */
@@ -86,8 +85,7 @@ body {
 /* ===== BOTÓN INGRESAR - ESTILO INVISIBLE ELEGANTE ===== */
 #btn-entrar {
   position: relative;
-  z-index: 9999999;
-  pointer-events: auto;
+  z-index: 2000001;
   display: inline-block;
   padding: 18px 48px;
   font-size: 20px;
@@ -95,14 +93,16 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 6px;
-  color: rgba(255,255,255,0.9);
-  background: rgba(20,20,30,0.25);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(20, 20, 30, 0.25);
   backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255,255,255,0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   border-radius: 16px;
   cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-
 
 #btn-entrar:hover {
   color: #ffffff;
@@ -572,7 +572,6 @@ button:active, .btn-descarga:active {
       <div class="circle-info">
         <div class="name-circle">Santi</div>
         <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Octubre 2025</div>
       </div>
     </div>
 
@@ -584,7 +583,6 @@ button:active, .btn-descarga:active {
       <div class="circle-info">
         <div class="name-circle">Andrew</div>
         <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Enero 2026</div>
       </div>
     </div>
 
@@ -596,7 +594,6 @@ button:active, .btn-descarga:active {
       <div class="circle-info">
         <div class="name-circle">Betrayedd</div>
         <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Enero 2026</div>
       </div>
     </div>
 
@@ -608,7 +605,6 @@ button:active, .btn-descarga:active {
       <div class="circle-info">
         <div class="name-circle">Alexander</div>
         <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Octubre 2025</div>
       </div>
     </div>
 
@@ -684,29 +680,6 @@ button:active, .btn-descarga:active {
       </div>
       <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+🐐.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
     </div>
-  
-      <div class="aporte-card">
-      <h3>DATA MONEY</h3>
-      <p class="creator">CREADOR: SANTI GOLLO</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">401MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/p1zewe.png" alt="DATA $" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
-      </div>
-      <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
-    </div>
-
-    <div class="aporte-card">
-      <h3>KZK</h3>
-      <p class="creator">CREADOR: SANTI GOLLO</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">400MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/j8kso2.png" alt="DATA HZK" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
-      </div>
-      <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
-    </div>
-</div>
 
 <script>
 // Función para cambiar entre secciones
@@ -745,3 +718,40 @@ document.addEventListener("DOMContentLoaded", function() {
   const botonEntrar = document.getElementById("btn-entrar");
   const videoIntro = document.getElementById("miVideoIntro");
   const videoFondoPagina = document.getElementById("video-fondo-pagina");
+
+  if (videoFondoPagina) {
+    videoFondoPagina.pause();
+    // Se reanuda luego de salir de intro
+  }
+
+  if (botonEntrar) {
+    botonEntrar.addEventListener("click", () => {
+      if (videoIntro) {
+        videoIntro.muted = false;
+        videoIntro.play().catch(e => console.log("autoplay limitado"));
+      }
+      if (overlay) overlay.style.opacity = "0";
+      setTimeout(() => {
+        if (introContainer) introContainer.style.opacity = "0";
+        setTimeout(() => {
+          if (introContainer) introContainer.style.display = "none";
+          if (videoFondoPagina) {
+            videoFondoPagina.play().catch(e => console.log("autoplay restringido"));
+          }
+        }, 1000);
+      }, 800);
+    });
+  }
+});
+
+// Ajuste extra: Forzar display correcto de staff vertical en resize y en general
+window.addEventListener('resize', () => {
+  const equipo = document.getElementById('equipo');
+  if (equipo && getComputedStyle(equipo).display !== 'none') {
+    equipo.style.display = 'flex';
+  }
+});
+</script>
+
+</body>
+</html>
