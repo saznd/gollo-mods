@@ -231,13 +231,18 @@ body {
   position: relative;
   z-index: 10;
   transition: all 0.3s;
+  display: none !important; /* Todas ocultas por defecto */
+}
+
+/* Sección visible */
+.seccion.visible {
+  display: flex !important;
 }
 
 /* ============================= */
 /* STAFF - DISEÑO DE CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS */
 /* ============================= */
 .staff-vertical {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -322,12 +327,6 @@ body {
   padding: 4px 14px;
   border-radius: 40px;
   border: 0.5px solid rgba(255,255,255,0.2);
-}
-
-/* SIN CUADROS, SIN FONDOS RECTANGULARES */
-.staff-circle-item::before,
-.staff-circle-item::after {
-  display: none;
 }
 
 /* ============================= */
@@ -515,16 +514,6 @@ body {
   }
 }
 
-/* clases de visualización */
-.seccion {
-  display: none;
-}
-
-#equipo {
-  display: flex;
-}
-
-/* Animaciones extra */
 button:active, .btn-descarga:active {
   transform: scale(0.97);
 }
@@ -546,7 +535,7 @@ button:active, .btn-descarga:active {
 </div>
 
 <!-- VIDEO FONDO PRINCIPAL -->
-<video id="video-fondo-pagina" autoplay loop muted playsinline>
+<video id="video-fondo-pagina" loop muted playsinline>
   <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
 </video>
 
@@ -562,7 +551,7 @@ button:active, .btn-descarga:active {
     </div>
   </div>
 
-  <!-- ====== EQUIPO - NUEVO DISEÑO CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS, CON FECHAS ====== -->
+  <!-- ====== EQUIPO - NUEVO DISEÑO CÍRCULOS PUROS UNO DEBAJO DEL OTRO ====== -->
   <div id="equipo" class="seccion staff-vertical">
     <!-- Santi - Octubre 2025 -->
     <div class="staff-circle-item">
@@ -612,7 +601,7 @@ button:active, .btn-descarga:active {
       </div>
     </div>
 
-     <!-- San - Enero 2026 -->
+    <!-- San - Enero 2026 -->
     <div class="staff-circle-item">
       <div class="avatar-circle">
         <img src="https://files.catbox.moe/61cfoz.png" alt="San">
@@ -620,12 +609,12 @@ button:active, .btn-descarga:active {
       <div class="circle-info">
         <div class="name-circle">San</div>
         <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Octubre 2026</div>
+        <div class="join-date">📅 Enero 2026</div>
       </div>
     </div>
   </div>
 
-  <!-- ====== GTA PC - 2 APORTES ====== -->
+  <!-- ====== GTA PC - 3 APORTES ====== -->
   <div id="aportes" class="seccion aportes-grid">
     <div class="aporte-card">
       <h3>GTA G4</h3>
@@ -649,27 +638,27 @@ button:active, .btn-descarga:active {
       <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
     </div>
 
-     <div class="aporte-card">
+    <div class="aporte-card">
       <h3>ROSITA GETEA SAEM</h3>
       <p class="creator">CREADOR: RICHAR AMOROSO</p>
       <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
       <p class="peso">PESO: <span class="rojo">270MB</span></p>
       <div class="video-thumb">
-        <img src="https://files.catbox.moe/0e5xdd.png" alt="GTA R5">
+        <img src="https://files.catbox.moe/0e5xdd.png" alt="ROSITA GETEA SAEM">
       </div>
       <a href="https://www.mediafire.com/file/ozrbqsww28t30ft/ROSITA+GETEA+SAEM.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
     </div>
   </div>
 
-  <!-- ====== GTA ANDROID - 2 APORTES ====== -->
+  <!-- ====== GTA ANDROID - 4 APORTES ====== -->
   <div id="datas" class="seccion aportes-grid">
     <div class="aporte-card">
-      <h3>PERKINES 🪂 </h3>
+      <h3>PERKINES 🪂</h3>
       <p class="creator">CREADOR: ALEXANDER</p>
       <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
       <p class="peso">PESO: <span class="rojo">394MB</span></p>
       <div class="video-thumb">
-        <img src="https://files.catbox.moe/0qxmij.png" alt="DATA PERKINES" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+        <img src="https://files.catbox.moe/0qxmij.png" alt="DATA PERKINES">
       </div>
       <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+🪂.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
     </div>
@@ -680,18 +669,18 @@ button:active, .btn-descarga:active {
       <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
       <p class="peso">PESO: <span class="rojo">394MB</span></p>
       <div class="video-thumb">
-        <img src="https://files.catbox.moe/10allm.png" alt="DATA AMARILLA ALEX" onerror="this.src='https://placehold.co/400x200/0f172a/white?text=DATA+AZUL'">
+        <img src="https://files.catbox.moe/10allm.png" alt="DATA AMARILLA ALEX">
       </div>
       <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+🐐.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
     </div>
-  
-      <div class="aporte-card">
+
+    <div class="aporte-card">
       <h3>$</h3>
       <p class="creator">CREADOR: SANTI GOLLO</p>
       <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
       <p class="peso">PESO: <span class="rojo">401MB</span></p>
       <div class="video-thumb">
-        <img src="https://files.catbox.moe/p1zewe.png" alt="DATA $" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+        <img src="https://files.catbox.moe/p1zewe.png" alt="DATA $">
       </div>
       <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
     </div>
@@ -702,45 +691,67 @@ button:active, .btn-descarga:active {
       <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
       <p class="peso">PESO: <span class="rojo">400MB</span></p>
       <div class="video-thumb">
-        <img src="https://files.catbox.moe/j8kso2.png" alt="DATA HZK" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+        <img src="https://files.catbox.moe/j8kso2.png" alt="DATA HZK">
       </div>
       <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
     </div>
+  </div>
 </div>
 
 <script>
 // Función para cambiar entre secciones
 function mostrar(id, boton) {
+  // Ocultar todas las secciones
   document.querySelectorAll(".seccion").forEach(s => {
-    s.style.display = "none";
+    s.classList.remove("visible");
   });
+  
+  // Mostrar la sección seleccionada
   const seccionActiva = document.getElementById(id);
   if (seccionActiva) {
-    // Forzamos flex para staff vertical (círculos sin cuadros) y para las otras secciones también es flex/grid nativo
-    if (id === 'equipo') {
-      seccionActiva.style.display = "flex";
-    } else {
-      seccionActiva.style.display = "flex";
-    }
+    seccionActiva.classList.add("visible");
   }
+  
+  // Actualizar clase activa en los botones del menú
   document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
   if (boton) boton.classList.add("activo");
 }
 
-// Inicializar y manejar intro / video background
+// Inicializar al cargar la página
 document.addEventListener("DOMContentLoaded", function() {
-  // Ocultar todas las secciones menos equipo
+  // Configurar todas las secciones como ocultas
   document.querySelectorAll(".seccion").forEach(s => {
-    s.style.display = "none";
+    s.classList.remove("visible");
   });
-  const equipoSeccion = document.getElementById("equipo");
-  if (equipoSeccion) equipoSeccion.style.display = "flex";
   
+  // Mostrar la sección de equipo por defecto
+  const equipoSeccion = document.getElementById("equipo");
+  if (equipoSeccion) {
+    equipoSeccion.classList.add("visible");
+  }
+  
+  // Activar el primer botón del menú
   const primerBoton = document.querySelector(".menu button");
-  if (primerBoton) primerBoton.classList.add("activo");
+  if (primerBoton) {
+    primerBoton.classList.add("activo");
+  }
 
-  // Intro logic
+  // Lógica de la intro
   const introContainer = document.getElementById("intro-video");
   const overlay = document.querySelector(".overlay-intro");
   const botonEntrar = document.getElementById("btn-entrar");
-  const videoIntro = docu
+  const videoIntro = document.getElementById("miVideoIntro");
+  const videoFondoPagina = document.getElementById("video-fondo-pagina");
+
+  // Pausar el video de fondo inicialmente
+  if (videoFondoPagina) {
+    videoFondoPagina.pause();
+  }
+
+  if (botonEntrar) {
+    botonEntrar.addEventListener("click", () => {
+      // Animar salida de la intro
+      if (overlay) overlay.style.opacity = "0";
+      
+      setTimeout(() => {
+        if (introContaine
