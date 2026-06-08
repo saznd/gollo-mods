@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>GOLLO MODS PRIME</title>
-<!-- FUENTES MÁS BONITAS Y MODERNAS -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
+<title>GOLLO MODS | PRIME EVOLUCIONARIO</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-/* ===== RESET Y BASE ===== */
+<style> 
+
+/* ===== RESET & BASE ===== */
 * {
   margin: 0;
   padding: 0;
@@ -17,112 +18,10 @@
 }
 
 body {
-  background: #000000;
-  color: #eeeeee;
-  font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
-}
-
-/* ===== VIDEO DE FONDO ===== */
-#video-fondo-global {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-  filter: brightness(0.7) contrast(1.1) grayscale(0.7);
-  pointer-events: none;
-}
-
-/* ===== CONTENIDO PRINCIPAL ===== */
-.contenido-principal {
-  position: relative;
-  z-index: 10;
-  min-height: 100vh;
-}
-
-/* ===== EFECTOS ===== */
-.aporte-card {
-  transition: all 0.25s ease-out;
-}
-
-.aporte-card:hover {
-  transform: translateY(-5px);
-  border-color: #ffffff;
-  box-shadow: 0 0 18px rgba(255,255,255,0.25);
-}
-
-.titulo {
-  animation: pulseSoft 3s infinite alternate;
-}
-
-@keyframes pulseSoft {
-  0% { text-shadow: 0 0 5px rgba(255,255,255,0.2); opacity: 0.95; }
-  100% { text-shadow: 0 0 18px rgba(255,255,255,0.6); opacity: 1; }
-}
-
-.menu button {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease;
-}
-
-.menu button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 80%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-  transition: left 0.4s ease;
-  pointer-events: none;
-}
-
-.menu button:hover::before {
-  left: 150%;
-}
-
-.btn-descarga {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease;
-}
-
-.btn-descarga::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-  pointer-events: none;
-}
-
-.btn-descarga:hover::after {
-  left: 100%;
-}
-
-.texto-intro {
-  animation: textFlicker 2.5s infinite alternate;
-}
-
-@keyframes textFlicker {
-  0% { text-shadow: 0 0 8px rgba(255,255,255,0.3); letter-spacing: 2px; }
-  100% { text-shadow: 0 0 22px rgba(255,255,255,0.8); letter-spacing: 3px; }
-}
-
-.menu {
-  animation: borderBreath 3s infinite alternate;
-}
-
-@keyframes borderBreath {
-  0% { border-color: #444; box-shadow: 0 0 8px rgba(255,255,255,0.1); }
-  100% { border-color: #aaa; box-shadow: 0 0 22px rgba(255,255,255,0.25); }
+  background: black;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
 }
 
 /* ===== PANTALLA DE BIENVENIDA (INTRO) ===== */
@@ -151,7 +50,20 @@ body {
   object-fit: cover;
   transform: translate(-50%, -50%);
   z-index: -1;
-  filter: brightness(0.6) grayscale(0.8);
+  filter: brightness(0.85) contrast(1.1);
+  opacity: 1 !important;
+}
+
+/* VIDEO DE FONDO PRINCIPAL */
+#video-fondo-pagina {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: brightness(0.75) contrast(1.08);
 }
 
 .overlay-intro {
@@ -161,534 +73,674 @@ body {
   transition: opacity 0.8s ease;
 }
 
-/* ===== BOTÓN DE ENTRAR CON EFECTOS ===== */
+.texto-intro {
+  font-family: 'Ethnocentric', sans-serif;
+  font-size: 3rem;
+  color: #ffffff !important;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
+  margin-bottom: 40px;
+  letter-spacing: 4px;
+}
+
+/* ===== BOTÓN INGRESAR - ESTILO INVISIBLE ELEGANTE ===== */
 #btn-entrar {
-  padding: 20px 65px;
-  font-size: 28px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  font-weight: 800;
-  letter-spacing: 3px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.5);
-  transition: all 0.3s ease;
-  display: inline-block;
   position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(4px);
-}
-
-#btn-entrar::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transition: left 0.6s ease;
-}
-
-#btn-entrar:hover::before {
-  left: 100%;
+  z-index: 2000001;
+  display: inline-block;
+  padding: 18px 48px;
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(20, 20, 30, 0.25);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 #btn-entrar:hover {
-  transform: scale(1.08);
-  background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
-  box-shadow: 0 0 35px rgba(255,255,255,0.6), 0 8px 20px rgba(0,0,0,0.6);
-  letter-spacing: 5px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  letter-spacing: 8px;
+  backdrop-filter: blur(16px);
 }
 
-#btn-entrar:active {
-  transform: scale(0.92);
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-  box-shadow: 0 0 8px rgba(255,255,255,0.2), 0 2px 5px rgba(0,0,0,0.5);
-  transition: all 0.05s ease;
+/* ===== FUENTES ===== */
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("fonts/Ethnocentric.ttf");
+}
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("fonts/Ethnocentric.otf");
+}
+@font-face {
+  font-family: "Orbitronht";
+  src: url("fonts/Orbitronht.ttf");
 }
 
-#btn-entrar .ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(0);
-  animation: ripple-animation 0.6s linear;
-  pointer-events: none;
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-/* ===== CABECERA Y TÍTULOS ===== */
+/* ===== CABECERA ===== */
 .hero {
   text-align: center;
-  padding-top: 80px;
-  margin-bottom: 40px;
+  padding-top: 70px;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
 }
 
 .titulo {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 58px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 30px rgba(255,255,255,0.3);
+  font-family: 'Ethnocentric', sans-serif;
+  font-size: 68px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
 .subtitulo {
-  margin-top: 12px;
   font-size: 13px;
-  letter-spacing: 2px;
-  color: #bbbbbb;
-  font-family: 'Poppins', sans-serif;
+  letter-spacing: 3px;
+  color: rgba(240, 240, 255, 0.8);
+  font-family: 'Orbitron', sans-serif;
   font-weight: 300;
+  text-transform: uppercase;
 }
 
-/* ===== MENÚ ===== */
+/* ============================= */
+/* MENÚ - BOTONES INVISIBLES / TRANSPARENTES CON EFECTO LUXURY */
+/* ============================= */
 .menu-wrapper {
-  margin-top: 50px;
+  margin-top: 70px;
   position: relative;
   z-index: 15;
+  padding: 0 20px;
 }
 
 .menu {
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(4px);
-  border: 1px solid #555;
-  border-radius: 20px;
-  padding: 18px 20px;
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 70px;
+  padding: 16px 28px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(255,255,255,0.05);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 24px;
   flex-wrap: wrap;
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .menu button {
-  border-radius: 50px;
-  border: 1px solid #888;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  border-radius: 50px !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
-  background: #111111;
-  color: #f0f0f0;
-  padding: 12px 28px;
-  font-size: 14px;
-  letter-spacing: 1px;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  background: rgba(10, 10, 20, 0.3) !important;
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 14px 32px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .menu button:hover {
-  transform: translateY(-2px);
-  background: #2a2a2a;
-  border-color: #cccccc;
-}
-
-.menu button.activo {
-  background: #2c2c2c;
-  border: 1px solid #ffffff;
-  box-shadow: 0 0 12px rgba(255,255,255,0.5);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 2.5px;
   color: white;
 }
 
-/* ===== SECCIONES ===== */
+.menu button.activo {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+/* ============================= */
+/* SECCIONES (grid general) */
+/* ============================= */
 .seccion {
   margin-top: 70px;
   position: relative;
   z-index: 10;
-  width: 90%;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  display: none;
+  transition: all 0.3s;
 }
 
-/* ===== STAFF - LISTA VERTICAL EN CÍRCULOS ===== */
-.staff {
+/* ============================= */
+/* STAFF - DISEÑO DE CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS */
+/* ============================= */
+.staff-vertical {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 50px;
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
+  gap: 56px;
+  max-width: 500px;
+  margin: 40px auto 80px auto;
+  padding: 0 20px;
 }
 
-.member {
+/* Tarjeta circular: sin rectángulos, solo círculo + info flotante */
+.staff-circle-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   width: 100%;
+  max-width: 280px;
+  transition: all 0.3s ease;
+  cursor: default;
 }
 
 .avatar-circle {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
   overflow: hidden;
-  margin-bottom: 20px;
-  border: 3px solid rgba(255,255,255,0.3);
-  transition: all 0.3s ease;
-  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 10px 25px -5px rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
 }
 
-.avatar-circle:hover {
+.staff-circle-item:hover .avatar-circle {
   transform: scale(1.05);
-  border-color: rgba(255,255,255,0.8);
-  box-shadow: 0 0 35px rgba(255,255,255,0.3);
+  border-color: #ffffff;
+  box-shadow: 0 0 38px rgba(255, 255, 255, 0.6);
 }
 
 .avatar-circle img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.3s ease;
-  filter: grayscale(50%);
-}
-
-.avatar-circle:hover img {
-  filter: grayscale(0%);
-  transform: scale(1.1);
-}
-
-.member-name {
-  font-size: 28px;
-  font-weight: 800;
-  font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #fff, #ccc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-
-.member-date {
-  font-size: 14px;
-  font-family: 'Poppins', sans-serif;
-  color: #aaaaaa;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-
-.member-role {
-  font-size: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: #888;
-  background: rgba(255,255,255,0.05);
-  display: inline-block;
-  padding: 5px 15px;
-  border-radius: 30px;
-}
-
-/* Línea divisoria entre miembros */
-.member:not(:last-child)::after {
-  content: '';
   display: block;
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* ===== TARJETAS DE APORTES ===== */
+.circle-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.name-circle {
+  font-family: "Ethnocentric", sans-serif;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  color: white;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5);
+  margin-bottom: 8px;
+}
+
+.role-circle {
+  font-family: "Orbitron", monospace;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.1);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+  margin-bottom: 10px;
+}
+
+.join-date {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 40px;
+  border: 0.5px solid rgba(255,255,255,0.2);
+}
+
+/* SIN CUADROS, SIN FONDOS RECTANGULARES */
+.staff-circle-item::before,
+.staff-circle-item::after {
+  display: none;
+}
+
+/* ============================= */
+/* APORTES GRID - TARJETAS LUXURY */
+/* ============================= */
 .aportes-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 48px;
+  width: 95%;
+  max-width: 1000px;
+  margin: 50px auto 80px auto;
 }
 
 .aporte-card {
-  background: rgba(10,10,10,0.85);
-  backdrop-filter: blur(4px);
-  border: 1px solid #5a5a5a;
-  border-radius: 20px;
-  padding: 18px;
-  transition: all 0.25s ease-out;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 24px;
+  text-align: left;
+  transition: all 0.3s ease;
+  border-radius: 28px;
+  width: 320px;
+  transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.3s;
+}
+
+.aporte-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.65);
 }
 
 .aporte-card h3 {
-  color: #dddddd;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  margin-bottom: 10px;
+  color: #fff;
+  font-family: "Ethnocentric", sans-serif;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 20px;
   letter-spacing: 1px;
 }
 
 .creator, .password, .peso {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #bbbbbb;
-  margin: 5px 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 6px 0;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.verde, .rojo {
+  color: #fff;
+  font-weight: bold;
 }
 
 .video-thumb {
-  margin: 14px 0;
-  border: 1px solid #555;
-  border-radius: 12px;
+  position: relative;
+  margin: 18px 0;
+  border-radius: 20px;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: 0.2s;
 }
 
 .video-thumb img {
   width: 100%;
   display: block;
-  filter: grayscale(100%);
-  transition: filter 0.2s ease;
+  transition: transform 0.4s;
 }
 
 .aporte-card:hover .video-thumb img {
-  filter: grayscale(0%);
+  transform: scale(1.02);
 }
 
+/* BOTONES DE DESCARGA - TRANSPARENTES INVISIBLES ELEGANTES */
 .btn-descarga {
-  display: block;
-  text-align: center;
-  background: #151515;
-  border: 1px solid #888;
-  border-radius: 60px;
-  padding: 12px 0;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  border-radius: 60px !important;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 1px;
-  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(8px);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
-  transition: all 0.2s ease;
-  margin-top: 12px;
-  position: relative;
-  overflow: hidden;
+  padding: 12px 20px;
+  font-size: 12px;
+  margin-top: 18px;
+  letter-spacing: 1.8px;
+  text-align: center;
 }
 
 .btn-descarga:hover {
-  background: #2c2c2c;
-  border-color: #ffffff;
   transform: scale(1.02);
-  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 3px;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.1);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .titulo { font-size: 40px; }
-  .menu button { padding: 8px 16px; font-size: 11px; }
-  .hero { padding-top: 60px; }
-  .texto-intro { font-size: 1.5rem; }
-  #btn-entrar { font-size: 18px; padding: 14px 35px; letter-spacing: 2px; }
-  .menu { max-width: 95%; padding: 15px; }
-  
-  .avatar-circle { width: 110px; height: 110px; }
-  .member-name { font-size: 24px; }
-  .member-date { font-size: 12px; }
-  .member-role { font-size: 10px; }
-  .staff { gap: 35px; }
-}
-
-@media (max-width: 480px) {
-  .avatar-circle { width: 90px; height: 90px; }
-  .member-name { font-size: 20px; }
-}
-
-/* Optimización */
-@media (prefers-reduced-motion: reduce) {
-  *, .titulo, .menu, .texto-intro, #btn-entrar, .avatar-circle {
-    animation: none !important;
-    transition: none !important;
+/* ============================= */
+/* RESPONSIVE (Mobile first) */
+/* ============================= */
+@media screen and (max-width: 768px) {
+  .titulo {
+    font-size: 42px;
+  }
+  .subtitulo {
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 0 12px;
+  }
+  .menu {
+    border-radius: 50px;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .menu button {
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .staff-vertical {
+    gap: 45px;
+    margin-top: 20px;
+  }
+  .avatar-circle {
+    width: 130px;
+    height: 130px;
+  }
+  .name-circle {
+    font-size: 22px;
+  }
+  .role-circle {
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+  .join-date {
+    font-size: 9px;
+  }
+  .aporte-card {
+    width: 90%;
+    max-width: 340px;
+  }
+  .texto-intro {
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+  #btn-entrar {
+    padding: 14px 36px;
+    font-size: 16px;
+    letter-spacing: 4px;
   }
 }
 
-img {
-  content-visibility: auto;
+@media screen and (max-width: 480px) {
+  .titulo {
+    font-size: 32px;
+  }
+  .menu button {
+    width: 100%;
+    justify-content: center;
+  }
+  .menu {
+    flex-direction: column;
+    width: 90%;
+    border-radius: 40px;
+  }
+  .avatar-circle {
+    width: 110px;
+    height: 110px;
+  }
+  .name-circle {
+    font-size: 20px;
+  }
+  .texto-intro {
+    font-size: 1.6rem;
+  }
 }
+
+/* clases de visualización */
+.seccion {
+  display: none;
+}
+
+#equipo {
+  display: flex;
+}
+
+/* Animaciones extra */
+button:active, .btn-descarga:active {
+  transform: scale(0.97);
+}
+
 </style>
 </head>
+
 <body>
 
-<!-- VIDEO DE FONDO -->
-<video id="video-fondo-global" autoplay loop muted playsinline preload="auto">
-  <source src="https://files.catbox.moe/6g6xgk.mp4" type="video/mp4">
-</video>
-
-<!-- INTRO -->
+<!-- INTRO VIDEO -->
 <div id="intro-video">
-  <video muted loop playsinline class="video-intro-file" id="miVideoIntro" autoplay muted loop preload="auto">
-    <source src="https://files.catbox.moe/6g6xgk.mp4" type="video/mp4">
+  <video muted loop playsinline class="video-intro-file" id="miVideoIntro" loop>
+    <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
   </video>
   <div class="overlay-intro">
-    <div class="texto-intro">BIENVENIDO A GOLLO MODS</div>
-    <button id="btn-entrar">▶ ENTRAR AL PRIME ◀</button>
+    <div class="texto-intro">GOLLO MODS</div>
+    <button id="btn-entrar">ENTRAR</button>
   </div>
 </div>
 
-<!-- CONTENIDO PRINCIPAL -->
-<div class="contenido-principal">
-  <div class="hero">
-    <div class="titulo">GOLLO MODS PRIME</div>
-    <div class="subtitulo">EL PRIME NO ES PARA CUALQUIERA — DEMUESTRA QUE SOS DIGNO</div>
+<!-- VIDEO FONDO PRINCIPAL -->
+<video id="video-fondo-pagina" autoplay loop muted playsinline>
+  <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
+</video>
 
-    <div class="menu-wrapper">
-      <div class="menu">
-        <button onclick="mostrar('equipo', this)">Owners</button>
-        <button onclick="mostrar('aportes', this)">GTA</button>
+<div class="hero">
+  <div class="titulo">GOLLO MODS</div>
+  <div class="subtitulo">Bienvenido, demuestra que eres digno de este Prime</div>
+
+  <div class="menu-wrapper">
+    <div class="menu">
+      <button onclick="mostrar('equipo', this)"><span>OWNERS</span></button>
+      <button onclick="mostrar('aportes', this)"><span>GTA PC</span></button>
+      <button onclick="mostrar('datas', this)"><span>GTA ANDROID</span></button>
+    </div>
+  </div>
+
+  <!-- ====== EQUIPO - NUEVO DISEÑO CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS, CON FECHAS ====== -->
+  <div id="equipo" class="seccion staff-vertical">
+    <!-- Santi - Octubre 2025 -->
+    <div class="staff-circle-item">
+      <div class="avatar-circle">
+        <img src="https://files.catbox.moe/u0s9h1.png" alt="Santi">
+      </div>
+      <div class="circle-info">
+        <div class="name-circle">Santi</div>
+        <div class="role-circle">OWNER</div>
+        <div class="join-date">📅 Octubre 2025</div>
+      </div>
+    </div>
+
+    <!-- Andrew - Enero 2026 -->
+    <div class="staff-circle-item">
+      <div class="avatar-circle">
+        <img src="https://files.catbox.moe/ecu4gb.png" alt="Andrew">
+      </div>
+      <div class="circle-info">
+        <div class="name-circle">Andrew</div>
+        <div class="role-circle">OWNER</div>
+        <div class="join-date">📅 Enero 2026</div>
+      </div>
+    </div>
+
+    <!-- Betrayedd - Enero 2026 -->
+    <div class="staff-circle-item">
+      <div class="avatar-circle">
+        <img src="https://files.catbox.moe/1ialho.png" alt="Betrayedd">
+      </div>
+      <div class="circle-info">
+        <div class="name-circle">Betrayedd</div>
+        <div class="role-circle">OWNER</div>
+        <div class="join-date">📅 Enero 2026</div>
+      </div>
+    </div>
+
+    <!-- Alexander - Octubre 2025 -->
+    <div class="staff-circle-item">
+      <div class="avatar-circle">
+        <img src="https://files.catbox.moe/sjrh0t.png" alt="Alexander">
+      </div>
+      <div class="circle-info">
+        <div class="name-circle">Alexander</div>
+        <div class="role-circle">OWNER</div>
+        <div class="join-date">📅 Octubre 2025</div>
+      </div>
+    </div>
+
+     <!-- San - Enero 2026 -->
+    <div class="staff-circle-item">
+      <div class="avatar-circle">
+        <img src="https://files.catbox.moe/61cfoz.png" alt="San">
+      </div>
+      <div class="circle-info">
+        <div class="name-circle">San</div>
+        <div class="role-circle">OWNER</div>
+        <div class="join-date">📅 Octubre 2026</div>
       </div>
     </div>
   </div>
 
-  <!-- STAFF - LISTA VERTICAL EN CÍRCULOS -->
-  <div id="equipo" class="seccion staff">
-    <div class="member">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/u0s9h1.png" loading="lazy">
-      </div>
-      <div class="member-name">Santi</div>
-      <div class="member-date">Octubre 2025</div>
-      <div class="member-role">OWNER</div>
-    </div>
-    <div class="member">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/fb9db2.png" loading="lazy">
-      </div>
-      <div class="member-name">Andrew</div>
-      <div class="member-date">12 Enero 2026</div>
-      <div class="member-role">OWNER</div>
-    </div>
-    <div class="member">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/1ialho.png" loading="lazy">
-      </div>
-      <div class="member-name">Betrayedd</div>
-      <div class="member-date">9 Enero 2026</div>
-      <div class="member-role">OWNER</div>
-    </div>
-    <div class="member">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/sjrh0t.png" loading="lazy">
-      </div>
-      <div class="member-name">Alexander</div>
-      <div class="member-date">Octubre 2025</div>
-      <div class="member-role">OWNER</div>
-    </div>
-  </div>
-
-  <!-- APORTES GTA -->
+  <!-- ====== GTA PC - 2 APORTES ====== -->
   <div id="aportes" class="seccion aportes-grid">
-    <div class="aporte-card"><h3>G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 235MB</p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" loading="lazy"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 240MB</p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" loading="lazy"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>KING OF KINGS</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: NINGUNA</p><p class="peso">PESO: 228MB</p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" loading="lazy"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-    <div class="aporte-card"><h3>SOMTHING NICE</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: betraking</p><p class="peso">PESO: 225MB</p><div class="video-thumb"><img src="https://files.catbox.moe/zs8fid.png" loading="lazy"></div><a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga">INSTALAR GTA</a></div>
-  </div>  
+    <div class="aporte-card">
+      <h3>GTA G4</h3>
+      <p class="creator">CREADOR: SANTI GOLLO</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">235MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4">
+      </div>
+      <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
+    </div>
+
+    <div class="aporte-card">
+      <h3>GTA R5</h3>
+      <p class="creator">CREADOR: SANTI GOLLO</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">240MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5">
+      </div>
+      <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
+    </div>
+
+     <div class="aporte-card">
+      <h3>ROSITA GETEA SAEM</h3>
+      <p class="creator">CREADOR: RICHAR AMOROSO</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">270MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/0e5xdd.png" alt="GTA R5">
+      </div>
+      <a href="https://www.mediafire.com/file/ozrbqsww28t30ft/ROSITA+GETEA+SAEM.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
+    </div>
+  </div>
+
+  <!-- ====== GTA ANDROID - 2 APORTES ====== -->
+  <div id="datas" class="seccion aportes-grid">
+    <div class="aporte-card">
+      <h3>PERKINES 🪂 </h3>
+      <p class="creator">CREADOR: ALEXANDER</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">394MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/0qxmij.png" alt="DATA PERKINES" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+      </div>
+      <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+🪂.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+    </div>
+
+    <div class="aporte-card">
+      <h3>QUIEN LO DIRIA</h3>
+      <p class="creator">CREADOR: ALEXANDER</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">394MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/10allm.png" alt="DATA AMARILLA ALEX" onerror="this.src='https://placehold.co/400x200/0f172a/white?text=DATA+AZUL'">
+      </div>
+      <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+🐐.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+    </div>
+  
+      <div class="aporte-card">
+      <h3>$</h3>
+      <p class="creator">CREADOR: SANTI GOLLO</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">401MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/p1zewe.png" alt="DATA $" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+      </div>
+      <a href="https://www.mediafire.com/file/yo09frpsefgtbh4/$.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+    </div>
+
+    <div class="aporte-card">
+      <h3>KZK</h3>
+      <p class="creator">CREADOR: SANTI GOLLO</p>
+      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+      <p class="peso">PESO: <span class="rojo">400MB</span></p>
+      <div class="video-thumb">
+        <img src="https://files.catbox.moe/j8kso2.png" alt="DATA HZK" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
+      </div>
+      <a href="https://www.mediafire.com/file/i7l1gu38qv19ttz/HzK.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+    </div>
 </div>
 
 <script>
-  function mostrar(id, boton) {
-    document.querySelectorAll(".seccion").forEach(s => { s.style.display = "none"; });
-    const seccionMostrar = document.getElementById(id);
-    if (id === "equipo") {
-      seccionMostrar.style.display = "flex";
-    } else {
-      seccionMostrar.style.display = "grid";
-    }
-    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-    boton.classList.add("activo");
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".seccion").forEach(s => { s.style.display = "none"; });
-    const equipoSeccion = document.getElementById("equipo");
-    equipoSeccion.style.display = "flex";
-    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-    document.querySelector(".menu button").classList.add("activo");
+// Función para cambiar entre secciones
+function mostrar(id, boton) {
+  document.querySelectorAll(".seccion").forEach(s => {
+    s.style.display = "none";
   });
+  const seccionActiva = document.getElementById(id);
+  if (seccionActiva) {
+    // Forzamos flex para staff vertical (círculos sin cuadros) y para las otras secciones también es flex/grid nativo
+    if (id === 'equipo') {
+      seccionActiva.style.display = "flex";
+    } else {
+      seccionActiva.style.display = "flex";
+    }
+  }
+  document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
+  if (boton) boton.classList.add("activo");
+}
 
+// Inicializar y manejar intro / video background
+document.addEventListener("DOMContentLoaded", function() {
+  // Ocultar todas las secciones menos equipo
+  document.querySelectorAll(".seccion").forEach(s => {
+    s.style.display = "none";
+  });
+  const equipoSeccion = document.getElementById("equipo");
+  if (equipoSeccion) equipoSeccion.style.display = "flex";
+  
+  const primerBoton = document.querySelector(".menu button");
+  if (primerBoton) primerBoton.classList.add("activo");
+
+  // Intro logic
   const introContainer = document.getElementById("intro-video");
   const overlay = document.querySelector(".overlay-intro");
-  const btnEntrar = document.getElementById("btn-entrar");
-  const videoIntro = document.getElementById("miVideoIntro");
-
-  function createRipple(event, button) {
-    const ripple = document.createElement('span');
-    ripple.classList.add('ripple');
-    
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    let x, y;
-    
-    if (event.touches) {
-      x = event.touches[0].clientX - rect.left - size / 2;
-      y = event.touches[0].clientY - rect.top - size / 2;
-    } else {
-      x = event.clientX - rect.left - size / 2;
-      y = event.clientY - rect.top - size / 2;
-    }
-    
-    ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
-    ripple.style.position = 'absolute';
-    
-    button.appendChild(ripple);
-    
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-  }
-
-  btnEntrar.addEventListener("click", (event) => {
-    createRipple(event, btnEntrar);
-    btnEntrar.style.transform = 'scale(0.92)';
-    setTimeout(() => {
-      btnEntrar.style.transform = '';
-    }, 150);
-    
-    videoIntro.muted = false;
-    videoIntro.play();
-    overlay.style.opacity = "0";
-    setTimeout(() => {
-      introContainer.style.opacity = "0";
-      setTimeout(() => { introContainer.style.display = "none"; }, 1000);
-    }, 500);
-  });
-  
-  btnEntrar.addEventListener("touchstart", (event) => {
-    event.preventDefault();
-    createRipple(event, btnEntrar);
-    btnEntrar.style.transform = 'scale(0.92)';
-    setTimeout(() => {
-      btnEntrar.style.transform = '';
-    }, 150);
-    
-    videoIntro.muted = false;
-    videoIntro.play();
-    overlay.style.opacity = "0";
-    setTimeout(() => {
-      introContainer.style.opacity = "0";
-      setTimeout(() => { introContainer.style.display = "none"; }, 1000);
-    }, 500);
-  });
-</script>
-</body>
-</html>
+  const botonEntrar = document.getElementById("btn-entrar");
+  const videoIntro = docu
