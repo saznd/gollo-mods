@@ -3,14 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>GOLLO MODS | PRIME EVOLUCIONARIO</title>
-<link rel="icon" type="image/png" href="img/logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style> 
-
-/* ===== RESET & BASE ===== */
+<title>GOLLO MODS | DATAS Y MODS</title>
+<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23000' stroke='%23ffffff' stroke-width='3'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23ffffff' font-weight='bold'%3EG%3C/text%3E%3C/svg%3E">
+<!-- Fuentes ultra premium -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
 * {
   margin: 0;
   padding: 0;
@@ -18,44 +15,20 @@
 }
 
 body {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
   overflow-x: hidden;
-  background: black;
-  color: white;
-  font-family: 'Orbitron', sans-serif;
+  padding-bottom: 60px;
+  background-color: #000000;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-/* ===== PANTALLA DE BIENVENIDA (INTRO) ===== */
-#intro-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  z-index: 1000000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 1s ease, visibility 1s;
-  overflow: hidden;
-}
-
-.video-intro-file {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  filter: brightness(0.85) contrast(1.1);
-  opacity: 1 !important;
-}
-
-/* VIDEO DE FONDO PRINCIPAL */
-#video-fondo-pagina {
+/* VIDEO DE FONDO - MÁS VISIBLE */
+#video-fondo {
   position: fixed;
   top: 0;
   left: 0;
@@ -63,693 +36,543 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -2;
-  filter: brightness(0.75) contrast(1.08);
+  pointer-events: none;
 }
 
-.overlay-intro {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  transition: opacity 0.8s ease;
+/* Overlay mucho más sutil para que se note el video */
+.overlay-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+  pointer-events: none;
 }
 
-.texto-intro {
-  font-family: 'Ethnocentric', sans-serif;
-  font-size: 3rem;
-  color: #ffffff !important;
-  text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
-  margin-bottom: 40px;
-  letter-spacing: 4px;
+/* ========== TIPOGRAFÍA PREMIUM - BLANCO ========== */
+.titulo-principal {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 5rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 35%, #e0e0e0 70%, #ffffff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 15px rgba(255,255,255,0.3);
+  animation: subtlePulse 3s infinite alternate;
 }
 
-/* ===== BOTÓN INGRESAR - ESTILO INVISIBLE ELEGANTE ===== */
-#btn-entrar {
-  position: relative;
-  z-index: 2000001;
-  display: inline-block;
-  padding: 18px 48px;
-  font-size: 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 6px;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(20, 20, 30, 0.25);
-  backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  border-radius: 16px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+@keyframes subtlePulse {
+  0% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
+  100% { text-shadow: 0 0 25px rgba(255,255,255,0.7); }
 }
 
-#btn-entrar:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-  letter-spacing: 8px;
-  backdrop-filter: blur(16px);
-}
-
-/* ===== FUENTES ===== */
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.ttf");
-}
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.otf");
-}
-@font-face {
-  font-family: "Orbitronht";
-  src: url("fonts/Orbitronht.ttf");
-}
-
-/* ===== CABECERA ===== */
-.hero {
-  text-align: center;
-  padding-top: 70px;
-  margin-bottom: 60px;
-  position: relative;
-  z-index: 20;
-  min-height: 100vh;
-}
-
-.titulo {
-  font-family: 'Ethnocentric', sans-serif;
-  font-size: 68px;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(255,255,255,0.3);
-  letter-spacing: 2px;
-  margin-bottom: 8px;
-}
-
-.subtitulo {
-  font-size: 13px;
+.subtitulo-premium {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   letter-spacing: 3px;
-  color: rgba(240, 240, 255, 0.8);
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 300;
+  font-size: 0.85rem;
+  color: #eeeeff;
   text-transform: uppercase;
+  background: rgba(0,0,0,0.2);
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+  margin-top: 8px;
 }
 
-/* ============================= */
-/* MENÚ - BOTONES INVISIBLES / TRANSPARENTES CON EFECTO LUXURY */
-/* ============================= */
-.menu-wrapper {
-  margin-top: 70px;
+/* ========== BOTONES BLANCOS Y NEGROS ========== */
+button, .btn-descarga, .menu button {
+  background: #0a0a0f !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
   position: relative;
-  z-index: 15;
-  padding: 0 20px;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
+button::after, .btn-descarga::after, .menu button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #1e1e2a, #2a2a35);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+button:hover, .btn-descarga:hover, .menu button:hover {
+  transform: translateY(-2px);
+  color: #ffffff !important;
+  background: #111118 !important;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.6) inset;
+}
+
+button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
+  opacity: 0.6;
+}
+
+/* Menú principal */
 .menu {
-  background: rgba(0, 0, 0, 0.25) !important;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 70px;
-  padding: 16px 28px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(255,255,255,0.05);
+  background: rgba(5, 5, 12, 0.5);
+  backdrop-filter: blur(20px);
+  padding: 8px 20px;
+  border-radius: 60px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.15);
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 24px;
+  gap: 10px;
   flex-wrap: wrap;
-  width: 100%;
-  max-width: 750px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .menu button {
+  background: #0c0c14 !important;
+  padding: 12px 34px;
   border-radius: 50px !important;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  background: rgba(10, 10, 20, 0.3) !important;
-  backdrop-filter: blur(6px);
-  color: rgba(255, 255, 255, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  padding: 14px 32px;
-  font-size: 15px;
-  letter-spacing: 2px;
+  font-size: 0.9rem;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.2);
+  color: #f0f0f0 !important;
 }
 
-.menu button:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 10px 28px rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 2.5px;
-  color: white;
+.menu button::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 20%;
+  width: 0%;
+  height: 1.5px;
+  background: linear-gradient(90deg, #ffffff, #aaaaaa);
+  transition: width 0.25s ease;
+  border-radius: 2px;
+}
+
+.menu button:hover::before {
+  width: 60%;
 }
 
 .menu button.activo {
-  background: rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
+  background: #181822 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(255,255,255,0.3), inset 0 0 0 1px rgba(255,255,255,0.8);
 }
 
-/* ============================= */
-/* SECCIONES (grid general) */
-/* ============================= */
-.seccion {
-  margin-top: 70px;
-  position: relative;
-  z-index: 10;
-  transition: all 0.3s;
+.menu button.activo::before {
+  width: 60%;
+  background: #ffffff;
 }
 
-/* ============================= */
-/* STAFF - DISEÑO DE CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS */
-/* ============================= */
-.staff-vertical {
+/* ========== SECCIÓN EQUIPO - ORDENADA EN GRILLA ========== */
+#equipo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: start;
+  gap: 50px 40px;
+  max-width: 1100px;
+  margin: 70px auto;
+  padding: 20px;
+}
+
+/* Tarjeta individual del staff - sin fondo, solo círculo y rol */
+.staff-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 56px;
-  max-width: 500px;
-  margin: 40px auto 80px auto;
-  padding: 0 20px;
-}
-
-/* Tarjeta circular: sin rectángulos, solo círculo + info flotante */
-.staff-circle-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border: none;
+  box-shadow: none;
   width: 100%;
-  max-width: 280px;
-  transition: all 0.3s ease;
-  cursor: default;
+  max-width: 220px;
 }
 
-.avatar-circle {
+.staff-card:hover {
+  transform: translateY(-8px);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Círculo del avatar */
+.avatar-glow {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 10px 25px -5px rgba(0,0,0,0.5);
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: blur(4px);
+  position: relative;
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
 }
 
-.staff-circle-item:hover .avatar-circle {
-  transform: scale(1.05);
-  border-color: #ffffff;
-  box-shadow: 0 0 38px rgba(255, 255, 255, 0.6);
+.avatar-glow .ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #888888);
+  opacity: 0;
+  transition: opacity 0.35s;
+  filter: blur(12px);
+  z-index: 0;
 }
 
-.avatar-circle img {
+.avatar-glow img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 2;
+  background: #0a0a0f;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
-.circle-info {
-  margin-top: 20px;
-  text-align: center;
+.staff-card:hover .avatar-glow img {
+  border-color: #ffffff;
+  transform: scale(1.02);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
 }
 
-.name-circle {
-  font-family: "Ethnocentric", sans-serif;
-  font-size: 26px;
-  letter-spacing: 1.5px;
-  color: white;
-  text-shadow: 0 0 6px rgba(0,0,0,0.5);
-  margin-bottom: 8px;
+.staff-card:hover .avatar-glow .ring {
+  opacity: 0.7;
 }
 
-.role-circle {
-  font-family: "Orbitron", monospace;
-  font-size: 12px;
-  letter-spacing: 4px;
-  color: rgba(255, 255, 255, 0.85);
-  text-transform: uppercase;
-  background: rgba(255,255,255,0.1);
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 40px;
-  backdrop-filter: blur(4px);
-  margin-bottom: 10px;
-}
-
-.join-date {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 40px;
-  border: 0.5px solid rgba(255,255,255,0.2);
-}
-
-/* SIN CUADROS, SIN FONDOS RECTANGULARES */
-.staff-circle-item::before,
-.staff-circle-item::after {
+/* Nombre del staff - oculto */
+.name-staff {
   display: none;
 }
 
-/* ============================= */
-/* APORTES GRID - TARJETAS LUXURY */
-/* ============================= */
-.aportes-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 48px;
-  width: 95%;
-  max-width: 1000px;
-  margin: 50px auto 80px auto;
-}
-
-.aporte-card {
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 24px;
-  text-align: left;
-  transition: all 0.3s ease;
-  border-radius: 28px;
-  width: 320px;
-  transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.3s;
-}
-
-.aporte-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.65);
-  box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.1);
-  background: rgba(0, 0, 0, 0.65);
-}
-
-.aporte-card h3 {
-  color: #fff;
-  font-family: "Ethnocentric", sans-serif;
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-.creator, .password, .peso {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 6px 0;
-  font-family: 'Orbitron', sans-serif;
-  letter-spacing: 0.5px;
-}
-
-.verde, .rojo {
-  color: #fff;
-  font-weight: bold;
-}
-
-.video-thumb {
-  position: relative;
-  margin: 18px 0;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: 0.2s;
-}
-
-.video-thumb img {
-  width: 100%;
-  display: block;
-  transition: transform 0.4s;
-}
-
-.aporte-card:hover .video-thumb img {
-  transform: scale(1.02);
-}
-
-/* BOTONES DE DESCARGA - TRANSPARENTES INVISIBLES ELEGANTES */
-.btn-descarga {
-  border-radius: 60px !important;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.3) !important;
+/* Rol del staff */
+.role-staff {
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
-  color: white;
+  padding: 8px 20px;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.staff-card:hover .role-staff {
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.75);
+  letter-spacing: 2.5px;
+}
+
+/* ========== TARJETAS DE CONTENIDO (APORTES Y DATAS) ========== */
+.aportes-grid, .datas-grid {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  padding: 12px 20px;
-  font-size: 12px;
-  margin-top: 18px;
-  letter-spacing: 1.8px;
+  gap: 50px;
+  width: 92%;
+  max-width: 1000px;
+  margin: 55px auto;
+  flex-wrap: wrap;
+}
+
+.content-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background: rgba(6, 6, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 26px 24px 28px;
+  border-radius: 36px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 15px 30px -15px rgba(0,0,0,0.4);
+}
+
+.content-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(12, 12, 22, 0.88);
+  box-shadow: 0 25px 35px -14px rgba(0,0,0,0.6);
+}
+
+.content-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+}
+
+.info-line {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #e0e0ff;
+  margin: 8px 0;
+  letter-spacing: -0.2px;
+}
+
+.creator-text {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pass-text .green-pass {
+  color: #aaffdd;
+  font-weight: 500;
+}
+
+.weight-text .red-weight {
+  color: #ffbbaa;
+}
+
+.video-thumbnail {
+  margin: 15px 0 12px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #0a0a0f;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-thumbnail img,
+.video-thumbnail video {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  transition: transform 0.3s;
+}
+
+.content-card:hover .video-thumbnail img,
+.content-card:hover .video-thumbnail video {
+  transform: scale(1.01);
+}
+
+.btn-descarga {
+  display: block;
   text-align: center;
+  text-decoration: none;
+  padding: 14px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  border-radius: 44px;
+  margin-top: 14px;
+  background: #0a0a10 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
 }
 
 .btn-descarga:hover {
-  transform: scale(1.02);
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 3px;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  background: #14141e !important;
+  letter-spacing: 2.5px;
+  border-color: rgba(255,255,255,0.8) !important;
+  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.9);
+  color: #fafaff !important;
 }
 
-/* ============================= */
-/* RESPONSIVE (Mobile first) */
-/* ============================= */
-@media screen and (max-width: 768px) {
-  .titulo {
-    font-size: 42px;
+/* Responsive */
+@media (max-width: 950px) {
+  #equipo {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 45px 35px;
+    max-width: 700px;
   }
-  .subtitulo {
-    font-size: 9px;
-    letter-spacing: 2px;
-    padding: 0 12px;
-  }
-  .menu {
-    border-radius: 50px;
-    padding: 12px 16px;
-    gap: 12px;
-  }
-  .menu button {
-    padding: 10px 20px;
-    font-size: 11px;
-    letter-spacing: 1px;
-  }
-  .staff-vertical {
-    gap: 45px;
-    margin-top: 20px;
-  }
-  .avatar-circle {
-    width: 130px;
-    height: 130px;
-  }
-  .name-circle {
-    font-size: 22px;
-  }
-  .role-circle {
-    font-size: 10px;
-    letter-spacing: 3px;
-  }
-  .join-date {
-    font-size: 9px;
-  }
-  .aporte-card {
-    width: 90%;
-    max-width: 340px;
-  }
-  .texto-intro {
-    font-size: 2rem;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-  }
-  #btn-entrar {
-    padding: 14px 36px;
-    font-size: 16px;
-    letter-spacing: 4px;
-  }
+  .avatar-glow { width: 130px; height: 130px; }
 }
 
-@media screen and (max-width: 480px) {
-  .titulo {
-    font-size: 32px;
-  }
-  .menu button {
-    width: 100%;
-    justify-content: center;
-  }
-  .menu {
-    flex-direction: column;
-    width: 90%;
-    border-radius: 40px;
-  }
-  .avatar-circle {
-    width: 110px;
-    height: 110px;
-  }
-  .name-circle {
-    font-size: 20px;
-  }
-  .texto-intro {
-    font-size: 1.6rem;
-  }
+@media (max-width: 850px) {
+  .titulo-principal { font-size: 3.4rem; }
+  .menu button { padding: 9px 22px; font-size: 0.8rem; }
+  .aportes-grid, .datas-grid { gap: 30px; }
 }
 
-/* clases de visualización */
-.seccion {
-  display: none;
+@media (max-width: 680px) {
+  .titulo-principal { font-size: 2.4rem; }
+  .menu { padding: 6px 12px; gap: 6px; }
+  .menu button { padding: 8px 18px; font-size: 0.7rem; }
+  .content-card { padding: 20px; }
+  #equipo {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px 20px;
+    max-width: 500px;
+  }
+  .avatar-glow { width: 110px; height: 110px; }
+  .role-staff { font-size: 0.7rem; padding: 5px 15px; letter-spacing: 1.5px; }
+  .aportes-grid, .datas-grid { flex-direction: column; align-items: center; }
+  .content-card { max-width: 350px; width: 100%; }
 }
 
-#equipo {
-  display: flex;
+@media (max-width: 480px) {
+  #equipo {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 250px;
+  }
+  .avatar-glow { width: 140px; height: 140px; }
 }
-
-/* Animaciones extra */
-button:active, .btn-descarga:active {
-  transform: scale(0.97);
-}
-
 </style>
 </head>
-
 <body>
 
-<!-- INTRO VIDEO -->
-<div id="intro-video">
-  <video muted loop playsinline class="video-intro-file" id="miVideoIntro" loop>
-    <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
-  </video>
-  <div class="overlay-intro">
-    <div class="texto-intro">GOLLO MODS</div>
-    <button id="btn-entrar">ENTRAR</button>
+<!-- VIDEO DE FONDO -->
+<video autoplay muted loop id="video-fondo">
+  <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
+</video>
+<div class="overlay-video"></div>
+
+<!-- Hero section -->
+<div class="hero" style="text-align: center; padding-top: 52px;">
+  <div class="titulo-principal">𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</div>
+  <div class="subtitulo-premium">𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖍𝖆 𝖎𝖓𝖎𝖈𝖎𝖆𝖉𝖔</div>
+
+  <div class="menu-wrapper" style="margin: 38px auto 20px;">
+    <div class="menu">
+      <button onclick="mostrar('equipo', this)"><span>𝕺𝖜𝖓𝖊𝖗𝖘</span></button>
+      <button onclick="mostrar('aportes', this)"><span>𝕲𝖙𝖆'𝖘</span></button>
+      <button onclick="mostrar('datas', this)"><span>𝕯𝖆𝖙𝖆𝖘</span></button>
+    </div>
   </div>
 </div>
 
-<!-- VIDEO FONDO PRINCIPAL -->
-<video id="video-fondo-pagina" autoplay loop muted playsinline>
-  <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
-</video>
-
-<div class="hero">
-  <div class="titulo">GOLLO MODS</div>
-  <div class="subtitulo">Bienvenido, demuestra que eres digno de este Prime</div>
-
-  <div class="menu-wrapper">
-    <div class="menu">
-      <button onclick="mostrar('equipo', this)"><span>OWNERS</span></button>
-      <button onclick="mostrar('aportes', this)"><span>GTA PC</span></button>
-      <button onclick="mostrar('datas', this)"><span>GTA ANDROID</span></button>
-    </div>
+<!-- SECCIÓN EQUIPO -->
+<div id="equipo" class="seccion">
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/qr7ae5.png" alt="Santi" onerror="this.src='https://cdn.discordapp.com/attachments/1406502394837074097/1506438853911646239/1779090598965.jpg?ex=6a0e4403&is=6a0cf283&hm=e4dbbadbc433e7f7207cf6e42147523b855b02e58d097336eaf26b4775013b53&'"></div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
   </div>
-
-  <!-- ====== EQUIPO - NUEVO DISEÑO CÍRCULOS PUROS UNO DEBAJO DEL OTRO, SIN CUADROS, CON FECHAS ====== -->
-  <div id="equipo" class="seccion staff-vertical">
-    <!-- Santi - Octubre 2025 -->
-    <div class="staff-circle-item">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/u0s9h1.png" alt="Santi">
-      </div>
-      <div class="circle-info">
-        <div class="name-circle">Santi</div>
-        <div class="role-circle">OWNER</div>
-      </div>
-    </div>
-
-    <!-- Andrew - Enero 2026 -->
-    <div class="staff-circle-item">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/ecu4gb.png" alt="Andrew">
-      </div>
-      <div class="circle-info">
-        <div class="name-circle">Andrew</div>
-        <div class="role-circle">OWNER</div>
-      </div>
-    </div>
-
-    <!-- Betrayedd - Enero 2026 -->
-    <div class="staff-circle-item">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/1ialho.png" alt="Betrayedd">
-      </div>
-      <div class="circle-info">
-        <div class="name-circle">Betrayedd</div>
-        <div class="role-circle">OWNER</div>
-      </div>
-    </div>
-
-    <!-- Alexander - Octubre 2025 -->
-    <div class="staff-circle-item">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/sjrh0t.png" alt="Alexander">
-      </div>
-      <div class="circle-info">
-        <div class="name-circle">Alexander</div>
-        <div class="role-circle">OWNER</div>
-      </div>
-    </div>
-
-     <!-- San - Enero 2026 -->
-    <div class="staff-circle-item">
-      <div class="avatar-circle">
-        <img src="https://files.catbox.moe/61cfoz.png" alt="San">
-      </div>
-      <div class="circle-info">
-        <div class="name-circle">San</div>
-        <div class="role-circle">OWNER</div>
-        <div class="join-date">📅 Octubre 2026</div>
-      </div>
-    </div>
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/ecu4gb.png" alt="Andrew" onerror="this.src='https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024'"></div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
   </div>
-
-  <!-- ====== GTA PC - 2 APORTES ====== -->
-  <div id="aportes" class="seccion aportes-grid">
-    <div class="aporte-card">
-      <h3>GTA G4</h3>
-      <p class="creator">CREADOR: SANTI GOLLO</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">235MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4">
-      </div>
-      <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
-    </div>
-
-    <div class="aporte-card">
-      <h3>GTA R5</h3>
-      <p class="creator">CREADOR: SANTI GOLLO</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">240MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5">
-      </div>
-      <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
-    </div>
-
-     <div class="aporte-card">
-      <h3>ROSITA GETEA SAEM</h3>
-      <p class="creator">CREADOR: RICHAR AMOROSO</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">270MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/0e5xdd.png" alt="GTA R5">
-      </div>
-      <a href="https://www.mediafire.com/file/ozrbqsww28t30ft/ROSITA+GETEA+SAEM.rar/file" class="btn-descarga">⟣ INSTALAR GTA ⟢</a>
-    </div>
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/1ialho.png" alt="Betrayedd" onerror="this.src='https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024'"></div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
   </div>
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/sjrh0t.png" alt="Alexander" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'"></div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  </div>
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/61cfoz.png" alt="San" onerror="this.src='https://cdn.discordapp.com/embed/avatars/1.png'"></div>
+    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  </div>
+  <div class="staff-card">
+    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/2.png'"></div>
+    <div class="role-staff">𝖘𝖚𝖇 𝖔𝖜𝖓𝖊𝖗</div>
+  </div>
+</div>
 
-  <!-- ====== GTA ANDROID - 2 APORTES ====== -->
-  <div id="datas" class="seccion aportes-grid">
-    <div class="aporte-card">
-      <h3>PERKINES 🪂 </h3>
-      <p class="creator">CREADOR: ALEXANDER</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">394MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/0qxmij.png" alt="DATA PERKINES" onerror="this.src='https://placehold.co/400x200/1a1a2e/white?text=DATA+MORADA'">
-      </div>
-      <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+🪂.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+<!-- SECCIÓN APORTES (GTAS) -->
+<div id="aportes" class="seccion aportes-grid">
+  <div class="content-card">
+    <h3>𝕲𝖙𝖆 𝕲4</h3>
+    <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
+    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+    <div class="info-line weight-text">PESO: <span class="red-weight">235MB</span></div>
+    <div class="video-thumbnail">
+      <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4 Preview" onerror="this.style.display='none'">
     </div>
+    <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+  </div>
+  <div class="content-card">
+    <h3>𝕾𝖔𝖒𝖊𝖙𝖍𝖎𝖓𝖌 𝕹𝖎𝖈𝖊</h3>
+    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
+    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+    <div class="info-line weight-text">PESO: <span class="red-weight">225MB</span></div>
+    <div class="video-thumbnail">
+      <video src="https://files.catbox.moe/dmoo10.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
+    </div>
+    <a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+  </div>
+</div>
 
-    <div class="aporte-card">
-      <h3>QUIEN LO DIRIA</h3>
-      <p class="creator">CREADOR: ALEXANDER</p>
-      <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-      <p class="peso">PESO: <span class="rojo">394MB</span></p>
-      <div class="video-thumb">
-        <img src="https://files.catbox.moe/10allm.png" alt="DATA AMARILLA ALEX" onerror="this.src='https://placehold.co/400x200/0f172a/white?text=DATA+AZUL'">
-      </div>
-      <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+🐐.zip/file" class="btn-descarga">⬇ INSTALAR GTA ⬇</a>
+<!-- SECCIÓN DATAS (PERKINES Y QUIEN LO DIRÍA) -->
+<div id="datas" class="seccion datas-grid">
+  <!-- DATA: PERKINES -->
+  <div class="content-card">
+    <h3>⚡ 𝕻𝖊𝖗𝖐𝖎𝖓𝖊𝖘</h3>
+    <div class="info-line"><span class="creator-text">CREADOR: Alexander</span></div>
+    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+    <div class="info-line weight-text">PESO: <span class="red-weight">394MB</span></div>
+    <div class="video-thumbnail">
+      <video src="https://files.catbox.moe/3h707a.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
     </div>
+    <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga">📦 𝕯𝖊𝖘𝖈𝖆𝖗𝖌𝖆𝖗 𝕯𝖆𝖙𝖆</a>
+  </div>
+  
+  <!-- DATA: QUIEN LO DIRÍA -->
+  <div class="content-card">
+    <h3>🤔 𝕼𝖚𝖎𝖊𝖓 𝖑𝖔 𝕯𝖎𝖗í𝖆</h3>
+    <div class="info-line"><span class="creator-text">CREADOR: Alexander</span></div>
+    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
+    <div class="info-line weight-text">PESO: <span class="red-weight">394MB</span></div>
+    <div class="video-thumbnail">
+      <video src="https://files.catbox.moe/tkz5dj.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
+    </div>
+    <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+%F0%9F%90%90.zip/file" class="btn-descarga">📦 𝕯𝖊𝖘𝖈𝖆𝖗𝖌𝖆𝖗 𝕯𝖆𝖙𝖆</a>
+  </div>
+</div>
 
 <script>
-// Función para cambiar entre secciones
-function mostrar(id, boton) {
-  document.querySelectorAll(".seccion").forEach(s => {
-    s.style.display = "none";
-  });
-  const seccionActiva = document.getElementById(id);
-  if (seccionActiva) {
-    // Forzamos flex para staff vertical (círculos sin cuadros) y para las otras secciones también es flex/grid nativo
-    if (id === 'equipo') {
-      seccionActiva.style.display = "flex";
+function mostrar(seccionId, btn) {
+  let secciones = document.querySelectorAll('.seccion');
+  secciones.forEach(sec => sec.style.display = 'none');
+  
+  let seccionMostrar = document.getElementById(seccionId);
+  if(seccionMostrar) {
+    if(seccionId === 'aportes' || seccionId === 'datas') {
+      seccionMostrar.style.display = 'flex';
     } else {
-      seccionActiva.style.display = "flex";
+      seccionMostrar.style.display = 'grid';
     }
   }
-  document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-  if (boton) boton.classList.add("activo");
+  
+  let botones = document.querySelectorAll('.menu button');
+  botones.forEach(boton => boton.classList.remove('activo'));
+  if(btn) btn.classList.add('activo');
 }
 
-// Inicializar y manejar intro / video background
-document.addEventListener("DOMContentLoaded", function() {
-  // Ocultar todas las secciones menos equipo
-  document.querySelectorAll(".seccion").forEach(s => {
-    s.style.display = "none";
-  });
-  const equipoSeccion = document.getElementById("equipo");
-  if (equipoSeccion) equipoSeccion.style.display = "flex";
-  
-  const primerBoton = document.querySelector(".menu button");
-  if (primerBoton) primerBoton.classList.add("activo");
-
-  // Intro logic
-  const introContainer = document.getElementById("intro-video");
-  const overlay = document.querySelector(".overlay-intro");
-  const botonEntrar = document.getElementById("btn-entrar");
-  const videoIntro = document.getElementById("miVideoIntro");
-  const videoFondoPagina = document.getElementById("video-fondo-pagina");
-
-  if (videoFondoPagina) {
-    videoFondoPagina.pause();
-    // Se reanuda luego de salir de intro
-  }
-
-  if (botonEntrar) {
-    botonEntrar.addEventListener("click", () => {
-      if (videoIntro) {
-        videoIntro.muted = false;
-        videoIntro.play().catch(e => console.log("autoplay limitado"));
-      }
-      if (overlay) overlay.style.opacity = "0";
-      setTimeout(() => {
-        if (introContainer) introContainer.style.opacity = "0";
-        setTimeout(() => {
-          if (introContainer) introContainer.style.display = "none";
-          if (videoFondoPagina) {
-            videoFondoPagina.play().catch(e => console.log("autoplay restringido"));
-          }
-        }, 1000);
-      }, 800);
-    });
-  }
-});
-
-// Ajuste extra: Forzar display correcto de staff vertical en resize y en general
-window.addEventListener('resize', () => {
-  const equipo = document.getElementById('equipo');
-  if (equipo && getComputedStyle(equipo).display !== 'none') {
-    equipo.style.display = 'flex';
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  let todasSecciones = document.querySelectorAll('.seccion');
+  todasSecciones.forEach(sec => sec.style.display = 'none');
+  let equipoDiv = document.getElementById('equipo');
+  if(equipoDiv) equipoDiv.style.display = 'grid';
+  let primerBoton = document.querySelector('.menu button');
+  if(primerBoton) primerBoton.classList.add('activo');
 });
 </script>
 
