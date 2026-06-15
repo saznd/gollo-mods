@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>GOLLO MODS | DATAS Y MODS</title>
-<link rel="icon" type="image/png" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23000' stroke='%23ffffff' stroke-width='3'/%3E%3Ctext x='50' y='70' font-size='50' text-anchor='middle' fill='%23ffffff' font-weight='bold'%3EG%3C/text%3E%3C/svg%3E">
-<!-- Fuentes ultra premium -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
+
+<title>GOLLO MODS</title>
+<link rel="icon" type="image/png" href="img/akala.png">
+<link href="fuentes/css1.css" rel="stylesheet">
+<link href="fuentes/css2.css" rel="stylesheet">
+
+<style> 
+
+/* ===== RESET Y BASE ===== */
 * {
   margin: 0;
   padding: 0;
@@ -18,17 +22,14 @@ body {
   margin: 0;
   position: relative;
   z-index: 1;
-  color: #ffffff;
-  overflow-x: hidden;
-  padding-bottom: 60px;
-  background-color: #000000;
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  color: white;
+  font-family: "Orbitronht", sans-serif;
+  padding-bottom: 80px;
+  background-color: #000;
 }
 
-/* VIDEO DE FONDO - MÁS VISIBLE */
-#video-fondo {
+/* ===== VIDEO DE FONDO ===== */
+#bg-video {
   position: fixed;
   top: 0;
   left: 0;
@@ -36,543 +37,664 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -2;
+  filter: brightness(0.85) contrast(1.05);
   pointer-events: none;
 }
 
-/* Overlay mucho más sutil para que se note el video */
-.overlay-video {
+.video-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.45);
   z-index: -1;
   pointer-events: none;
 }
 
-/* ========== TIPOGRAFÍA PREMIUM - BLANCO ========== */
-.titulo-principal {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 5rem;
-  letter-spacing: -0.02em;
-  background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 35%, #e0e0e0 70%, #ffffff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 0 2px 15px rgba(255,255,255,0.3);
-  animation: subtlePulse 3s infinite alternate;
+@media (max-width: 768px) {
+  .video-overlay {
+    background: rgba(0, 0, 0, 0.55);
+  }
+  #bg-video {
+    filter: brightness(0.9) contrast(1.1);
+  }
 }
 
-@keyframes subtlePulse {
-  0% { text-shadow: 0 0 5px rgba(255,255,255,0.2); }
-  100% { text-shadow: 0 0 25px rgba(255,255,255,0.7); }
+.card:hover{
+  transform: perspective(800px) rotateX(5deg) rotateY(5deg) scale(1.05);
 }
 
-.subtitulo-premium {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 3px;
-  font-size: 0.85rem;
-  color: #eeeeff;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.2);
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 40px;
-  backdrop-filter: blur(4px);
-  margin-top: 8px;
-}
-
-/* ========== BOTONES BLANCOS Y NEGROS ========== */
-button, .btn-descarga, .menu button {
-  background: #0a0a0f !important;
-  color: #ffffff !important;
-  border: none !important;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  overflow: hidden;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-}
-
-button::after, .btn-descarga::after, .menu button::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #1e1e2a, #2a2a35);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-button:hover, .btn-descarga:hover, .menu button:hover {
-  transform: translateY(-2px);
-  color: #ffffff !important;
-  background: #111118 !important;
-  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.6) inset;
-}
-
-button:hover::after, .btn-descarga:hover::after, .menu button:hover::after {
-  opacity: 0.6;
-}
-
-/* Menú principal */
-.menu {
-  background: rgba(5, 5, 12, 0.5);
-  backdrop-filter: blur(20px);
-  padding: 8px 20px;
-  border-radius: 60px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.15);
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.menu button {
-  background: #0c0c14 !important;
-  padding: 12px 34px;
-  border-radius: 50px !important;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.2);
-  color: #f0f0f0 !important;
-}
-
-.menu button::before {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 20%;
-  width: 0%;
-  height: 1.5px;
-  background: linear-gradient(90deg, #ffffff, #aaaaaa);
-  transition: width 0.25s ease;
-  border-radius: 2px;
-}
-
-.menu button:hover::before {
-  width: 60%;
-}
-
-.menu button.activo {
-  background: #181822 !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 12px rgba(255,255,255,0.3), inset 0 0 0 1px rgba(255,255,255,0.8);
-}
-
-.menu button.activo::before {
-  width: 60%;
-  background: #ffffff;
-}
-
-/* ========== SECCIÓN EQUIPO - ORDENADA EN GRILLA ========== */
-#equipo {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  align-items: start;
-  gap: 50px 40px;
-  max-width: 1100px;
-  margin: 70px auto;
+/* ===== ESTILOS DE CONTENIDO ===== */
+.discord-box{
+  margin-top: 30px;
   padding: 20px;
-}
-
-/* Tarjeta individual del staff - sin fondo, solo círculo y rol */
-.staff-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background: transparent;
-  backdrop-filter: none;
-  border-radius: 0;
-  padding: 0;
-  transition: transform 0.3s ease;
-  cursor: pointer;
-  border: none;
-  box-shadow: none;
-  width: 100%;
-  max-width: 220px;
-}
-
-.staff-card:hover {
-  transform: translateY(-8px);
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-/* Círculo del avatar */
-.avatar-glow {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  position: relative;
-  margin-bottom: 18px;
-  transition: all 0.3s ease;
-}
-
-.avatar-glow .ring {
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, #888888);
-  opacity: 0;
-  transition: opacity 0.35s;
-  filter: blur(12px);
-  z-index: 0;
-}
-
-.avatar-glow img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  position: relative;
-  z-index: 2;
-  background: #0a0a0f;
-  transition: all 0.3s;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-
-.staff-card:hover .avatar-glow img {
-  border-color: #ffffff;
-  transform: scale(1.02);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
-}
-
-.staff-card:hover .avatar-glow .ring {
-  opacity: 0.7;
-}
-
-/* Nombre del staff - oculto */
-.name-staff {
-  display: none;
-}
-
-/* Rol del staff */
-.role-staff {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  padding: 8px 20px;
-  border-radius: 40px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  margin-top: 8px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+  width: 260px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  background: rgba(0,0,0,0.85);
+  border: 1px solid #555;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(255,255,255,0.2), 0 0 40px rgba(100,100,100,0.3);
+  animation: glowBox 2s infinite alternate;
 }
 
-.staff-card:hover .role-staff {
-  border-color: #ffffff;
-  color: #ffffff;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-  background: rgba(0, 0, 0, 0.75);
-  letter-spacing: 2.5px;
-}
-
-/* ========== TARJETAS DE CONTENIDO (APORTES Y DATAS) ========== */
-.aportes-grid, .datas-grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
-  width: 92%;
-  max-width: 1000px;
-  margin: 55px auto;
-  flex-wrap: wrap;
-}
-
-.content-card {
-  flex: 1;
-  min-width: 300px;
-  max-width: 400px;
-  background: rgba(6, 6, 12, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 26px 24px 28px;
-  border-radius: 36px;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  box-shadow: 0 15px 30px -15px rgba(0,0,0,0.4);
-}
-
-.content-card:hover {
-  transform: translateY(-7px);
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(12, 12, 22, 0.88);
-  box-shadow: 0 25px 35px -14px rgba(0,0,0,0.6);
-}
-
-.content-card h3 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 1.9rem;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #e0e0e0);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+.discord-title{
+  font-family: "Orbitronht", sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #ccc;
   margin-bottom: 10px;
 }
 
-.info-line {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-size: 0.8rem;
-  color: #e0e0ff;
-  margin: 8px 0;
-  letter-spacing: -0.2px;
-}
-
-.creator-text {
+#discord-count{
+  font-family: "Ethnocentric", sans-serif;
+  font-size: 28px;
   color: #ffffff;
-  font-weight: 600;
+  text-shadow: 0 0 5px #ffffff, 0 0 15px #aaaaaa, 0 0 30px #888888;
 }
 
-.pass-text .green-pass {
-  color: #aaffdd;
-  font-weight: 500;
+@keyframes glowBox {
+  0%{ box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(200,200,200,0.2); }
+  100%{ box-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(150,150,150,0.4); }
 }
 
-.weight-text .red-weight {
-  color: #ffbbaa;
+/* ===== FUENTES ===== */
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("fonts/Ethnocentric.ttf");
+}
+@font-face {
+  font-family: "Ethnocentric";
+  src: url("fonts/Ethnocentric.otf");
+}
+@font-face {
+  font-family: "Orbitronht";
+  src: url("fonts/Orbitronht.ttf");
+}
+@font-face {
+  font-family: "HighriseFont";
+  src: url("fonts/HighriseFont.otf");
 }
 
-.video-thumbnail {
-  margin: 15px 0 12px;
-  border-radius: 24px;
+.creator{
+  font-family: "Orbitronht", sans-serif;
+  font-weight: 900;
+  color: rgb(255, 80, 80);
+  letter-spacing: 1px;
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.password{
+  font-family: "Orbitronht", sans-serif;
+  font-weight: 900;
+  color: #d1d1d1;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+  margin: 4px 0;
+}
+.verde{
+  color: #00ff00;
+}
+.peso{
+  font-family: "Orbitronht", sans-serif;
+  font-weight: 900;
+  color: #d1d1d1;
+  letter-spacing: 0.5px;
+  font-size: 13px;
+  margin: 4px 0;
+}
+.rojo{
+  color: red;
+  font-weight: bold;
+}
+
+/* ----- CABECERA ----- */
+.hero {
+  text-align: center;
+  padding-top: 60px;
+}
+
+.titulo {
+  font-family: 'Ethnocentric', sans-serif;
+  font-size: 64px;
+  letter-spacing: 6px;
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #aaa, 0 0 20px #888, 0 0 40px #666, 0 0 80px #444;
+  animation: glowTitulo 2s infinite alternate;
+}
+
+@keyframes glowTitulo {
+  0% { text-shadow: 0 0 10px #aaa; }
+  100% { text-shadow: 0 0 30px #ffffff; }
+}
+
+.subtitulo {
+  margin-top: 12px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(245, 240, 240, 0.95);
+  font-family: "Orbitronht", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.4);
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 40px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+
+/* ============================= */
+/* MENÚ - NUEVO DISEÑO MODERNO Y ELEGANTE */
+/* ============================= */
+
+.menu-wrapper{
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+/* Botones rediseñados: forma de píldora, borde neón, efecto glassmorphism */
+.menu button {
+  position: relative;
+  background: rgba(20, 20, 30, 0.65);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: "Orbitronht", sans-serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+  border-radius: 60px;
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
   overflow: hidden;
-  background: #0a0a0f;
-  min-height: 180px;
+  z-index: 1;
+}
+
+/* Efecto de brillo neón en los bordes */
+.menu button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ffffff, #aaaaaa, #ffffff, #888888);
+  border-radius: 62px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -2;
+}
+
+.menu button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.2);
+  border-radius: 58px;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+/* Hover: efecto de elevación y neón */
+.menu button:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(35, 35, 50, 0.85);
+  letter-spacing: 2.5px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.3);
+}
+
+.menu button:hover::before {
+  opacity: 0.6;
+}
+
+/* Botón activo (seleccionado) con estilo destacado */
+.menu button.activo {
+  background: rgba(255, 255, 255, 0.95);
+  color: #000000;
+  text-shadow: none;
+  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 8px 20px rgba(0,0,0,0.3);
+  letter-spacing: 2.5px;
+}
+
+.menu button.activo::before {
+  opacity: 0.9;
+  background: linear-gradient(45deg, #ffffff, #dddddd, #ffffff);
+}
+
+.menu button.activo::after {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Efecto de "click" */
+.menu button:active {
+  transform: translateY(2px) scale(0.98);
+  transition: 0.05s;
+}
+
+/* Responsive: botones más compactos en móvil */
+@media (max-width: 768px) {
+  .menu {
+    gap: 15px;
+  }
+  .menu button {
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* ============================= */
+/* SECCIONES */
+/* ============================= */
+
+.seccion {
+  display: none;
+}
+
+#equipo {
+  display: grid;
+}
+
+/* ============================= */
+/* STAFF */
+/* ============================= */
+
+.staff{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+  justify-content: center;
+  gap: 35px;
+  max-width: 1200px;
+  margin: 70px auto;
+}
+
+.card{
+  width: 100%;
+  max-width: 360px;
+  height: 280px;
+  border: 1px solid rgba(255,255,255,0.3);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 16px;
+}
+
+.card:hover{
+  transform: translateY(-8px);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.card::before,
+.aporte-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 100%);
+  filter: blur(18px);
+  transform: skew(-15deg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover::before,
+.aporte-card:hover::before {
+  opacity: 1;
+  animation: flash 1.4s ease;
+}
+
+@keyframes flash {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
+.avatar{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.4);
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
 }
 
-.video-thumbnail img,
-.video-thumbnail video {
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name{
+  color:white;
+  font-size: 22px;
+  font-weight:bold;
+  font-family: "Ethnocentric", sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px black;
+  text-align: center;
+}
+
+.role{
+  color: #ffcc44;
+  font-size: 15px;
+  font-family: "Orbitronht", monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 4px black;
+  font-weight: bold;
+}
+
+/* ============================= */
+/* APORTES GRID (para aportes, datas y descargas) */
+/* ============================= */
+
+.aportes-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+  justify-content: center;
+  gap: 30px;
+  width: 95%;
+  max-width: 1100px;
+  margin: 60px auto 0 auto;
+}
+
+.aporte-card{
+  background: rgba(0,0,0,0.85);
+  border: 1px solid #aaa;
+  padding: 15px;
+  text-align: left;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  backdrop-filter: blur(2px);
+}
+
+.aporte-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(255,255,255,0.2), 0 0 40px rgba(150,150,150,0.3);
+}
+
+.aporte-card h3{
+  color: #ffffff;
+  font-family: "Ethnocentric", sans-serif;
+  margin-top: 6px;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+.video-thumb{
+  position: relative;
+  margin: 12px 0;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-thumb img{
   width: 100%;
   display: block;
-  border-radius: 20px;
-  transition: transform 0.3s;
 }
 
-.content-card:hover .video-thumbnail img,
-.content-card:hover .video-thumbnail video {
-  transform: scale(1.01);
+.btn-descarga{
+  display:block;
+  text-align:center;
+  background: linear-gradient(90deg, #2a2a2a, #111111);
+  color:white;
+  text-decoration:none;
+  padding:14px;
+  font-family: "MiBoton", "Orbitronht", sans-serif;
+  font-size: 18px;
+  letter-spacing: 2px;
+  border: 1px solid #888;
+  transition: all 0.35s ease;
+  border-radius: 40px;
+  margin-top: 8px;
 }
 
-.btn-descarga {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  padding: 14px 12px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  border-radius: 44px;
-  margin-top: 14px;
-  background: #0a0a10 !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255,255,255,0.3) !important;
-  transition: all 0.25s ease;
-  text-transform: uppercase;
+.btn-descarga:hover{
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+  transform: translateY(-4px) scale(1.02);
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #555555, #222222);
 }
 
-.btn-descarga:hover {
-  transform: translateY(-3px);
-  background: #14141e !important;
-  letter-spacing: 2.5px;
-  border-color: rgba(255,255,255,0.8) !important;
-  box-shadow: 0 8px 20px -6px rgba(0,0,0,0.9);
-  color: #fafaff !important;
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .titulo { font-size: 48px; }
+  .subtitulo { font-size: 10px; letter-spacing: 1px; padding: 4px 12px; }
+  .staff { grid-template-columns: 1fr; gap: 25px; }
+  .card { width: 90%; max-width: 320px; height: auto; padding: 20px 0; }
+  .name { font-size: 18px; }
+  .role { font-size: 12px; }
+  .avatar { width: 90px; height: 90px; }
 }
 
-/* Responsive */
-@media (max-width: 950px) {
-  #equipo {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 45px 35px;
-    max-width: 700px;
-  }
-  .avatar-glow { width: 130px; height: 130px; }
-}
-
-@media (max-width: 850px) {
-  .titulo-principal { font-size: 3.4rem; }
-  .menu button { padding: 9px 22px; font-size: 0.8rem; }
-  .aportes-grid, .datas-grid { gap: 30px; }
-}
-
-@media (max-width: 680px) {
-  .titulo-principal { font-size: 2.4rem; }
-  .menu { padding: 6px 12px; gap: 6px; }
-  .menu button { padding: 8px 18px; font-size: 0.7rem; }
-  .content-card { padding: 20px; }
-  #equipo {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 35px 20px;
-    max-width: 500px;
-  }
-  .avatar-glow { width: 110px; height: 110px; }
-  .role-staff { font-size: 0.7rem; padding: 5px 15px; letter-spacing: 1.5px; }
-  .aportes-grid, .datas-grid { flex-direction: column; align-items: center; }
-  .content-card { max-width: 350px; width: 100%; }
-}
-
-@media (max-width: 480px) {
-  #equipo {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    max-width: 250px;
-  }
-  .avatar-glow { width: 140px; height: 140px; }
-}
 </style>
 </head>
 <body>
 
 <!-- VIDEO DE FONDO -->
-<video autoplay muted loop id="video-fondo">
+<video autoplay muted loop playsinline id="bg-video">
   <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
+  Tu navegador no soporta video HTML5.
 </video>
-<div class="overlay-video"></div>
+<div class="video-overlay"></div>
 
-<!-- Hero section -->
-<div class="hero" style="text-align: center; padding-top: 52px;">
-  <div class="titulo-principal">𝖌𝖔𝖑𝖑𝖔 𝖒𝖔𝖉𝖘</div>
-  <div class="subtitulo-premium">𝖑𝖆 𝖗𝖊𝖛𝖔𝖑𝖚𝖈𝖎𝖔𝖓 𝖍𝖆 𝖎𝖓𝖎𝖈𝖎𝖆𝖉𝖔</div>
+<div class="hero">
+  <div class="titulo"> GOLLO MODS</div>
+  <div class="subtitulo">✦ ADELANTE, ESTO ES MUCHO MÁS QUE UN SITIO, ES TODA UNA COMUNIDAD ✦</div>
 
-  <div class="menu-wrapper" style="margin: 38px auto 20px;">
+  <div class="menu-wrapper">
     <div class="menu">
-      <button onclick="mostrar('equipo', this)"><span>𝕺𝖜𝖓𝖊𝖗𝖘</span></button>
-      <button onclick="mostrar('aportes', this)"><span>𝕲𝖙𝖆'𝖘</span></button>
-      <button onclick="mostrar('datas', this)"><span>𝕯𝖆𝖙𝖆𝖘</span></button>
+      <button onclick="mostrar('equipo', this)"><span>EQUIPO</span></button>
+      <button onclick="mostrar('aportes', this)"><span>APORTES</span></button>
+      <button onclick="mostrar('datas', this)"><span>DATAS</span></button>
+      <button onclick="mostrar('descargas', this)"><span>APORTES TOP</span></button>
     </div>
   </div>
 </div>
 
-<!-- SECCIÓN EQUIPO -->
-<div id="equipo" class="seccion">
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/qr7ae5.png" alt="Santi" onerror="this.src='https://cdn.discordapp.com/attachments/1406502394837074097/1506438853911646239/1779090598965.jpg?ex=6a0e4403&is=6a0cf283&hm=e4dbbadbc433e7f7207cf6e42147523b855b02e58d097336eaf26b4775013b53&'"></div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+<!-- ====== EQUIPO ====== -->
+<div id="equipo" class="seccion staff">
+  <div class="card">
+    <div class="avatar"><img src="https://files.catbox.moe/7k3zrh.png" alt="Santi"></div>
+    <div class="name">SANTI</div>
+    <div class="role">OWNER</div>
   </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/ecu4gb.png" alt="Andrew" onerror="this.src='https://cdn.discordapp.com/avatars/1125573441563664414/e65942c4af8e588121d42d802d8e8329.png?size=1024'"></div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  <div class="card">
+    <div class="avatar"><img src="https://files.catbox.moe/ih893x.png" alt="Andrew"></div>
+    <div class="name">ANDREW</div>
+    <div class="role">OWNER</div>
   </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/1ialho.png" alt="Betrayedd" onerror="this.src='https://cdn.discordapp.com/avatars/1203105008384614432/efbc96daa7868944422e509778ca3054.png?size=1024'"></div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  <div class="card">
+    <div class="avatar"><img src="https://files.catbox.moe/1ialho.png" alt="betrayedd"></div>
+    <div class="name">BETRAYEDD</div>
+    <div class="role">OWNER</div>
   </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/sjrh0t.png" alt="Alexander" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'"></div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
+  <div class="card">
+    <div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" alt="Mr Fiel"></div>
+    <div class="name">MR FIEL</div>
+    <div class="role">OWNER</div>
   </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/61cfoz.png" alt="San" onerror="this.src='https://cdn.discordapp.com/embed/avatars/1.png'"></div>
-    <div class="role-staff">𝖔𝖜𝖓𝖊𝖗</div>
-  </div>
-  <div class="staff-card">
-    <div class="avatar-glow"><div class="ring"></div><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy" onerror="this.src='https://cdn.discordapp.com/embed/avatars/2.png'"></div>
-    <div class="role-staff">𝖘𝖚𝖇 𝖔𝖜𝖓𝖊𝖗</div>
-  </div>
-</div>
-
-<!-- SECCIÓN APORTES (GTAS) -->
-<div id="aportes" class="seccion aportes-grid">
-  <div class="content-card">
-    <h3>𝕲𝖙𝖆 𝕲4</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Santi Gollo</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">235MB</span></div>
-    <div class="video-thumbnail">
-      <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4 Preview" onerror="this.style.display='none'">
-    </div>
-    <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
-  </div>
-  <div class="content-card">
-    <h3>𝕾𝖔𝖒𝖊𝖙𝖍𝖎𝖓𝖌 𝕹𝖎𝖈𝖊</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Betrayedd</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">225MB</span></div>
-    <div class="video-thumbnail">
-      <video src="https://files.catbox.moe/dmoo10.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
-    </div>
-    <a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga">𝕴𝖓𝖘𝖙𝖆𝖑𝖆𝖗 𝕲𝖙𝖆</a>
+  <div class="card">
+    <div class="avatar"><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy"></div>
+    <div class="name">SLEEZY</div>
+    <div class="role">SUB OWNER</div>
   </div>
 </div>
 
-<!-- SECCIÓN DATAS (PERKINES Y QUIEN LO DIRÍA) -->
-<div id="datas" class="seccion datas-grid">
-  <!-- DATA: PERKINES -->
-  <div class="content-card">
-    <h3>⚡ 𝕻𝖊𝖗𝖐𝖎𝖓𝖊𝖘</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Alexander</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">394MB</span></div>
-    <div class="video-thumbnail">
-      <video src="https://files.catbox.moe/3h707a.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
-    </div>
-    <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga">📦 𝕯𝖊𝖘𝖈𝖆𝖗𝖌𝖆𝖗 𝕯𝖆𝖙𝖆</a>
-  </div>
+<!-- ====== APORTES (GTA G4, GTA R5, SOMETHING NICE, KING OF KINGS) ====== -->
+<div id="aportes" class="seccion aportes-grid" style="margin-top:60px;">
   
-  <!-- DATA: QUIEN LO DIRÍA -->
-  <div class="content-card">
-    <h3>🤔 𝕼𝖚𝖎𝖊𝖓 𝖑𝖔 𝕯𝖎𝖗í𝖆</h3>
-    <div class="info-line"><span class="creator-text">CREADOR: Alexander</span></div>
-    <div class="info-line pass-text">CONTRASEÑA: <span class="green-pass">NINGUNA</span></div>
-    <div class="info-line weight-text">PESO: <span class="red-weight">394MB</span></div>
-    <div class="video-thumbnail">
-      <video src="https://files.catbox.moe/tkz5dj.mp4" autoplay muted loop playsinline disablePictureInPicture onerror="this.style.display='none'"></video>
+  <div class="aporte-card">
+    <h3>GTA G4</h3>
+    <p class="creator">CREADOR: SANTI</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">235 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4">
     </div>
-    <a href="https://www.mediafire.com/file/n7rdtlx9qvtrnes/QUIEN+LO+DIRIA+%F0%9F%90%90.zip/file" class="btn-descarga">📦 𝕯𝖊𝖘𝖈𝖆𝖗𝖌𝖆𝖗 𝕯𝖆𝖙𝖆</a>
+    <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA G4</a>
   </div>
+
+  <div class="aporte-card">
+    <h3>GTA R5</h3>
+    <p class="creator">CREADOR: SANTI</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">240 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5">
+    </div>
+    <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA R5</a>
+  </div>
+
+  <div class="aporte-card">
+    <h3>Something Nice</h3>
+    <p class="creator">CREADOR: BETRAYEDD</p>
+    <p class="password">CONTRASEÑA: <span class="verde">betraking</span></p>
+    <p class="peso">PESO: <span class="rojo">225 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/zs8fid.png" alt="Something Nice">
+    </div>
+    <a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga" target="_blank">DESCARGA SOMETHING NICE</a>
+  </div>
+
+  <div class="aporte-card">
+    <h3>King of Kings</h3>
+    <p class="creator">CREADOR: BETRAYEDD</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">228 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings">
+    </div>
+    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a>
+  </div>
+
+</div>
+
+<!-- ====== DATAS (DATA GOLLO + PERKINES + PURA FANTASÍA) ====== -->
+<div id="datas" class="seccion aportes-grid" style="margin-top:60px;">
+  
+  <div class="aporte-card">
+    <h3>DATA GOLLO</h3>
+    <p class="creator">CREADOR: SANTI</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">415 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/zc6ttc.jpg" alt="DATA GOLLO">
+    </div>
+    <a href="https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file" class="btn-descarga" target="_blank">DESCARGAR DATA GOLLO</a>
+  </div>
+
+  <div class="aporte-card">
+    <h3>PERKINES 🪂</h3>
+    <p class="creator">CREADOR: MR FIEL</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">394 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/6smlda.jpg" alt="PERKINES">
+    </div>
+    <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga" target="_blank">DESCARGAR PERKINES</a>
+  </div>
+
+  <div class="aporte-card">
+    <h3>PURA FANTASÍA</h3>
+    <p class="creator">CREADOR: MR FIEL</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">395 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/recxwz.jpg" alt="Pura fantasía">
+    </div>
+    <a href="https://www.mediafire.com/file/s3gzq1uw2vvyvun/CUANDO+ERA+TODO+PURA+FANTAS%C3%8DA+:wilted_rose:.zip/file" class="btn-descarga" target="_blank">DESCARGAR PURA FANTASÍA</a>
+  </div>
+
+</div>
+
+<!-- ====== APORTES TOP (descargas) - SOLO KING OF KINGS ====== -->
+<div id="descargas" class="seccion aportes-grid" style="margin-top:60px;">
+  
+  <div class="aporte-card">
+    <h3>King of Kings</h3>
+    <p class="creator">CREADOR: BETRAYEDD</p>
+    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+    <p class="peso">PESO: <span class="rojo">228 MB</span></p>
+    <div class="video-thumb">
+      <img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings">
+    </div>
+    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a>
+  </div>
+
 </div>
 
 <script>
-function mostrar(seccionId, btn) {
-  let secciones = document.querySelectorAll('.seccion');
-  secciones.forEach(sec => sec.style.display = 'none');
-  
-  let seccionMostrar = document.getElementById(seccionId);
-  if(seccionMostrar) {
-    if(seccionId === 'aportes' || seccionId === 'datas') {
-      seccionMostrar.style.display = 'flex';
+function mostrar(id, boton) {
+  document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
+  const seccionMostrar = document.getElementById(id);
+  if (seccionMostrar) {
+    if (id === 'equipo' || id === 'aportes' || id === 'datas' || id === 'descargas') {
+      seccionMostrar.style.display = "grid";
     } else {
-      seccionMostrar.style.display = 'grid';
+      seccionMostrar.style.display = "block";
     }
   }
-  
-  let botones = document.querySelectorAll('.menu button');
-  botones.forEach(boton => boton.classList.remove('activo'));
-  if(btn) btn.classList.add('activo');
+  document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
+  if (boton) boton.classList.add("activo");
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  let todasSecciones = document.querySelectorAll('.seccion');
-  todasSecciones.forEach(sec => sec.style.display = 'none');
-  let equipoDiv = document.getElementById('equipo');
-  if(equipoDiv) equipoDiv.style.display = 'grid';
-  let primerBoton = document.querySelector('.menu button');
-  if(primerBoton) primerBoton.classList.add('activo');
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
+  const equipoSeccion = document.getElementById("equipo");
+  if (equipoSeccion) equipoSeccion.style.display = "grid";
+  const botones = document.querySelectorAll(".menu button");
+  if (botones.length > 0) {
+    botones.forEach(b => b.classList.remove("activo"));
+    botones[0].classList.add("activo");
+  }
 });
 </script>
 
