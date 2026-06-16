@@ -1,729 +1,480 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-
-<title>GOLLO MODS</title>
-<link rel="icon" type="image/png" href="img/akala.png">
-<link href="fuentes/css1.css" rel="stylesheet">
-<link href="fuentes/css2.css" rel="stylesheet">
-
-<style> 
-
-/* ===== RESET Y BASE ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  position: relative;
-  z-index: 1;
-  color: white;
-  font-family: "Orbitronht", sans-serif;
-  padding-bottom: 80px;
-  background-color: #000;
-}
-
-/* ===== VIDEO DE FONDO ===== */
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  filter: brightness(0.85) contrast(1.05);
-  pointer-events: none;
-}
-
-.video-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: -1;
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  .video-overlay {
-    background: rgba(0, 0, 0, 0.55);
-  }
-  #bg-video {
-    filter: brightness(0.9) contrast(1.1);
-  }
-}
-
-.card:hover{
-  transform: perspective(800px) rotateX(5deg) rotateY(5deg) scale(1.05);
-}
-
-/* ===== ESTILOS DE CONTENIDO ===== */
-.discord-box{
-  margin-top: 30px;
-  padding: 20px;
-  width: 260px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  background: rgba(0,0,0,0.85);
-  border: 1px solid #555;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(255,255,255,0.2), 0 0 40px rgba(100,100,100,0.3);
-  animation: glowBox 2s infinite alternate;
-}
-
-.discord-title{
-  font-family: "Orbitronht", sans-serif;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #ccc;
-  margin-bottom: 10px;
-}
-
-#discord-count{
-  font-family: "Ethnocentric", sans-serif;
-  font-size: 28px;
-  color: #ffffff;
-  text-shadow: 0 0 5px #ffffff, 0 0 15px #aaaaaa, 0 0 30px #888888;
-}
-
-@keyframes glowBox {
-  0%{ box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(200,200,200,0.2); }
-  100%{ box-shadow: 0 0 20px rgba(255,255,255,0.5), 0 0 40px rgba(150,150,150,0.4); }
-}
-
-/* ===== FUENTES ===== */
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.ttf");
-}
-@font-face {
-  font-family: "Ethnocentric";
-  src: url("fonts/Ethnocentric.otf");
-}
-@font-face {
-  font-family: "Orbitronht";
-  src: url("fonts/Orbitronht.ttf");
-}
-@font-face {
-  font-family: "HighriseFont";
-  src: url("fonts/HighriseFont.otf");
-}
-
-.creator{
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 900;
-  color: rgb(255, 80, 80);
-  letter-spacing: 1px;
-  font-size: 14px;
-  margin: 6px 0;
-}
-
-.password{
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 900;
-  color: #d1d1d1;
-  letter-spacing: 0.5px;
-  font-size: 13px;
-  margin: 4px 0;
-}
-.verde{
-  color: #00ff00;
-}
-.peso{
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 900;
-  color: #d1d1d1;
-  letter-spacing: 0.5px;
-  font-size: 13px;
-  margin: 4px 0;
-}
-.rojo{
-  color: red;
-  font-weight: bold;
-}
-
-/* ----- CABECERA ----- */
-.hero {
-  text-align: center;
-  padding-top: 60px;
-}
-
-.titulo {
-  font-family: 'Ethnocentric', sans-serif;
-  font-size: 64px;
-  letter-spacing: 6px;
-  color: #fff;
-  text-shadow: 0 0 5px #fff, 0 0 10px #aaa, 0 0 20px #888, 0 0 40px #666, 0 0 80px #444;
-  animation: glowTitulo 2s infinite alternate;
-}
-
-@keyframes glowTitulo {
-  0% { text-shadow: 0 0 10px #aaa; }
-  100% { text-shadow: 0 0 30px #ffffff; }
-}
-
-.subtitulo {
-  margin-top: 12px;
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: rgba(245, 240, 240, 0.95);
-  font-family: "Orbitronht", sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  background: rgba(0,0,0,0.4);
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 40px;
-  backdrop-filter: blur(3px);
-  box-shadow: 0 0 12px rgba(255,255,255,0.2);
-}
-
-/* ============================= */
-/* MENÚ - NUEVO DISEÑO MODERNO Y ELEGANTE */
-/* ============================= */
-
-.menu-wrapper{
-  width: 100%;
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-}
-
-.menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  background: transparent;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-
-/* Botones rediseñados: forma de píldora, borde neón, efecto glassmorphism */
-.menu button {
-  position: relative;
-  background: rgba(20, 20, 30, 0.65);
-  backdrop-filter: blur(10px);
-  color: white;
-  border: none;
-  padding: 12px 32px;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-family: "Orbitronht", sans-serif;
-  font-size: 15px;
-  letter-spacing: 2px;
-  border-radius: 60px;
-  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* Efecto de brillo neón en los bordes */
-.menu button::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ffffff, #aaaaaa, #ffffff, #888888);
-  border-radius: 62px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: -2;
-}
-
-.menu button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.2);
-  border-radius: 58px;
-  z-index: -1;
-  transition: all 0.3s ease;
-}
-
-/* Hover: efecto de elevación y neón */
-.menu button:hover {
-  transform: translateY(-5px) scale(1.02);
-  background: rgba(35, 35, 50, 0.85);
-  letter-spacing: 2.5px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.3);
-}
-
-.menu button:hover::before {
-  opacity: 0.6;
-}
-
-/* Botón activo (seleccionado) con estilo destacado */
-.menu button.activo {
-  background: rgba(255, 255, 255, 0.95);
-  color: #000000;
-  text-shadow: none;
-  box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 8px 20px rgba(0,0,0,0.3);
-  letter-spacing: 2.5px;
-}
-
-.menu button.activo::before {
-  opacity: 0.9;
-  background: linear-gradient(45deg, #ffffff, #dddddd, #ffffff);
-}
-
-.menu button.activo::after {
-  background: rgba(255,255,255,0.2);
-}
-
-/* Efecto de "click" */
-.menu button:active {
-  transform: translateY(2px) scale(0.98);
-  transition: 0.05s;
-}
-
-/* Responsive: botones más compactos en móvil */
-@media (max-width: 768px) {
-  .menu {
-    gap: 15px;
-  }
-  .menu button {
-    padding: 8px 20px;
-    font-size: 12px;
-    letter-spacing: 1.5px;
-  }
-}
-
-/* ============================= */
-/* SECCIONES */
-/* ============================= */
-
-.seccion {
-  display: none;
-}
-
-#equipo {
-  display: grid;
-}
-
-/* ============================= */
-/* STAFF */
-/* ============================= */
-
-.staff{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
-  justify-content: center;
-  gap: 35px;
-  max-width: 1200px;
-  margin: 70px auto;
-}
-
-.card{
-  width: 100%;
-  max-width: 360px;
-  height: 280px;
-  border: 1px solid rgba(255,255,255,0.3);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  transition: all 0.4s ease;
-  gap: 18px;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-  border-radius: 16px;
-}
-
-.card:hover{
-  transform: translateY(-8px);
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255,255,255,0.8);
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-.card::before,
-.aporte-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 45%, rgba(255,255,255,0) 100%);
-  filter: blur(18px);
-  transform: skew(-15deg);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.card:hover::before,
-.aporte-card:hover::before {
-  opacity: 1;
-  animation: flash 1.4s ease;
-}
-
-@keyframes flash {
-  0% { left: -150%; }
-  100% { left: 150%; }
-}
-
-.avatar{
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.7);
-  background: rgba(0,0,0,0.4);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-.avatar img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.name{
-  color:white;
-  font-size: 22px;
-  font-weight:bold;
-  font-family: "Ethnocentric", sans-serif;
-  letter-spacing: 2px;
-  text-shadow: 0 0 8px black;
-  text-align: center;
-}
-
-.role{
-  color: #ffcc44;
-  font-size: 15px;
-  font-family: "Orbitronht", monospace;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-shadow: 0 0 4px black;
-  font-weight: bold;
-}
-
-/* ============================= */
-/* APORTES GRID (para aportes, datas y descargas) */
-/* ============================= */
-
-.aportes-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
-  justify-content: center;
-  gap: 30px;
-  width: 95%;
-  max-width: 1100px;
-  margin: 60px auto 0 auto;
-}
-
-.aporte-card{
-  background: rgba(0,0,0,0.85);
-  border: 1px solid #aaa;
-  padding: 15px;
-  text-align: left;
-  transition: all 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  backdrop-filter: blur(2px);
-}
-
-.aporte-card:hover{
-  transform: translateY(-8px);
-  box-shadow: 0 0 10px rgba(255,255,255,0.3), 0 0 25px rgba(255,255,255,0.2), 0 0 40px rgba(150,150,150,0.3);
-}
-
-.aporte-card h3{
-  color: #ffffff;
-  font-family: "Ethnocentric", sans-serif;
-  margin-top: 6px;
-  margin-bottom: 5px;
-  text-shadow: 0 0 5px rgba(255,255,255,0.5);
-}
-
-.video-thumb{
-  position: relative;
-  margin: 12px 0;
-  border: 1px solid #aaa;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.video-thumb img{
-  width: 100%;
-  display: block;
-}
-
-.btn-descarga{
-  display:block;
-  text-align:center;
-  background: linear-gradient(90deg, #2a2a2a, #111111);
-  color:white;
-  text-decoration:none;
-  padding:14px;
-  font-family: "MiBoton", "Orbitronht", sans-serif;
-  font-size: 18px;
-  letter-spacing: 2px;
-  border: 1px solid #888;
-  transition: all 0.35s ease;
-  border-radius: 40px;
-  margin-top: 8px;
-}
-
-.btn-descarga:hover{
-  box-shadow: 0 0 15px rgba(255,255,255,0.4);
-  transform: translateY(-4px) scale(1.02);
-  letter-spacing: 4px;
-  background: linear-gradient(90deg, #555555, #222222);
-}
-
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
-
-@media (max-width: 768px) {
-  .titulo { font-size: 48px; }
-  .subtitulo { font-size: 10px; letter-spacing: 1px; padding: 4px 12px; }
-  .staff { grid-template-columns: 1fr; gap: 25px; }
-  .card { width: 90%; max-width: 320px; height: auto; padding: 20px 0; }
-  .name { font-size: 18px; }
-  .role { font-size: 12px; }
-  .avatar { width: 90px; height: 90px; }
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOLLO MODS</title>
+  <link rel="icon" type="image/png" href="img/akala.png">
+  <link href="fuentes/css1.css" rel="stylesheet">
+  <link href="fuentes/css2.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      color: white;
+      font-family: "Orbitronht", sans-serif;
+      padding-bottom: 80px;
+      background-color: #000;
+      position: relative;
+      z-index: 1;
+    }
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.85) contrast(1.05);
+      pointer-events: none;
+    }
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: -1;
+      pointer-events: none;
+    }
+    @media (max-width:768px) {
+      .video-overlay {
+        background: rgba(0, 0, 0, 0.55);
+      }
+      #bg-video {
+        filter: brightness(0.9) contrast(1.1);
+      }
+    }
+    @font-face {
+      font-family: "Ethnocentric";
+      src: url("fonts/Ethnocentric.ttf");
+    }
+    @font-face {
+      font-family: "Orbitronht";
+      src: url("fonts/Orbitronht.ttf");
+    }
+    .hero {
+      text-align: center;
+      padding-top: 60px;
+    }
+    .titulo {
+      font-family: 'Ethnocentric', sans-serif;
+      font-size: 64px;
+      letter-spacing: 6px;
+      color: #fff;
+      text-shadow: 0 0 5px #fff, 0 0 10px #aaa, 0 0 20px #888, 0 0 40px #666, 0 0 80px #444;
+      animation: glowTitulo 2s infinite alternate;
+    }
+    @keyframes glowTitulo {
+      0% {
+        text-shadow: 0 0 10px #aaa;
+      }
+      100% {
+        text-shadow: 0 0 30px #ffffff;
+      }
+    }
+    .subtitulo {
+      margin-top: 12px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: rgba(245, 240, 240, 0.95);
+      font-family: "Orbitronht", sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.4);
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 40px;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+    }
+    .menu-wrapper {
+      width: 100%;
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .menu button {
+      position: relative;
+      background: rgba(20, 20, 30, 0.65);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: "Orbitronht", sans-serif;
+      font-size: 15px;
+      letter-spacing: 2px;
+      border-radius: 60px;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      z-index: 1;
+    }
+    .menu button::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ffffff, #aaaaaa, #ffffff, #888888);
+      border-radius: 62px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -2;
+    }
+    .menu button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 58px;
+      z-index: -1;
+      transition: all 0.3s ease;
+    }
+    .menu button:hover {
+      transform: translateY(-5px) scale(1.02);
+      background: rgba(35, 35, 50, 0.85);
+      letter-spacing: 2.5px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    .menu button:hover::before {
+      opacity: 0.6;
+    }
+    .menu button.activo {
+      background: rgba(255, 255, 255, 0.95);
+      color: #000000;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 8px 20px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2.5px;
+    }
+    .menu button.activo::before {
+      opacity: 0.9;
+      background: linear-gradient(45deg, #ffffff, #dddddd, #ffffff);
+    }
+    .menu button.activo::after {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .menu button:active {
+      transform: translateY(2px) scale(0.98);
+      transition: 0.05s;
+    }
+    @media (max-width:768px) {
+      .menu {
+        gap: 15px;
+      }
+      .menu button {
+        padding: 8px 20px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+      }
+      .titulo {
+        font-size: 48px;
+      }
+      .subtitulo {
+        font-size: 10px;
+        letter-spacing: 1px;
+        padding: 4px 12px;
+      }
+    }
+    .seccion {
+      display: none;
+    }
+    #equipo {
+      display: grid;
+    }
+    .staff {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+      justify-content: center;
+      gap: 35px;
+      max-width: 1200px;
+      margin: 70px auto;
+    }
+    .card {
+      width: 100%;
+      max-width: 360px;
+      height: 280px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      transition: all 0.4s ease;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      border-radius: 16px;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0) 100%);
+      filter: blur(18px);
+      transform: skew(-15deg);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .card:hover::before {
+      opacity: 1;
+      animation: flash 1.4s ease;
+    }
+    @keyframes flash {
+      0% {
+        left: -150%;
+      }
+      100% {
+        left: 150%;
+      }
+    }
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .name {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      font-family: "Ethnocentric", sans-serif;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px black;
+      text-align: center;
+    }
+    .role {
+      color: #ffcc44;
+      font-size: 15px;
+      font-family: "Orbitronht", monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px black;
+      font-weight: bold;
+    }
+    .aportes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      justify-content: center;
+      gap: 30px;
+      width: 95%;
+      max-width: 1100px;
+      margin: 60px auto 0 auto;
+    }
+    .aporte-card {
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #aaa;
+      padding: 15px;
+      text-align: left;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      backdrop-filter: blur(2px);
+    }
+    .aporte-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 25px rgba(255, 255, 255, 0.2), 0 0 40px rgba(150, 150, 150, 0.3);
+    }
+    .aporte-card h3 {
+      color: #ffffff;
+      font-family: "Ethnocentric", sans-serif;
+      margin-top: 6px;
+      margin-bottom: 5px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    .creator {
+      font-family: "Orbitronht", sans-serif;
+      font-weight: 900;
+      color: rgb(255, 80, 80);
+      letter-spacing: 1px;
+      font-size: 14px;
+      margin: 6px 0;
+    }
+    .password {
+      font-family: "Orbitronht", sans-serif;
+      font-weight: 900;
+      color: #d1d1d1;
+      letter-spacing: 0.5px;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+    .verde {
+      color: #00ff00;
+    }
+    .peso {
+      font-family: "Orbitronht", sans-serif;
+      font-weight: 900;
+      color: #d1d1d1;
+      letter-spacing: 0.5px;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+    .rojo {
+      color: red;
+      font-weight: bold;
+    }
+    .video-thumb {
+      position: relative;
+      margin: 12px 0;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .video-thumb img {
+      width: 100%;
+      display: block;
+    }
+    .btn-descarga {
+      display: block;
+      text-align: center;
+      background: linear-gradient(90deg, #2a2a2a, #111111);
+      color: white;
+      text-decoration: none;
+      padding: 14px;
+      font-family: "MiBoton", "Orbitronht", sans-serif;
+      font-size: 18px;
+      letter-spacing: 2px;
+      border: 1px solid #888;
+      transition: all 0.35s ease;
+      border-radius: 40px;
+      margin-top: 8px;
+    }
+    .btn-descarga:hover {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      transform: translateY(-4px) scale(1.02);
+      letter-spacing: 4px;
+      background: linear-gradient(90deg, #555555, #222222);
+    }
+    @media (max-width:768px) {
+      .staff {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      .card {
+        width: 90%;
+        max-width: 320px;
+        height: auto;
+        padding: 20px 0;
+      }
+      .name {
+        font-size: 18px;
+      }
+      .role {
+        font-size: 12px;
+      }
+      .avatar {
+        width: 90px;
+        height: 90px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
 
-<!-- VIDEO DE FONDO -->
-<video autoplay muted loop playsinline id="bg-video">
-  <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
-  Tu navegador no soporta video HTML5.
-</video>
-<div class="video-overlay"></div>
-
-<div class="hero">
-  <div class="titulo"> GOLLO MODS</div>
-  <div class="subtitulo">✦ ADELANTE, ESTO ES MUCHO MÁS QUE UN SITIO, ES TODA UNA COMUNIDAD ✦</div>
-
-  <div class="menu-wrapper">
-    <div class="menu">
-      <button onclick="mostrar('equipo', this)"><span>EQUIPO</span></button>
-      <button onclick="mostrar('aportes', this)"><span>APORTES</span></button>
-      <button onclick="mostrar('datas', this)"><span>DATAS</span></button>
-      <button onclick="mostrar('descargas', this)"><span>APORTES TOP</span></button>
+  <div class="hero">
+    <div class="titulo">GOLLO MODS</div>
+    <div class="subtitulo">✦ ADELANTE, ESTO ES MUCHO MÁS QUE UN SITIO, ES TODA UNA COMUNIDAD ✦</div>
+    <div class="menu-wrapper">
+      <div class="menu">
+        <button onclick="mostrar('equipo', this)">EQUIPO</button>
+        <button onclick="mostrar('aportes', this)">APORTES</button>
+        <button onclick="mostrar('datas', this)">DATAS</button>
+        <button onclick="mostrar('descargas', this)">APORTES TOP</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ====== EQUIPO ====== -->
-<div id="equipo" class="seccion staff">
-  <div class="card">
-    <div class="avatar"><img src="https://files.catbox.moe/7k3zrh.png" alt="Santi"></div>
-    <div class="name">SANTI</div>
-    <div class="role">OWNER</div>
-  </div>
-  <div class="card">
-    <div class="avatar"><img src="https://files.catbox.moe/ih893x.png" alt="Andrew"></div>
-    <div class="name">ANDREW</div>
-    <div class="role">OWNER</div>
-  </div>
-  <div class="card">
-    <div class="avatar"><img src="https://files.catbox.moe/1ialho.png" alt="betrayedd"></div>
-    <div class="name">BETRAYEDD</div>
-    <div class="role">OWNER</div>
-  </div>
-  <div class="card">
-    <div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" alt="Mr Fiel"></div>
-    <div class="name">MR FIEL</div>
-    <div class="role">OWNER</div>
-  </div>
-  <div class="card">
-    <div class="avatar"><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy"></div>
-    <div class="name">SLEEZY</div>
-    <div class="role">SUB OWNER</div>
-  </div>
-</div>
-
-<!-- ====== APORTES ====== -->
-<div id="aportes" class="seccion aportes-grid" style="margin-top:60px;">
-  
-  <div class="aporte-card">
-    <h3>GTA G4</h3>
-    <p class="creator">CREADOR: SANTI</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">235 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4">
-    </div>
-    <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA G4</a>
+  <!-- EQUIPO -->
+  <div id="equipo" class="seccion staff">
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/7k3zrh.png" alt="Santi"></div><div class="name">SANTI</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/ih893x.png" alt="Andrew"></div><div class="name">ANDREW</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/1ialho.png" alt="betrayedd"></div><div class="name">BETRAYEDD</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" alt="Mr Fiel"></div><div class="name">MR FIEL</div><div class="role">OWNER</div></div>
+    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy"></div><div class="name">SLEEZY</div><div class="role">SUB OWNER</div></div>
   </div>
 
-  <div class="aporte-card">
-    <h3>GTA R5</h3>
-    <p class="creator">CREADOR: SANTI</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">240 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5">
-    </div>
-    <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA R5</a>
+  <!-- APORTES -->
+  <div id="aportes" class="seccion aportes-grid">
+    <div class="aporte-card"><h3>GTA G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">235 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA G4</a></div>
+    <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">240 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA R5</a></div>
+    <div class="aporte-card"><h3>Something Nice</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">betraking</span></p><p class="peso">PESO: <span class="rojo">225 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/zs8fid.png" alt="Something Nice"></div><a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga" target="_blank">DESCARGA SOMETHING NICE</a></div>
+    <div class="aporte-card"><h3>King of Kings</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">228 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a></div>
   </div>
 
-  <div class="aporte-card">
-    <h3>Something Nice</h3>
-    <p class="creator">CREADOR: BETRAYEDD</p>
-    <p class="password">CONTRASEÑA: <span class="verde">betraking</span></p>
-    <p class="peso">PESO: <span class="rojo">225 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/zs8fid.png" alt="Something Nice">
-    </div>
-    <a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga" target="_blank">DESCARGA SOMETHING NICE</a>
+  <!-- DATAS -->
+  <div id="datas" class="seccion aportes-grid">
+    <div class="aporte-card"><h3>DATA GOLLO</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">415 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/zc6ttc.jpg" alt="DATA GOLLO"></div><a href="https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file" class="btn-descarga" target="_blank">DESCARGAR DATA GOLLO</a></div>
+    <div class="aporte-card"><h3>RECREACIÓN MARACAS</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">384 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/ic8sdk.jpg" alt="RECREACIÓN MARACAS"></div><a href="https://www.mediafire.com/file/dm5t1b8q22fhn3x/RECRACION+MARACAS.zip/file" class="btn-descarga" target="_blank">DESCARGAR RECREACIÓN MARACAS</a></div>
+    <div class="aporte-card"><h3>ROSE 61</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">387 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/cizo8o.jpg" alt="ROSE 61"></div><a href="https://www.mediafire.com/file/qobo79420jqv16z/ROSE+61.zip/file" class="btn-descarga" target="_blank">DESCARGAR ROSE 61</a></div>
+    <div class="aporte-card"><h3>PERKINES 🪂</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">394 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/6smlda.jpg" alt="PERKINES"></div><a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga" target="_blank">DESCARGAR PERKINES</a></div>
+    <div class="aporte-card"><h3>PURA FANTASÍA</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">395 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/recxwz.jpg" alt="Pura fantasía"></div><a href="https://www.mediafire.com/file/s3gzq1uw2vvyvun/CUANDO+ERA+TODO+PURA+FANTAS%C3%8DA+:wilted_rose:.zip/file" class="btn-descarga" target="_blank">DESCARGAR PURA FANTASÍA</a></div>
   </div>
 
-  <div class="aporte-card">
-    <h3>King of Kings</h3>
-    <p class="creator">CREADOR: BETRAYEDD</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">228 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings">
-    </div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a>
+  <!-- APORTES TOP -->
+  <div id="descargas" class="seccion aportes-grid">
+    <div class="aporte-card"><h3>King of Kings</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">228 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a></div>
   </div>
 
-</div>
-
-<!-- ====== DATAS (DATA GOLLO + RECREACIÓN MARACAS + ROSE 61 + PERKINES + PURA FANTASÍA) ====== -->
-<div id="datas" class="seccion aportes-grid" style="margin-top:60px;">
-  
-  <!-- DATA GOLLO -->
-  <div class="aporte-card">
-    <h3>DATA GOLLO</h3>
-    <p class="creator">CREADOR: SANTI</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">415 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/zc6ttc.jpg" alt="DATA GOLLO">
-    </div>
-    <a href="https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file" class="btn-descarga" target="_blank">DESCARGAR DATA GOLLO</a>
-  </div>
-
-  <!-- RECREACIÓN MARACAS (NUEVA) -->
-  <div class="aporte-card">
-    <h3>RECREACIÓN MARACAS</h3>
-    <p class="creator">CREADOR: SANTI</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">384 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/ic8sdk.jpg" alt="RECREACIÓN MARACAS">
-    </div>
-    <a href="https://www.mediafire.com/file/dm5t1b8q22fhn3x/RECRACION+MARACAS.zip/file" class="btn-descarga" target="_blank">DESCARGAR RECREACIÓN MARACAS</a>
-  </div>
-
-  <!-- ROSE 61 (NUEVA) -->
-  <div class="aporte-card">
-    <h3>ROSE 61</h3>
-    <p class="creator">CREADOR: SANTI</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">387 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/cizo8o.jpg" alt="ROSE 61">
-    </div>
-    <a href="https://www.mediafire.com/file/qobo79420jqv16z/ROSE+61.zip/file" class="btn-descarga" target="_blank">DESCARGAR ROSE 61</a>
-  </div>
-
-  <!-- PERKINES -->
-  <div class="aporte-card">
-    <h3>PERKINES 🪂</h3>
-    <p class="creator">CREADOR: MR FIEL</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">394 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/6smlda.jpg" alt="PERKINES">
-    </div>
-    <a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga" target="_blank">DESCARGAR PERKINES</a>
-  </div>
-
-  <!-- PURA FANTASÍA -->
-  <div class="aporte-card">
-    <h3>PURA FANTASÍA</h3>
-    <p class="creator">CREADOR: MR FIEL</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">395 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/recxwz.jpg" alt="Pura fantasía">
-    </div>
-    <a href="https://www.mediafire.com/file/s3gzq1uw2vvyvun/CUANDO+ERA+TODO+PURA+FANTAS%C3%8DA+:wilted_rose:.zip/file" class="btn-descarga" target="_blank">DESCARGAR PURA FANTASÍA</a>
-  </div>
-
-</div>
-
-<!-- ====== APORTES TOP - SOLO KING OF KINGS ====== -->
-<div id="descargas" class="seccion aportes-grid" style="margin-top:60px;">
-  
-  <div class="aporte-card">
-    <h3>King of Kings</h3>
-    <p class="creator">CREADOR: BETRAYEDD</p>
-    <p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p>
-    <p class="peso">PESO: <span class="rojo">228 MB</span></p>
-    <div class="video-thumb">
-      <img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings">
-    </div>
-    <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a>
-  </div>
-
-</div>
-
-<script>
-function mostrar(id, boton) {
-  document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
-  const seccionMostrar = document.getElementById(id);
-  if (seccionMostrar) {
-    if (id === 'equipo' || id === 'aportes' || id === 'datas' || id === 'descargas') {
-      seccionMostrar.style.display = "grid";
-    } else {
-      seccionMostrar.style.display = "block";
+  <script>
+    function mostrar(id, boton) {
+      document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
+      const seccion = document.getElementById(id);
+      if (seccion) seccion.style.display = "grid";
+      document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
+      if (boton) boton.classList.add("activo");
     }
-  }
-  document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-  if (boton) boton.classList.add("activo");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
-  const equipoSeccion = document.getElementById("equipo");
-  if (equipoSeccion) equipoSeccion.style.display = "grid";
-  const botones = document.querySelectorAll(".menu button");
-  if (botones.length > 0) {
-    botones.forEach(b => b.classList.remove("activo"));
-    botones[0].classList.add("activo");
-  }
-});
-</script>
-
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
+      document.getElementById("equipo").style.display = "grid";
+      document.querySelector(".menu button").classList.add("activo");
+    });
+  </script>
 </body>
 </html>
