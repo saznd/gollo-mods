@@ -410,13 +410,74 @@
         height: 90px;
       }
     }
+
+    /* Reproductor de música flotante */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 12px 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+    .music-player:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
+    }
+    .music-player audio {
+      width: 180px;
+      height: 32px;
+      border-radius: 20px;
+      background: transparent;
+    }
+    .music-player audio::-webkit-media-controls-panel {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .music-player audio::-webkit-media-controls-play-button {
+      filter: invert(1);
+    }
+    .music-player .player-icon {
+      color: #fff;
+      font-size: 18px;
+      opacity: 0.7;
+    }
+    @media (max-width:600px) {
+      .music-player {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        border-radius: 30px;
+        gap: 8px;
+      }
+      .music-player audio {
+        width: 120px;
+        height: 28px;
+      }
+    }
   </style>
 </head>
 <body>
   <video autoplay muted loop playsinline id="bg-video">
-    <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
+    <source src="https://files.catbox.moe/ddu5ym.mp4" type="video/mp4">
   </video>
   <div class="video-overlay"></div>
+
+  <!-- Reproductor de música -->
+  <div class="music-player">
+    <span class="player-icon">🎵</span>
+    <audio id="bg-music" loop>
+      <source src="https://files.catbox.moe/6tk1rg.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+  </div>
 
   <div class="hero">
     <div class="titulo">GOLLO MODS</div>
@@ -470,14 +531,4 @@
       document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
       const seccion = document.getElementById(id);
       if (seccion) seccion.style.display = "grid";
-      document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-      if (boton) boton.classList.add("activo");
-    }
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
-      document.getElementById("equipo").style.display = "grid";
-      document.querySelector(".menu button").classList.add("activo");
-    });
-  </script>
-</body>
-</html>
+      document.querySelectorAll(".menu button").forEach(b => b.classList.remove("ac
