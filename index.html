@@ -33,13 +33,14 @@
       z-index: 0;
     }
 
+    /* Overlay más claro para que se vea mejor el video */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.45);
       z-index: 1;
     }
 
@@ -56,17 +57,17 @@
       font-family: 'Ethnocentric', sans-serif;
       font-size: clamp(2.5rem, 10vw, 4.5rem);
       text-align: center;
-      text-shadow: 0 0 20px #a020f0, 0 0 40px #8000ff;
+      text-shadow: 0 0 20px #ffffff, 0 0 40px #888888;
       animation: pulse 2s infinite alternate;
       padding: 30px 0 10px;
     }
 
     @keyframes pulse {
       0% {
-        text-shadow: 0 0 10px #a020f0;
+        text-shadow: 0 0 10px #cccccc;
       }
       100% {
-        text-shadow: 0 0 30px #ff00ff;
+        text-shadow: 0 0 30px #ffffff;
       }
     }
 
@@ -90,40 +91,40 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.70);
       padding: 16px 20px;
       border-radius: 12px;
-      border: 1px solid #a020f0;
-      box-shadow: 0 0 30px rgba(160, 32, 240, 0.3);
+      border: 1px solid #888;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.10);
     }
 
     .menu button {
-      background: linear-gradient(135deg, #a020f0, #4b0082);
+      background: linear-gradient(135deg, #444, #222);
       color: #fff;
-      border: 1px solid #888;
-      padding: 14px 22px;
+      border: 1px solid #666;
+      padding: 12px 18px;
       font-family: 'Orbitronht', sans-serif;
       font-weight: bold;
-      font-size: clamp(0.7rem, 1.1vw, 0.9rem);
+      font-size: clamp(0.65rem, 1.1vw, 0.85rem);
       text-transform: uppercase;
       cursor: pointer;
       transition: 0.3s;
       border-radius: 6px;
       letter-spacing: 2px;
-      min-width: 100px;
+      min-width: 80px;
     }
 
     .menu button:hover,
     .menu button.activo {
-      background: linear-gradient(135deg, #c94cff, #6a00b3);
-      box-shadow: 0 0 20px #a020f0;
+      background: linear-gradient(135deg, #777, #333);
+      box-shadow: 0 0 20px #aaa;
       transform: scale(1.05);
     }
 
     /* ===== SECCIONES ===== */
     .seccion {
       display: none;
-      padding: 30px 0;
+      padding: 20px 0;
     }
 
     #equipo {
@@ -134,35 +135,39 @@
     .staff {
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      max-width: 600px;
+      gap: 20px;
+      max-width: 500px;
       margin: 0 auto;
       width: 100%;
     }
 
+    /* Tarjetas del staff mucho más transparentes */
     .card {
-      background: rgba(0, 0, 0, 0.88);
-      border: 2px solid #aaa;
-      border-radius: 20px;
-      padding: 40px 30px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid #999;
+      border-radius: 16px;
+      padding: 25px 20px;
       text-align: center;
       transition: 0.3s;
       width: 100%;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 0 40px rgba(160, 32, 240, 0.6);
-      border-color: #a020f0;
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 30px rgba(200, 200, 200, 0.25);
+      border-color: #ccc;
+      background: rgba(0, 0, 0, 0.65);
     }
 
     .avatar {
-      width: 140px;
-      height: 140px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 20px;
-      border: 4px solid #a020f0;
+      margin: 0 auto 15px;
+      border: 3px solid #aaa;
     }
 
     .avatar img {
@@ -173,18 +178,19 @@
 
     .name {
       font-family: 'Ethnocentric', sans-serif;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
     }
 
     .role {
       color: #ff4444;
-      font-size: 1.1rem;
+      font-size: 1rem;
       text-transform: uppercase;
       font-family: 'Orbitronht', monospace;
       font-weight: bold;
       letter-spacing: 4px;
-      text-shadow: 0 0 20px #ff0000;
+      text-shadow: 0 0 20px #ff0000, 0 0 10px rgba(0,0,0,0.9);
       margin-top: 5px;
     }
 
@@ -192,83 +198,92 @@
     .aportes-grid {
       display: flex;
       flex-direction: column;
-      gap: 45px;
-      margin: 20px auto 0;
-      max-width: 650px;
+      gap: 30px;
+      margin: 10px auto 0;
+      max-width: 550px;
       width: 100%;
     }
 
+    /* Tarjetas de aportes más transparentes */
     .aporte-card {
-      background: rgba(0, 0, 0, 0.92);
-      border: 2px solid #aaa;
-      border-radius: 20px;
-      padding: 35px 30px 35px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid #999;
+      border-radius: 16px;
+      padding: 25px 20px 25px;
       transition: 0.3s;
       width: 100%;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .aporte-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 0 45px rgba(160, 32, 240, 0.5);
-      border-color: #a020f0;
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 0 30px rgba(200, 200, 200, 0.25);
+      border-color: #ccc;
+      background: rgba(0, 0, 0, 0.65);
     }
 
     .aporte-card h3 {
       font-family: 'Ethnocentric', sans-serif;
       color: #ff4444;
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
       text-align: center;
+      text-shadow: 0 0 15px rgba(0,0,0,0.9);
     }
 
     .aporte-card p {
-      font-size: 1.1rem;
-      margin: 8px 0;
+      font-size: 1rem;
+      margin: 6px 0;
       font-family: 'Orbitronht', sans-serif;
       text-align: center;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
     }
 
     .verde {
       color: #0f0;
+      text-shadow: 0 0 10px rgba(0,0,0,0.9);
     }
     .rojo {
       color: #f44;
       font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.9);
     }
 
     .video-thumb {
-      margin: 20px 0;
+      margin: 15px 0;
       border: 2px solid #555;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
     }
 
     .video-thumb img {
       width: 100%;
       display: block;
-      min-height: 200px;
+      min-height: 160px;
       object-fit: cover;
     }
 
     .btn-descarga {
       display: block;
       text-align: center;
-      background: linear-gradient(90deg, #a020f0, #4b0082);
+      background: linear-gradient(90deg, rgba(80,80,80,0.85), rgba(30,30,30,0.85));
       color: #fff;
       text-decoration: none;
-      padding: 20px;
+      padding: 16px;
       border-radius: 10px;
       font-family: 'Orbitronht', sans-serif;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       letter-spacing: 3px;
       transition: 0.3s;
-      border: 2px solid #888;
+      border: 2px solid #777;
+      backdrop-filter: blur(2px);
     }
 
     .btn-descarga:hover {
-      background: linear-gradient(90deg, #c94cff, #6a00b3);
-      box-shadow: 0 0 30px #a020f0;
+      background: linear-gradient(90deg, rgba(120,120,120,0.9), rgba(60,60,60,0.9));
+      box-shadow: 0 0 25px #aaa;
       transform: scale(1.04);
     }
 
@@ -280,7 +295,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.85);
       padding: 12px 20px;
       border-radius: 50px;
       border: 1px solid #888;
@@ -348,35 +363,35 @@
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .menu button {
-        padding: 12px 16px;
-        font-size: 0.65rem;
-        min-width: 70px;
+        padding: 10px 14px;
+        font-size: 0.6rem;
+        min-width: 60px;
       }
       .card {
-        padding: 30px 20px;
+        padding: 20px 15px;
       }
       .avatar {
-        width: 110px;
-        height: 110px;
+        width: 90px;
+        height: 90px;
       }
       .name {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
       }
       .role {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
       .aporte-card {
-        padding: 25px 18px;
+        padding: 20px 15px;
       }
       .aporte-card h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       .aporte-card p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
       .btn-descarga {
-        font-size: 1rem;
-        padding: 16px;
+        font-size: 0.9rem;
+        padding: 14px;
       }
       .barra {
         width: 80px;
@@ -398,25 +413,28 @@
       .contenido {
         padding: 15px 10px 100px;
       }
+      .staff {
+        max-width: 100%;
+      }
       .card {
-        padding: 20px 15px;
+        padding: 16px 12px;
       }
       .avatar {
-        width: 90px;
-        height: 90px;
+        width: 75px;
+        height: 75px;
       }
       .name {
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
       .aporte-card {
-        padding: 18px 12px;
+        padding: 16px 10px;
       }
       .aporte-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       .btn-descarga {
-        font-size: 0.85rem;
-        padding: 14px;
+        font-size: 0.8rem;
+        padding: 12px;
       }
       .barra {
         width: 60px;
