@@ -8,476 +8,619 @@
   <link href="fuentes/css1.css" rel="stylesheet">
   <link href="fuentes/css2.css" rel="stylesheet">
   <style>
+    /* ===== RESET Y BASE ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      margin: 0;
-      color: white;
-      font-family: "Orbitronht", sans-serif;
-      padding-bottom: 80px;
-      background-color: #000;
-      position: relative;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      overflow-x: hidden;
+    }
+
+    /* ===== VIDEO FONDO ===== */
+    #video-fondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
       z-index: 1;
     }
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -2;
-      filter: brightness(0.85) contrast(1.05);
-      pointer-events: none;
+
+    .contenido {
+      position: relative;
+      z-index: 2;
+      padding: 30px 20px 120px;
+      max-width: 800px;
+      margin: 0 auto;
     }
-    .video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: -1;
-      pointer-events: none;
-    }
-    @media (max-width:768px) {
-      .video-overlay {
-        background: rgba(0, 0, 0, 0.55);
-      }
-      #bg-video {
-        filter: brightness(0.9) contrast(1.1);
-      }
-    }
-    @font-face {
-      font-family: "Ethnocentric";
-      src: url("fonts/Ethnocentric.ttf");
-    }
-    @font-face {
-      font-family: "Orbitronht";
-      src: url("fonts/Orbitronht.ttf");
-    }
-    .hero {
-      text-align: center;
-      padding-top: 60px;
-    }
+
+    /* ===== TEXTO Y TÍTULOS ===== */
     .titulo {
       font-family: 'Ethnocentric', sans-serif;
-      font-size: 64px;
-      letter-spacing: 6px;
-      color: #fff;
-      text-shadow: 0 0 5px #fff, 0 0 10px #aaa, 0 0 20px #888, 0 0 40px #666, 0 0 80px #444;
-      animation: glowTitulo 2s infinite alternate;
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      text-align: center;
+      text-shadow: 0 0 20px #a020f0, 0 0 40px #8000ff;
+      animation: pulse 2s infinite alternate;
+      padding: 30px 0 10px;
     }
-    @keyframes glowTitulo {
+
+    @keyframes pulse {
       0% {
-        text-shadow: 0 0 10px #aaa;
+        text-shadow: 0 0 10px #a020f0;
       }
       100% {
-        text-shadow: 0 0 30px #ffffff;
+        text-shadow: 0 0 30px #ff00ff;
       }
     }
+
     .subtitulo {
-      margin-top: 12px;
-      font-size: 14px;
-      letter-spacing: 2px;
-      color: rgba(245, 240, 240, 0.95);
-      font-family: "Orbitronht", sans-serif;
-      font-weight: 400;
-      text-transform: uppercase;
-      background: rgba(0, 0, 0, 0.4);
-      display: inline-block;
-      padding: 6px 18px;
-      border-radius: 40px;
-      backdrop-filter: blur(3px);
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      font-size: clamp(0.9rem, 2vw, 1.3rem);
+      color: #ccc;
+      margin-bottom: 30px;
+      letter-spacing: 3px;
     }
+
+    /* ===== MENÚ ===== */
     .menu-wrapper {
-      width: 100%;
-      margin-top: 40px;
       display: flex;
       justify-content: center;
-      padding: 0;
+      margin: 30px 0;
     }
+
     .menu {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid #a020f0;
+      box-shadow: 0 0 30px rgba(160, 32, 240, 0.3);
     }
+
     .menu button {
-      position: relative;
-      background: rgba(20, 20, 30, 0.65);
-      backdrop-filter: blur(10px);
-      color: white;
-      border: none;
-      padding: 12px 32px;
-      cursor: pointer;
+      background: linear-gradient(135deg, #a020f0, #4b0082);
+      color: #fff;
+      border: 1px solid #888;
+      padding: 14px 22px;
+      font-family: 'Orbitronht', sans-serif;
       font-weight: bold;
+      font-size: clamp(0.7rem, 1.1vw, 0.9rem);
       text-transform: uppercase;
-      font-family: "Orbitronht", sans-serif;
-      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 6px;
       letter-spacing: 2px;
-      border-radius: 60px;
-      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      z-index: 1;
+      min-width: 100px;
     }
-    .menu button::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #ffffff, #aaaaaa, #ffffff, #888888);
-      border-radius: 62px;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: -2;
-    }
-    .menu button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 58px;
-      z-index: -1;
-      transition: all 0.3s ease;
-    }
-    .menu button:hover {
-      transform: translateY(-5px) scale(1.02);
-      background: rgba(35, 35, 50, 0.85);
-      letter-spacing: 2.5px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-    .menu button:hover::before {
-      opacity: 0.6;
-    }
+
+    .menu button:hover,
     .menu button.activo {
-      background: rgba(255, 255, 255, 0.95);
-      color: #000000;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 8px 20px rgba(0, 0, 0, 0.3);
-      letter-spacing: 2.5px;
+      background: linear-gradient(135deg, #c94cff, #6a00b3);
+      box-shadow: 0 0 20px #a020f0;
+      transform: scale(1.05);
     }
-    .menu button.activo::before {
-      opacity: 0.9;
-      background: linear-gradient(45deg, #ffffff, #dddddd, #ffffff);
-    }
-    .menu button.activo::after {
-      background: rgba(255, 255, 255, 0.2);
-    }
-    .menu button:active {
-      transform: translateY(2px) scale(0.98);
-      transition: 0.05s;
-    }
-    @media (max-width:768px) {
-      .menu {
-        gap: 15px;
-      }
-      .menu button {
-        padding: 8px 20px;
-        font-size: 12px;
-        letter-spacing: 1.5px;
-      }
-      .titulo {
-        font-size: 48px;
-      }
-      .subtitulo {
-        font-size: 10px;
-        letter-spacing: 1px;
-        padding: 4px 12px;
-      }
-    }
+
+    /* ===== SECCIONES ===== */
     .seccion {
       display: none;
+      padding: 30px 0;
     }
+
     #equipo {
       display: grid;
     }
+
+    /* ===== STAFF - UNA DEBAJO DE OTRA ===== */
     .staff {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
-      justify-content: center;
-      gap: 35px;
-      max-width: 1200px;
-      margin: 70px auto;
-    }
-    .card {
-      width: 100%;
-      max-width: 360px;
-      height: 280px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-      transition: all 0.4s ease;
-      gap: 18px;
-      position: relative;
-      overflow: hidden;
+      gap: 30px;
+      max-width: 600px;
       margin: 0 auto;
-      border-radius: 16px;
+      width: 100%;
     }
+
+    .card {
+      background: rgba(0, 0, 0, 0.88);
+      border: 2px solid #aaa;
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: 0.3s;
+      width: 100%;
+    }
+
     .card:hover {
-      transform: translateY(-8px);
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0 40px rgba(160, 32, 240, 0.6);
+      border-color: #a020f0;
     }
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -150%;
-      width: 120%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0) 100%);
-      filter: blur(18px);
-      transform: skew(-15deg);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .card:hover::before {
-      opacity: 1;
-      animation: flash 1.4s ease;
-    }
-    @keyframes flash {
-      0% {
-        left: -150%;
-      }
-      100% {
-        left: 150%;
-      }
-    }
+
     .avatar {
-      width: 110px;
-      height: 110px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.7);
-      background: rgba(0, 0, 0, 0.4);
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      margin: 0 auto 20px;
+      border: 4px solid #a020f0;
     }
+
     .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .name {
-      color: white;
-      font-size: 22px;
-      font-weight: bold;
-      font-family: "Ethnocentric", sans-serif;
+      font-family: 'Ethnocentric', sans-serif;
+      font-size: 1.8rem;
       letter-spacing: 2px;
-      text-shadow: 0 0 8px black;
+    }
+
+    .role {
+      color: #ff4444;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-family: 'Orbitronht', monospace;
+      font-weight: bold;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px #ff0000;
+      margin-top: 5px;
+    }
+
+    /* ===== APORTES, DATAS, DESCARGA Y VENTA ===== */
+    .aportes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 45px;
+      margin: 20px auto 0;
+      max-width: 650px;
+      width: 100%;
+    }
+
+    .aporte-card {
+      background: rgba(0, 0, 0, 0.92);
+      border: 2px solid #aaa;
+      border-radius: 20px;
+      padding: 35px 30px 35px;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .aporte-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 0 45px rgba(160, 32, 240, 0.5);
+      border-color: #a020f0;
+    }
+
+    .aporte-card h3 {
+      font-family: 'Ethnocentric', sans-serif;
+      color: #ff4444;
+      font-size: 2rem;
+      margin-bottom: 10px;
       text-align: center;
     }
-    .role {
-      color: #ffcc44;
-      font-size: 15px;
-      font-family: "Orbitronht", monospace;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 0 4px black;
-      font-weight: bold;
+
+    .aporte-card p {
+      font-size: 1.1rem;
+      margin: 8px 0;
+      font-family: 'Orbitronht', sans-serif;
+      text-align: center;
     }
-    .aportes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
-      justify-content: center;
-      gap: 30px;
-      width: 95%;
-      max-width: 1100px;
-      margin: 60px auto 0 auto;
-    }
-    .aporte-card {
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px solid #aaa;
-      padding: 15px;
-      text-align: left;
-      transition: all 0.4s ease;
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      backdrop-filter: blur(2px);
-    }
-    .aporte-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 25px rgba(255, 255, 255, 0.2), 0 0 40px rgba(150, 150, 150, 0.3);
-    }
-    .aporte-card h3 {
-      color: #ffffff;
-      font-family: "Ethnocentric", sans-serif;
-      margin-top: 6px;
-      margin-bottom: 5px;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    }
-    .creator {
-      font-family: "Orbitronht", sans-serif;
-      font-weight: 900;
-      color: rgb(255, 80, 80);
-      letter-spacing: 1px;
-      font-size: 14px;
-      margin: 6px 0;
-    }
-    .password {
-      font-family: "Orbitronht", sans-serif;
-      font-weight: 900;
-      color: #d1d1d1;
-      letter-spacing: 0.5px;
-      font-size: 13px;
-      margin: 4px 0;
-    }
+
     .verde {
-      color: #00ff00;
-    }
-    .peso {
-      font-family: "Orbitronht", sans-serif;
-      font-weight: 900;
-      color: #d1d1d1;
-      letter-spacing: 0.5px;
-      font-size: 13px;
-      margin: 4px 0;
+      color: #0f0;
     }
     .rojo {
-      color: red;
+      color: #f44;
       font-weight: bold;
     }
+
     .video-thumb {
-      position: relative;
-      margin: 12px 0;
-      border: 1px solid #aaa;
-      border-radius: 8px;
+      margin: 20px 0;
+      border: 2px solid #555;
+      border-radius: 12px;
       overflow: hidden;
     }
+
     .video-thumb img {
       width: 100%;
       display: block;
+      min-height: 200px;
+      object-fit: cover;
     }
+
     .btn-descarga {
       display: block;
       text-align: center;
-      background: linear-gradient(90deg, #2a2a2a, #111111);
-      color: white;
+      background: linear-gradient(90deg, #a020f0, #4b0082);
+      color: #fff;
       text-decoration: none;
-      padding: 14px;
-      font-family: "MiBoton", "Orbitronht", sans-serif;
-      font-size: 18px;
-      letter-spacing: 2px;
-      border: 1px solid #888;
-      transition: all 0.35s ease;
-      border-radius: 40px;
-      margin-top: 8px;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Orbitronht', sans-serif;
+      font-weight: bold;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      transition: 0.3s;
+      border: 2px solid #888;
     }
+
     .btn-descarga:hover {
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-      transform: translateY(-4px) scale(1.02);
-      letter-spacing: 4px;
-      background: linear-gradient(90deg, #555555, #222222);
+      background: linear-gradient(90deg, #c94cff, #6a00b3);
+      box-shadow: 0 0 30px #a020f0;
+      transform: scale(1.04);
     }
-    @media (max-width:768px) {
-      .staff {
-        grid-template-columns: 1fr;
-        gap: 25px;
+
+    /* ===== REPRODUCTOR MÚSICA ===== */
+    .music-ui {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 0, 0, 0.92);
+      padding: 12px 20px;
+      border-radius: 50px;
+      border: 1px solid #888;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+
+    #btn-music {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff3333, #600000);
+      color: #fff;
+      border: 1px solid #aaa;
+      cursor: pointer;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    #btn-music:hover {
+      transform: scale(1.15);
+    }
+
+    .barra {
+      width: 150px;
+      height: 8px;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progreso {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff4444, #ff8888);
+      transition: width 0.1s linear;
+    }
+
+    /* ===== INTRO ===== */
+    #intro {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: clamp(3rem, 10vw, 5rem);
+      font-family: 'Ethnocentric', sans-serif;
+      z-index: 99999;
+      animation: fadeOut 2.5s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .menu button {
+        padding: 12px 16px;
+        font-size: 0.65rem;
+        min-width: 70px;
       }
       .card {
-        width: 90%;
-        max-width: 320px;
-        height: auto;
-        padding: 20px 0;
+        padding: 30px 20px;
+      }
+      .avatar {
+        width: 110px;
+        height: 110px;
       }
       .name {
-        font-size: 18px;
+        font-size: 1.4rem;
       }
       .role {
-        font-size: 12px;
+        font-size: 0.9rem;
+      }
+      .aporte-card {
+        padding: 25px 18px;
+      }
+      .aporte-card h3 {
+        font-size: 1.5rem;
+      }
+      .aporte-card p {
+        font-size: 0.9rem;
+      }
+      .btn-descarga {
+        font-size: 1rem;
+        padding: 16px;
+      }
+      .barra {
+        width: 80px;
+      }
+      .music-ui {
+        padding: 8px 14px;
+        bottom: 15px;
+        right: 15px;
+        gap: 10px;
+      }
+      #btn-music {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .contenido {
+        padding: 15px 10px 100px;
+      }
+      .card {
+        padding: 20px 15px;
       }
       .avatar {
         width: 90px;
         height: 90px;
       }
+      .name {
+        font-size: 1.1rem;
+      }
+      .aporte-card {
+        padding: 18px 12px;
+      }
+      .aporte-card h3 {
+        font-size: 1.2rem;
+      }
+      .btn-descarga {
+        font-size: 0.85rem;
+        padding: 14px;
+      }
+      .barra {
+        width: 60px;
+      }
+      .music-ui {
+        padding: 6px 10px;
+        bottom: 10px;
+        right: 10px;
+      }
+      #btn-music {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline id="bg-video">
-    <source src="https://files.catbox.moe/jrmbnv.mp4" type="video/mp4">
-  </video>
-  <div class="video-overlay"></div>
 
-  <div class="hero">
+  <!-- VIDEO FONDO -->
+  <video autoplay muted loop id="video-fondo" playsinline>
+    <source src="https://files.catbox.moe/vywh51.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <!-- CONTENIDO -->
+  <div class="contenido">
+
+    <!-- AUDIO -->
+    <audio id="musica" loop autoplay>
+      <source src="https://files.catbox.moe/k8v56d.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- HEADER -->
     <div class="titulo">GOLLO MODS</div>
-    <div class="subtitulo">✦ ADELANTE, ESTO ES MUCHO MÁS QUE UN SITIO, ES TODA UNA COMUNIDAD ✦</div>
+    <div class="subtitulo">LOS MEJORES CON LOS MEJORES</div>
+
+    <!-- MENÚ -->
     <div class="menu-wrapper">
       <div class="menu">
-        <button onclick="mostrar('equipo', this)">EQUIPO</button>
+        <button onclick="mostrar('equipo', this)" class="activo">EQUIPO</button>
         <button onclick="mostrar('aportes', this)">APORTES</button>
         <button onclick="mostrar('datas', this)">DATAS</button>
         <button onclick="mostrar('descargas', this)">APORTES TOP</button>
+        <button onclick="mostrar('venta', this)">APORTES EN VENTA</button>
       </div>
     </div>
+
+    <!-- SECCIÓN EQUIPO -->
+    <div id="equipo" class="seccion staff">
+      
+      <div class="card">
+        <div class="avatar"><img src="https://files.catbox.moe/7k3zrh.png" alt="Santi"></div>
+        <div class="name">SANTI</div>
+        <div class="role">OWNER</div>
+      </div>
+
+      <div class="card">
+        <div class="avatar"><img src="https://files.catbox.moe/ih893x.png" alt="Andrew"></div>
+        <div class="name">ANDREW</div>
+        <div class="role">OWNER</div>
+      </div>
+
+      <div class="card">
+        <div class="avatar"><img src="https://files.catbox.moe/1ialho.png" alt="Betrayedd"></div>
+        <div class="name">BETRAYEDD</div>
+        <div class="role">OWNER</div>
+      </div>
+
+      <div class="card">
+        <div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" alt="Alexander"></div>
+        <div class="name">ALEXANDER</div>
+        <div class="role">OWNER</div>
+      </div>
+
+      <div class="card">
+        <div class="avatar"><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy"></div>
+        <div class="name">SLEEZY</div>
+        <div class="role">OWNER</div>
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN APORTES -->
+    <div id="aportes" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>GTA G4</h3>
+        <p>CREADOR: SANTI</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">235MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" alt="G4"></div>
+        <a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga">INSTALAR</a>
+      </div>
+
+       <div class="aporte-card">
+        <h3>GTA R5</h3>
+        <p>CREADOR: SANTI</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">240MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" alt="R5"></div>
+        <a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga">INSTALAR</a>
+      </div>
+
+       <div class="aporte-card">
+        <h3>COME BACK</h3>
+        <p>CREADOR: BETRAYEDD</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">247MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/q4guzr.png" alt="COME BACK"></div>
+        <a href="https://www.mediafire.com/file/iqc2gbnqh4m4g9s/come+back.rar/file" class="btn-descarga">INSTALAR</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DATAS -->
+    <div id="datas" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>KING OF KINGS</h3>
+        <p>CREADOR: ALEXANDER</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">388MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/xonaqj.png" alt="KING OF KINGS"></div>
+        <a href="https://www.mediafire.com/file/gve6esjeawn85qw/KING+OF+KINGS+%E2%9B%B9%EF%B8%8F.zip/file" class="btn-descarga">INSTALAR</a>
+      </div>
+
+        <div class="aporte-card">
+        <h3>DATA SANTI</h3>
+        <p>CREADOR: SANTI</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">415MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/j6agxt.jpg" alt="DATA SANTI"></div>
+        <a href="https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file" class="btn-descarga">INSTALAR</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN APORTES TOP -->
+    <div id="descargas" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>KING OF KINGS</h3>
+        <p>CREADOR: BETRAYEDD</p>
+        <p>CONTRASEÑA: <span class="verde">NINGUNA</span></p>
+        <p>PESO: <span class="rojo">228MB</span></p>
+        <div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" alt="Cry Aport"></div>
+        <a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga">INSTALAR</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN APORTES EN VENTA -->
+    <div id="venta" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>PROXIMAMENTE</h3>
+        <p>CREADOR: NADIE</p>
+        <p>PRECIO: <span class="rojo">PROXIMAMENTE</span></p>
+        <div class="video-thumb"><img src="https://via.placeholder.com/600x300/1a1a1a/444?text=PRÓXIMAMENTE" alt="PROXIMAMENTE"></div>
+        <a href="#" target="_blank" class="btn-descarga">💬 COMPRAR</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- EQUIPO -->
-  <div id="equipo" class="seccion staff">
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/7k3zrh.png" alt="Santi"></div><div class="name">SANTI</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/ih893x.png" alt="Andrew"></div><div class="name">ANDREW</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/1ialho.png" alt="betrayedd"></div><div class="name">BETRAYEDD</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/sjrh0t.png" alt="Mr Fiel"></div><div class="name">MR FIEL</div><div class="role">OWNER</div></div>
-    <div class="card"><div class="avatar"><img src="https://files.catbox.moe/7fck7p.png" alt="Sleezy"></div><div class="name">SLEEZY</div><div class="role">SUB OWNER</div></div>
-  </div> 
-
-  <!-- APORTES -->
-  <div id="aportes" class="seccion aportes-grid">
-    <div class="aporte-card"><h3>GTA G4</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">235 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/c5ddxw.png" alt="GTA G4"></div><a href="https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA G4</a></div>
-    <div class="aporte-card"><h3>GTA R5</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">240 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/p20yd6.png" alt="GTA R5"></div><a href="https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file" class="btn-descarga" target="_blank">DESCARGA GTA R5</a></div>
-    <div class="aporte-card"><h3>Something Nice</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">betraking</span></p><p class="peso">PESO: <span class="rojo">225 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/zs8fid.png" alt="Something Nice"></div><a href="https://www.mediafire.com/file/j4oviji1pk4t7fk/somthing+nice.rar/file" class="btn-descarga" target="_blank">DESCARGA SOMETHING NICE</a></div>
-    <div class="aporte-card"><h3>King of Kings</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">228 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a></div>
-    <div class="aporte-card"><h3>come back</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">247 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/q4guzr.png" alt="come back"></div><a href="https://www.mediafire.com/file/iqc2gbnqh4m4g9s/come+back.rar/file" class="btn-descarga" target="_blank">DESCARGA COME BACK</a></div>
+  <!-- REPRODUCTOR MÚSICA -->
+  <div class="music-ui">
+    <button id="btn-music">⏸</button>
+    <div class="barra"><div class="progreso"></div></div>
   </div>
 
-  <!-- DATAS -->
-  <div id="datas" class="seccion aportes-grid">
-    <div class="aporte-card"><h3>DATA GOLLO</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">415 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/zc6ttc.jpg" alt="DATA GOLLO"></div><a href="https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file" class="btn-descarga" target="_blank">DESCARGAR DATA GOLLO</a></div>
-    <div class="aporte-card"><h3>RECREACIÓN MARACAS</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">384 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/ic8sdk.jpg" alt="RECREACIÓN MARACAS"></div><a href="https://www.mediafire.com/file/dm5t1b8q22fhn3x/RECRACION+MARACAS.zip/file" class="btn-descarga" target="_blank">DESCARGAR RECREACIÓN MARACAS</a></div>
-    <div class="aporte-card"><h3>ROSE 61</h3><p class="creator">CREADOR: SANTI</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">387 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/cizo8o.jpg" alt="ROSE 61"></div><a href="https://www.mediafire.com/file/qobo79420jqv16z/ROSE+61.zip/file" class="btn-descarga" target="_blank">DESCARGAR ROSE 61</a></div>
-    <div class="aporte-card"><h3>PERKINES 🪂</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">394 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/6smlda.jpg" alt="PERKINES"></div><a href="https://www.mediafire.com/file/b5upcmc8q1d95xf/PERKINES+%F0%9F%AA%82.zip/file" class="btn-descarga" target="_blank">DESCARGAR PERKINES</a></div>
-    <div class="aporte-card"><h3>PURA FANTASÍA</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">395 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/recxwz.jpg" alt="Pura fantasía"></div><a href="https://www.mediafire.com/file/s3gzq1uw2vvyvun/CUANDO+ERA+TODO+PURA+FANTAS%C3%8DA+:wilted_rose:.zip/file" class="btn-descarga" target="_blank">DESCARGAR PURA FANTASÍA</a></div>
-    <div class="aporte-card"><h3>ABORRECIDO</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">386 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/5tn41l.png" alt="ABORRECIDO"></div><a href="https://www.mediafire.com/file/os75ddhczsritj1/AB$R$EC$DO+🏇.zip/file" class="btn-descarga" target="_blank">DESCARGAR ABORRECIDO</a></div>
-    <div class="aporte-card"><h3>RASTRAS</h3><p class="creator">CREADOR: MR FIEL</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">383 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/kcmy79.png" alt="RASTRAS"></div><a href="https://www.mediafire.com/file/lrfa6wkujgx0106/R$STR$+⛷%EF%B8%8F.zip/file" class="btn-descarga" target="_blank">DESCARGAR RASTRAS</a></div>
-  </div>
+  <!-- INTRO -->
+  <div id="intro">GOLLO MODS</div>
 
-  <!-- APORTES TOP -->
-  <div id="descargas" class="seccion aportes-grid">
-    <div class="aporte-card"><h3>King of Kings</h3><p class="creator">CREADOR: BETRAYEDD</p><p class="password">CONTRASEÑA: <span class="verde">NINGUNA</span></p><p class="peso">PESO: <span class="rojo">228 MB</span></p><div class="video-thumb"><img src="https://files.catbox.moe/r6n4vp.png" alt="King of Kings"></div><a href="https://www.mediafire.com/file/05rf29dpqjnvgzl/King_of_kings.rar/file" class="btn-descarga" target="_blank">DESCARGA KING OF KINGS</a></div>
-  </div>
-
+  <!-- SCRIPTS -->
   <script>
+    // ===== MENÚ =====
     function mostrar(id, boton) {
-      document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
-      const seccion = document.getElementById(id);
-      if (seccion) seccion.style.display = "grid";
-      document.querySelectorAll(".menu button").forEach(b => b.classList.remove("activo"));
-      if (boton) boton.classList.add("activo");
+      document.querySelectorAll('.seccion').forEach(s => s.style.display = 'none');
+      document.getElementById(id).style.display = 'flex';
+      document.querySelectorAll('.menu button').forEach(b => b.classList.remove('activo'));
+      boton.classList.add('activo');
     }
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".seccion").forEach(s => s.style.display = "none");
-      document.getElementById("equipo").style.display = "grid";
-      document.querySelector(".menu button").classList.add("activo");
+
+    // ===== MÚSICA =====
+    const audio = document.getElementById('musica');
+    const btn = document.getElementById('btn-music');
+    const progreso = document.querySelector('.progreso');
+
+    window.addEventListener('load', () => {
+      audio.volume = 1;
+      audio.play().then(() => btn.textContent = '⏸').catch(() => btn.textContent = '▶');
+    });
+
+    document.addEventListener('click', function iniciar() {
+      if (audio.paused) { audio.play();
+        btn.textContent = '⏸'; }
+      document.removeEventListener('click', iniciar);
+    });
+
+    btn.addEventListener('click', () => {
+      if (audio.paused) { audio.play();
+        btn.textContent = '⏸'; } else { audio.pause();
+        btn.textContent = '▶'; }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      progreso.style.width = (audio.currentTime / audio.duration * 100) + '%';
     });
   </script>
+
 </body>
 </html>
