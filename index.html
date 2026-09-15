@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="SECRETT MODS - Comunidad de mods para GTA San Andreas">
+  <title>SECRETT MODS</title>
+  <link rel="icon" type="image/png" href="https://files.catbox.moe/hq1qke.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://files.catbox.moe">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      color: #e0e0e0;
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      font-weight: 700;
+      background: #050505;
+      overflow-x: hidden;
+      min-height: 100vh;
+      text-rendering: optimizeSpeed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body.modal-abierto { overflow: hidden; }
+    body.tab-oculta * { animation-play-state: paused !important; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* ===== VIDEO FONDO ===== */
+    #video-fondo {
+      position: fixed; inset: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      transform: translateZ(0);
+    }
+
+    .overlay {
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 45%, rgba(90,0,0,.25) 100%),
+        rgba(0,0,0,.78);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ===== SPLASH ===== */
+    #splash-screen {
+      position: fixed; inset: 0;
+      z-index: 9999;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      background: rgba(0,0,0,.95);
+      transition: opacity .6s ease, transform .6s ease, visibility .6s ease;
+    }
+
+    #splash-screen.oculto {
+      opacity: 0; transform: scale(1.05);
+      visibility: hidden; pointer-events: none;
+    }
+
+    .splash-icon-wrap {
+      position: relative;
+      width: 176px; height: 176px;
+      margin-bottom: 30px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .splash-anillo {
+      position: absolute; inset: -16px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0%, #b40000 15%, transparent 30%, transparent 55%, #ff2c2c 70%, transparent 88%);
+      animation: girarAnillo 7s linear infinite;
+      opacity: .85;
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+      will-change: transform;
+    }
+
+    @keyframes girarAnillo { to { transform: rotate(360deg); } }
+
+    .splash-icon {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 2px solid #7a1414;
+      box-shadow: 0 0 40px rgba(180,0,0,.35), 0 0 75px rgba(120,0,0,.2);
+      overflow: hidden;
+      position: relative; z-index: 1;
+      contain: strict;
+    }
+
+    .splash-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .splash-titulo {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(1.9rem, 5.5vw, 3.1rem);
+      letter-spacing: 6px;
+      color: #f0f0f0;
+      text-shadow: 0 0 18px rgba(200,20,20,.55), 0 0 3px rgba(255,100,100,.4);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .splash-titulo span { color: #d81d1d; }
+
+    .splash-subtitulo {
+      font-weight: 600;
+      font-size: .7rem;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,.45);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .splash-line {
+      width: 180px; height: 2px;
+      background: linear-gradient(90deg, transparent, #b02020, transparent);
+      margin-bottom: 35px;
+      animation: expandLine 2s ease-in-out infinite;
+    }
+
+    @keyframes expandLine {
+      0%, 100% { width: 120px; opacity: .4; }
+      50% { width: 200px; opacity: 1; }
+    }
+
+    .splash-flavor {
+      margin-top: 24px;
+      font-family: 'Cinzel', serif;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      color: rgba(210,50,50,.6);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .btn-ingresar-wrap { position: relative; display: inline-block; }
+
+    .btn-ingresar-wrap::before {
+      content: '';
+      position: absolute; inset: -14px;
+      border-radius: 50px;
+      background: radial-gradient(circle, rgba(200,0,0,.45), transparent 70%);
+      filter: blur(6px);
+      animation: auraInfernal 2.6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes auraInfernal {
+      0%, 100% { opacity: .45; transform: scale(.92); }
+      50% { opacity: .9; transform: scale(1.12); }
+    }
+
+    .btn-ingresar {
+      background: linear-gradient(135deg, #1c0606, #050000 60%, #1c0606);
+      color: #fff;
+      border: 1px solid #7a1414;
+      padding: 18px 55px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s, border-color .3s, background .3s;
+      letter-spacing: 4px;
+      transform: skew(-15deg);
+      border-radius: 4px;
+      white-space: nowrap;
+      box-shadow: 0 0 18px rgba(170,0,0,.35), 0 0 2px rgba(255,70,70,.4) inset;
+    }
+
+    .btn-ingresar span {
+      display: inline-block;
+      transform: skew(15deg);
+      text-shadow: 0 0 10px rgba(255,60,60,.6);
+    }
+
+    .btn-ingresar:hover {
+      background: linear-gradient(135deg, #310a0a, #0a0000 60%, #310a0a);
+      border-color: #ff2c2c;
+      box-shadow: 0 0 50px rgba(220,20,20,.7), 0 0 8px rgba(255,90,90,.6) inset;
+      transform: skew(-15deg) scale(1.06);
+      letter-spacing: 5px;
+    }
+
+    .btn-ingresar:active { transform: skew(-15deg) scale(.95); }
+
+    /* ===== HAMBURGUESA ===== */
+    #menuToggle {
+      position: fixed;
+      top: 18px; left: 18px;
+      z-index: 10000;
+      width: 50px; height: 50px;
+      border-radius: 10px;
+      background: rgba(15,15,15,.9);
+      border: 1px solid rgba(255,255,255,.12);
+      cursor: pointer;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 6px;
+      transition: background .3s, border-color .3s;
+      padding: 0;
+    }
+
+    #menuToggle:hover {
+      background: rgba(30,30,30,.95);
+      border-color: #888;
+    }
+
+    #menuToggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #ddd;
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+      transform-origin: center;
+    }
+
+    #menuToggle.activo span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    #menuToggle.activo span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #menuToggle.activo span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ===== MENÚ LATERAL ===== */
+    #sideMenu {
+      position: fixed;
+      top: 0; left: 0;
+      width: 280px; height: 100vh;
+      z-index: 9999;
+      background: rgba(10,10,10,.97);
+      border-right: 1px solid rgba(255,255,255,.08);
+      box-shadow: 5px 0 30px rgba(0,0,0,.8);
+      transform: translateX(-100%);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column;
+      padding: 90px 25px 30px;
+      overflow-y: auto;
+      will-change: transform;
+    }
+
+    #sideMenu.abierto { transform: translateX(0); }
+
+    .side-menu-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #999;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .side-menu-btn {
+      display: block;
+      width: 100%;
+      background: rgba(30,30,30,.6);
+      color: #ccc;
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 16px 20px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .9rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .25s, border-color .25s, color .25s, transform .25s;
+      letter-spacing: 3px;
+      border-radius: 6px;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .side-menu-btn:hover,
+    .side-menu-btn.activo {
+      background: linear-gradient(135deg, #444, #222);
+      border-color: #888;
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .side-menu-discord {
+      display: flex;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, #2a2a2a, #111);
+      border: 1px solid #444;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #ccc;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background .3s, border-color .3s, color .3s;
+    }
+
+    .side-menu-discord:hover {
+      background: linear-gradient(135deg, #444, #222);
+      border-color: #888;
+      color: #fff;
+    }
+
+    .side-menu-discord img { width: 22px; height: 22px; }
+
+    /* ===== BACKDROP ===== */
+    #menuBackdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 9998;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s, visibility .3s;
+    }
+
+    #menuBackdrop.visible { opacity: 1; visibility: visible; }
+
+    /* ===== CONTENIDO ===== */
+    #contenido-principal {
+      display: none;
+      position: relative;
+      z-index: 2;
+      padding: 80px 15px 120px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #contenido-principal.visible {
+      display: block;
+      animation: fadeInContent .5s ease forwards;
+    }
+
+    @keyframes fadeInContent {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .titulo {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      text-align: center;
+      background: linear-gradient(to bottom, #fff, #888);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 20px 0 5px;
+      letter-spacing: 2px;
+    }
+
+    .subtitulo {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(.8rem, 1.6vw, 1.2rem);
+      color: #999;
+      margin-bottom: 25px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ===== SECCIONES ===== */
+    .seccion {
+      display: none;
+      padding: 15px 0;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity .35s ease, transform .35s ease;
+      contain: layout style;
+    }
+
+    .seccion.activa {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== FILTROS ===== */
+    .filtros-container {
+      width: 100%;
+      max-width: 1050px;
+      margin: 0 auto 20px;
+      display: flex; flex-direction: column;
+      gap: 12px;
+    }
+
+    .buscador-wrapper input {
+      width: 100%;
+      padding: 12px 18px;
+      background: rgba(15,15,15,.8);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: border-color .3s, box-shadow .3s;
+      outline: none;
+    }
+
+    .buscador-wrapper input::placeholder {
+      color: rgba(255,255,255,.3);
+      letter-spacing: 1px;
+    }
+
+    .buscador-wrapper input:focus {
+      border-color: #777;
+      box-shadow: 0 0 15px rgba(150,150,150,.1);
+    }
+
+    .chips-container {
+      display: flex; flex-wrap: wrap;
+      gap: 8px; align-items: center;
+    }
+
+    .chips-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .65rem;
+      color: rgba(255,255,255,.4);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-right: 5px;
+    }
+
+    .chip {
+      padding: 5px 15px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      color: rgba(255,255,255,.5);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .75rem;
+      cursor: pointer;
+      transition: background .3s, border-color .3s, color .3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .chip:hover { background: rgba(255,255,255,.1); border-color: #888; color: #fff; }
+
+    .chip.activo {
+      background: linear-gradient(135deg, #444, #222);
+      border-color: #888;
+      color: #fff;
+    }
+
+    .chip-todos.activo {
+      background: rgba(255,255,255,.15);
+      border-color: rgba(255,255,255,.3);
+    }
+
+    /* ===== STAFF ===== */
+    .staff {
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      max-width: 1050px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .staff-grid {
+      display: flex; flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      width: 100%;
+      max-width: 1050px;
+    }
+
+    .separador-direccion {
+      width: 100%;
+      text-align: center;
+      padding: 25px 0 20px;
+      position: relative;
+      margin: 5px 0;
+    }
+
+    .separador-direccion::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 5%; right: 5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(180,0,0,.35), rgba(220,20,20,.55), rgba(180,0,0,.35), transparent);
+    }
+
+    .separador-direccion span {
+      padding: 0 25px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(.85rem, 1.3vw, 1.1rem);
+      color: #c0302f;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 12px rgba(200,20,20,.55), 0 0 2px rgba(255,90,90,.4);
+    }
+
+    .staff-card {
+      background: rgba(10,10,10,.85);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: 25px 20px;
+      transition: transform .3s, box-shadow .3s, border-color .3s, background .3s;
+      width: calc(50% - 15px);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: cardFadeIn .45s ease forwards;
+      cursor: pointer;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      min-height: 260px;
+      contain: content;
+    }
+
+    .staff-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, #a11414, transparent);
+    }
+
+    .staff-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(190,0,0,.25);
+      border-color: #a11414;
+      background: rgba(20,10,10,.9);
+    }
+
+    .staff-card:nth-child(1) { animation-delay: .05s; }
+    .staff-card:nth-child(2) { animation-delay: .1s; }
+    .staff-card:nth-child(3) { animation-delay: .15s; }
+    .staff-card:nth-child(4) { animation-delay: .2s; }
+    .staff-card:nth-child(5) { animation-delay: .25s; }
+
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .staff-card .avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 15px;
+      border: 2px solid #5a1414;
+      transition: border-color .3s, box-shadow .3s;
+      flex-shrink: 0;
+    }
+
+    .staff-card:hover .avatar {
+      border-color: #c81f1f;
+      box-shadow: 0 0 18px rgba(200,20,20,.45);
+    }
+
+    .staff-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .staff-card .name {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .staff-card .role {
+      color: #a44;
+      font-size: .75rem;
+      text-transform: uppercase;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .staff-card .card-tap-hint {
+      margin-top: 10px;
+      font-size: .6rem;
+      letter-spacing: 2px;
+      color: rgba(200,40,40,.5);
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .staff-card:hover .card-tap-hint { opacity: 1; }
+
+    /* ===== MODAL ===== */
+    .miembro-modal-backdrop {
+      position: fixed; inset: 0;
+      z-index: 10001;
+      background: rgba(3,0,0,.9);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity .3s, visibility .3s;
+      padding: 30px 16px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .miembro-modal-backdrop.visible { opacity: 1; visibility: visible; }
+
+    .miembro-modal {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      background: linear-gradient(180deg, #0d0505 0%, #060202 100%);
+      border: 1px solid rgba(200,20,20,.35);
+      border-radius: 14px;
+      padding: 50px 28px 35px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(160,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
+      transform: scale(.92) translateY(10px);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      margin: auto 0;
+      flex-shrink: 0;
+    }
+
+    .miembro-modal-backdrop.visible .miembro-modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .miembro-modal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+      background: linear-gradient(90deg, transparent, #b40000, #ff2c2c, #b40000, transparent);
+    }
+
+    .miembro-modal-cerrar {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,20,20,.4);
+      background: rgba(30,0,0,.7);
+      color: #d33;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .25s, color .25s, transform .25s;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2;
+      padding: 0;
+    }
+
+    .miembro-modal-cerrar:hover {
+      background: rgba(150,0,0,.6);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .miembro-modal-avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 18px;
+      border: 2px solid #a11414;
+      box-shadow: 0 0 25px rgba(200,20,20,.4);
+    }
+
+    .miembro-modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .miembro-modal-nombre {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 0 0 14px rgba(200,20,20,.5);
+    }
+
+    .miembro-modal-rol {
+      color: #c0302f;
+      font-size: .85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-top: 6px;
+    }
+
+    .miembro-modal-divisor {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, #a11414, transparent);
+      margin: 22px auto;
+    }
+
+    .miembro-modal-stats {
+      display: flex; flex-wrap: wrap;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .miembro-stat {
+      flex: 0 1 calc(50% - 7px);
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(200,20,20,.15);
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex; flex-direction: column;
+      gap: 4px;
+    }
+
+    .miembro-stat-full { flex: 0 1 100%; }
+
+    .miembro-stat-label {
+      font-size: .6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+
+    .miembro-stat-valor { font-size: .95rem; color: #eee; font-weight: 700; }
+
+    /* ===== FUEGO (solo desktop) ===== */
+    #fuego-ambiente {
+      position: fixed; inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      contain: strict;
+    }
+
+    #fuego-ambiente .particula {
+      position: absolute;
+      bottom: -20px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffcf5e 0%, #ff6a1f 40%, #b40000 75%, transparent 100%);
+      opacity: 0;
+      animation: fuegoSubir linear infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fuegoSubir {
+      0% { transform: translate3d(0,0,0) scale(.8); opacity: 0; }
+      8% { opacity: .9; }
+      50% { transform: translate3d(12px,-50vh,0) scale(1); opacity: .75; }
+      85% { opacity: .35; }
+      100% { transform: translate3d(-8px,-102vh,0) scale(.4); opacity: 0; }
+    }
+
+    /* ===== SANGRE (solo desktop) ===== */
+    #sangre-layer {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 100000;
+      overflow: hidden;
+      contain: strict;
+    }
+
+    .gota-sangre {
+      position: absolute;
+      width: var(--size, 14px); height: var(--size, 14px);
+      background: radial-gradient(circle at 30% 25%, #ff5a3d 0%, #d40000 32%, #7a0000 72%, #380000 100%);
+      border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%;
+      opacity: .97;
+      transform: translate(-50%,-50%) scale(0);
+      animation: gotaSplatter 1.1s cubic-bezier(.15,.8,.3,1) forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes gotaSplatter {
+      0% { transform: translate(-50%,-50%) scale(0) translate(0,0); opacity: 1; }
+      12% { transform: translate(-50%,-50%) scale(1.15) translate(calc(var(--tx)*.3), calc(var(--ty)*.3)); }
+      55% { transform: translate(-50%,-50%) scale(1) translate(var(--tx),var(--ty)); }
+      85% { transform: translate(-50%,-50%) scale(.92) translate(calc(var(--tx) + var(--dx)*.85), calc(var(--ty) + var(--dy)*.85)); opacity: .85; }
+      100% { transform: translate(-50%,-50%) scale(.82) translate(calc(var(--tx) + var(--dx)), calc(var(--ty) + var(--dy))); opacity: 0; }
+    }
+
+    .mancha-sangre {
+      position: absolute;
+      border-radius: 50% 45% 55% 40% / 45% 55% 40% 60%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,130,100,.35), transparent 25%),
+        radial-gradient(circle at 42% 38%, rgba(190,0,0,.95), rgba(90,0,0,.85) 65%, rgba(40,0,0,.6) 100%);
+      transform: translate(-50%,-50%) scale(0);
+      animation: manchaAparece 3s cubic-bezier(.2,.7,.3,1) forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes manchaAparece {
+      0% { transform: translate(-50%,-50%) scale(0); opacity: .97; }
+      10% { transform: translate(-50%,-50%) scale(1.05); }
+      18% { transform: translate(-50%,-50%) scale(1); opacity: .92; }
+      75% { transform: translate(-50%,-50%) scale(1.02); opacity: .8; }
+      100% { transform: translate(-50%,-50%) scale(1.1); opacity: 0; }
+    }
+
+    /* ===== APORTES ===== */
+    .aportes-grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin: 10px auto 0;
+      max-width: 1050px;
+      width: 100%;
+    }
+
+    .aporte-card {
+      background: rgba(10,10,10,.85);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: 25px 20px;
+      transition: transform .3s, box-shadow .3s, border-color .3s, background .3s;
+      width: calc(50% - 15px);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: cardFadeIn .45s ease forwards;
+      content-visibility: auto;
+      contain-intrinsic-size: 400px;
+    }
+
+    .aporte-card.oculto { display: none; }
+
+    .aporte-card:nth-child(1) { animation-delay: .05s; }
+    .aporte-card:nth-child(2) { animation-delay: .08s; }
+    .aporte-card:nth-child(3) { animation-delay: .11s; }
+    .aporte-card:nth-child(4) { animation-delay: .14s; }
+    .aporte-card:nth-child(5) { animation-delay: .17s; }
+    .aporte-card:nth-child(6) { animation-delay: .2s; }
+    .aporte-card:nth-child(7) { animation-delay: .23s; }
+    .aporte-card:nth-child(8) { animation-delay: .26s; }
+
+    .aporte-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, #555, transparent);
+    }
+
+    .aporte-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(150,150,150,.1);
+      border-color: #888;
+      background: rgba(20,20,20,.9);
+    }
+
+    .aporte-card h3 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      color: #ddd;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .aporte-card p {
+      font-size: 1rem;
+      margin: 8px 0;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      text-align: center;
+      color: rgba(255,255,255,.7);
+    }
+
+    .verde { color: #66cc88; }
+    .rojo { color: #cc6666; }
+
+    /* ===== VIDEO THUMB ===== */
+    .video-thumb {
+      margin: 15px 0;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,.6);
+      cursor: pointer;
+      position: relative;
+      transition: transform .3s, border-color .3s;
+      border: 2px solid rgba(255,255,255,.08);
+      background: #1a1a1a;
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      contain: layout paint;
+    }
+
+    .video-thumb:hover { transform: scale(1.01); border-color: #888; }
+
+    .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .yt-button {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 60px; height: 42px;
+      background: rgba(0,0,0,.6);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .3s, background .3s, border-color .3s;
+      border: 2px solid rgba(255,255,255,.15);
+    }
+
+    .video-thumb:hover .yt-button {
+      background: rgba(80,80,80,.9);
+      transform: translate(-50%,-50%) scale(1.05);
+      border-color: #ccc;
+    }
+
+    .yt-button svg { width: 28px; height: 28px; fill: #fff; margin-left: 3px; }
+
+    .btn-descarga {
+      display: block;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(50,50,50,.6), rgba(20,20,20,.6));
+      color: #ddd;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      transition: background .3s, box-shadow .3s, color .3s, transform .3s;
+      border: 1px solid #555;
+      margin-top: 12px;
+    }
+
+    .btn-descarga:hover {
+      background: linear-gradient(90deg, #444, #222);
+      box-shadow: 0 0 15px rgba(150,150,150,.2);
+      transform: scale(1.02);
+      color: #fff;
+      border-color: #888;
+    }
+
+    .btn-comprar-glow { animation: resplandor-compra 1.5s infinite alternate; }
+
+    @keyframes resplandor-compra {
+      from { box-shadow: 0 0 8px rgba(150,150,150,.2); border-color: #555; }
+      to { box-shadow: 0 0 25px rgba(180,180,180,.4); border-color: #999; }
+    }
+
+    .sin-resultados {
+      width: 100%;
+      text-align: center;
+      padding: 30px 20px;
+      color: rgba(255,255,255,.3);
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .9rem;
+      letter-spacing: 2px;
+      display: none;
+    }
+
+    .sin-resultados.visible { display: block; }
+
+    /* ===== REPRODUCTOR ===== */
+    .music-ui {
+      position: fixed;
+      bottom: 15px; right: 15px;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10,10,10,.85);
+      padding: 10px 16px 10px 12px;
+      border-radius: 40px;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 8px 30px rgba(0,0,0,.7);
+      transition: opacity .3s, transform .3s;
+      opacity: 0;
+    }
+
+    .music-ui.visible { display: flex; opacity: 1; animation: fadeInMusic .4s ease forwards; }
+
+    @keyframes fadeInMusic {
+      from { opacity: 0; transform: translateY(15px) scale(.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .disco-container { position: relative; width: 45px; height: 45px; flex-shrink: 0; }
+
+    .disco {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #444, #1a1a1a);
+      border: 2px solid #333;
+      position: relative;
+      animation: spinDisco 4s linear infinite;
+      animation-play-state: paused;
+      will-change: transform;
+    }
+
+    .disco.girando { animation-play-state: running; }
+
+    .disco::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #555, #222);
+      border: 1px solid #444;
+    }
+
+    .disco::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #999, #444);
+    }
+
+    @keyframes spinDisco { to { transform: rotate(360deg); } }
+
+    .music-controls-center { display: flex; align-items: center; gap: 5px; }
+
+    .music-btn {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: #aaa;
+      cursor: pointer;
+      transition: background .3s, border-color .3s, color .3s, transform .3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .music-btn:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.15);
+      color: #fff;
+    }
+
+    .music-btn.play-btn {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #444, #222);
+      border-color: #666;
+      color: #fff;
+    }
+
+    .music-btn.play-btn:hover { transform: scale(1.08); border-color: #999; }
+    .music-btn.play-btn.paused { background: linear-gradient(135deg, #2a2a2a, #111); border-color: #444; }
+
+    .music-progress-container {
+      display: flex; align-items: center;
+      gap: 8px; min-width: 100px;
+    }
+
+    .music-time {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: .6rem;
+      color: #777;
+      min-width: 30px;
+    }
+
+    .music-bar {
+      width: 80px; height: 3px;
+      background: rgba(255,255,255,.1);
+      border-radius: 3px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .music-bar:hover { height: 5px; }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #666, #999);
+      border-radius: 3px;
+      width: 0%;
+      will-change: width;
+    }
+
+    .music-volume { display: flex; align-items: center; gap: 4px; }
+    .music-volume .vol-icon { color: #666; font-size: 12px; }
+
+    .music-volume input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 40px; height: 2px;
+      background: rgba(255,255,255,.1);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .music-volume input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #888;
+      cursor: pointer;
+    }
+
+    .music-volume input[type="range"]::-moz-range-thumb {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #888;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ===== VOLVER ARRIBA ===== */
+    #btnVolverArriba {
+      position: fixed;
+      bottom: 75px; right: 20px;
+      z-index: 9998;
+      background: linear-gradient(135deg, #333, #111);
+      color: #fff;
+      border: 2px solid #555;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: opacity .3s, transform .3s, background .3s, border-color .3s;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(.8) translateY(15px);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    #btnVolverArriba.visible {
+      opacity: 1; visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    #btnVolverArriba:hover {
+      background: linear-gradient(135deg, #555, #333);
+      transform: scale(1.1);
+      border-color: #999;
+    }
+
+    .icon-flecha { display: inline-block; line-height: 1; margin-top: -2px; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .staff-card { width: calc(50% - 15px); }
+    }
+
+    @media (max-width: 600px) {
+      #menuToggle { width: 44px; height: 44px; top: 12px; left: 12px; }
+      #menuToggle span { width: 20px; }
+      #sideMenu { width: 240px; padding: 80px 20px 30px; }
+      .side-menu-btn { padding: 14px 16px; font-size: .8rem; }
+      .btn-descarga { font-size: .9rem; padding: 12px; }
+      .aporte-card, .staff-card { width: 100%; flex: 0 1 100% !important; max-width: 100% !important; }
+      .staff-card .avatar { width: 90px; height: 90px; }
+      .staff-card .name { font-size: 1.2rem; }
+      .splash-icon { width: 100px; height: 100px; }
+      .btn-ingresar { padding: 12px 30px; font-size: .9rem; letter-spacing: 2px; }
+      .separador-direccion span { font-size: .7rem; letter-spacing: 4px; padding: 0 12px; }
+      .buscador-wrapper input { font-size: .85rem; padding: 10px 14px; }
+      .chip { font-size: .65rem; padding: 4px 12px; }
+      .yt-button { width: 48px; height: 34px; }
+      .yt-button svg { width: 22px; height: 22px; }
+      .music-ui {
+        bottom: 8px; right: 8px;
+        padding: 8px 10px 8px 8px;
+        border-radius: 25px;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: calc(100vw - 16px);
+      }
+      .disco-container, .disco { width: 35px; height: 35px; }
+      .disco::before { width: 22px; height: 22px; }
+      .disco::after { width: 6px; height: 6px; }
+      .music-btn { width: 24px; height: 24px; }
+      .music-btn.play-btn { width: 30px; height: 30px; }
+      .music-progress-container { min-width: 70px; }
+      .music-bar { width: 50px; }
+      .music-time { font-size: .5rem; min-width: 22px; }
+      .music-volume { display: none; }
+      #btnVolverArriba { bottom: 65px; right: 12px; width: 38px; height: 38px; font-size: 18px; }
+      .aporte-card h3 { font-size: 1.5rem; }
+      .miembro-stat { flex: 0 1 100%; }
+      .miembro-modal { padding: 45px 20px 28px; }
+      .miembro-modal-backdrop { padding: 16px 12px; }
+    }
+
+    /* ===== ACCESIBILIDAD / MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      #video-fondo, #fuego-ambiente, #sangre-layer { display: none !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- VIDEO FONDO (solo desktop) -->
+  <video autoplay muted loop playsinline preload="metadata" id="video-fondo" aria-hidden="true">
+    <source src="https://files.catbox.moe/q29i8c.mp4" type="video/mp4">
+  </video>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <!-- FUEGO -->
+  <div id="fuego-ambiente" aria-hidden="true"></div>
+
+  <!-- SPLASH -->
+  <div id="splash-screen">
+    <div class="splash-icon-wrap">
+      <div class="splash-anillo"></div>
+      <div class="splash-icon">
+        <img src="https://files.catbox.moe/hq1qke.jpg" alt="SECRETT MODS" width="160" height="160" fetchpriority="high">
+      </div>
+    </div>
+    <h1 class="splash-titulo">SECRETT <span>MODS</span></h1>
+    <p class="splash-subtitulo">Comunidad de Mods · GTA San Andreas</p>
+    <div class="splash-line"></div>
+    <div class="btn-ingresar-wrap">
+      <button class="btn-ingresar" onclick="ingresar()"><span>INGRESAR</span></button>
+    </div>
+    <p class="splash-flavor">Entra si te atreves...</p>
+  </div>
+
+  <!-- HAMBURGUESA -->
+  <button id="menuToggle" title="Menú" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- MENÚ -->
+  <nav id="sideMenu" aria-label="Menú principal">
+    <div class="side-menu-title">SECCIONES</div>
+    <button class="side-menu-btn activo" onclick="mostrar('equipo', this)">EQUIPO</button>
+    <button class="side-menu-btn" onclick="mostrar('aportes', this)">APORTES</button>
+    <button class="side-menu-btn" onclick="mostrar('datas', this)">DATAS</button>
+    <button class="side-menu-btn" onclick="mostrar('descargas', this)">TENDENCIAS</button>
+    <button class="side-menu-btn" onclick="mostrar('venta', this)">TIENDA</button>
+    <a href="https://discord.gg/Bn8j5mpc5j" target="_blank" rel="noopener" class="side-menu-discord">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="" width="22" height="22" loading="lazy">
+      DISCORD
+    </a>
+  </nav>
+
+  <div id="menuBackdrop"></div>
+
+  <!-- CONTENIDO -->
+  <main id="contenido-principal">
+
+    <audio id="musica" loop preload="none">
+      <source src="https://files.catbox.moe/2dp2qd.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1 class="titulo">SECRETT MODS</h1>
+    <p class="subtitulo">El Renacimiento De Unas Leyendas</p>
+
+    <!-- EQUIPO -->
+    <section id="equipo" class="seccion staff">
+      <div class="separador-direccion"><span>DIRECCIÓN EJECUTIVA</span></div>
+      <div class="staff-grid">
+        <div class="staff-card" onclick="abrirMiembro('santi')" role="button" tabindex="0">
+          <div class="avatar"><img src="https://files.catbox.moe/y7ls04.webp" alt="Santi" width="100" height="100" loading="lazy" decoding="async"></div>
+          <div class="name">SANTI</div>
+          <div class="role">OWNER</div>
+          <div class="card-tap-hint">VER FICHA</div>
+        </div>
+        <div class="staff-card" onclick="abrirMiembro('onix')" role="button" tabindex="0">
+          <div class="avatar"><img src="https://files.catbox.moe/ypep87.png" alt="Onix" width="100" height="100" loading="lazy" decoding="async"></div>
+          <div class="name">ONIX</div>
+          <div class="role">OWNER</div>
+          <div class="card-tap-hint">VER FICHA</div>
+        </div>
+        <div class="staff-card" onclick="abrirMiembro('clarent')" role="button" tabindex="0">
+          <div class="avatar"><img src="https://files.catbox.moe/mk0mbk.png" alt="Clarent" width="100" height="100" loading="lazy" decoding="async"></div>
+          <div class="name">CLARENT</div>
+          <div class="role">OWNER</div>
+          <div class="card-tap-hint">VER FICHA</div>
+        </div>
+        <div class="staff-card" onclick="abrirMiembro('dykan')" role="button" tabindex="0">
+          <div class="avatar"><img src="https://files.catbox.moe/2uj8eb.png" alt="Dykan" width="100" height="100" loading="lazy" decoding="async"></div>
+          <div class="name">DYKAN</div>
+          <div class="role">OWNER</div>
+          <div class="card-tap-hint">VER FICHA</div>
+        </div>
+        <div class="staff-card" onclick="abrirMiembro('leon')" role="button" tabindex="0">
+          <div class="avatar"><img src="https://files.catbox.moe/ewliry.png" alt="Leon" width="100" height="100" loading="lazy" decoding="async"></div>
+          <div class="name">LEON</div>
+          <div class="role">OWNER</div>
+          <div class="card-tap-hint">VER FICHA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="miembroModalBackdrop" class="miembro-modal-backdrop" onclick="cerrarMiembroSiFondo(event)">
+      <div class="miembro-modal" role="dialog" aria-modal="true" aria-labelledby="miembroModalNombre">
+        <button class="miembro-modal-cerrar" onclick="cerrarMiembro()" aria-label="Cerrar">&times;</button>
+        <div class="miembro-modal-avatar"><img id="miembroModalImg" src="" alt="" width="110" height="110"></div>
+        <div id="miembroModalNombre" class="miembro-modal-nombre"></div>
+        <div id="miembroModalRol" class="miembro-modal-rol"></div>
+        <div class="miembro-modal-divisor"></div>
+        <div class="miembro-modal-stats">
+          <div class="miembro-stat"><span class="miembro-stat-label">País</span><span id="miembroModalPais" class="miembro-stat-valor"></span></div>
+          <div class="miembro-stat"><span class="miembro-stat-label">Rango</span><span id="miembroModalRango" class="miembro-stat-valor"></span></div>
+          <div class="miembro-stat"><span class="miembro-stat-label">Tiempo en el equipo</span><span id="miembroModalTiempoEquipo" class="miembro-stat-valor"></span></div>
+          <div class="miembro-stat"><span class="miembro-stat-label">Experiencia</span><span id="miembroModalExperiencia" class="miembro-stat-valor"></span></div>
+          <div class="miembro-stat miembro-stat-full"><span class="miembro-stat-label">Especialidad</span><span id="miembroModalEspecialidad" class="miembro-stat-valor"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APORTES -->
+    <section id="aportes" class="seccion aportes-grid" style="flex-direction: column; align-items: center;">
+      <div class="filtros-container">
+        <div class="buscador-wrapper">
+          <input type="text" id="buscador-aportes" placeholder="Buscar por nombre del creador..." oninput="filtrarAportes()">
+        </div>
+        <div class="chips-container">
+          <span class="chips-label">Filtrar por:</span>
+          <span class="chip chip-todos activo" data-filtro="todos" onclick="filtrarAportesChip('todos', this)">TODOS</span>
+          <span class="chip" data-filtro="SANTI" onclick="filtrarAportesChip('SANTI', this)">SANTI</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:25px;width:100%;max-width:1050px" id="aportes-grid-inner"></div>
+      <div class="sin-resultados" id="sin-resultados-aportes">NO SE ENCONTRARON APORTES DE ESTE CREADOR</div>
+    </section>
+
+    <!-- DATAS -->
+    <section id="datas" class="seccion aportes-grid" style="flex-direction: column; align-items: center;">
+      <div class="filtros-container">
+        <div class="buscador-wrapper">
+          <input type="text" id="buscador-datas" placeholder="Buscar por nombre del creador..." oninput="filtrarDatas()">
+        </div>
+        <div class="chips-container">
+          <span class="chips-label">Filtrar por:</span>
+          <span class="chip chip-todos activo" data-filtro="todos" onclick="filtrarDatasChip('todos', this)">TODOS</span>
+          <span class="chip" data-filtro="SANTI" onclick="filtrarDatasChip('SANTI', this)">SANTI</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:25px;width:100%;max-width:1050px" id="datas-grid-inner"></div>
+      <div class="sin-resultados" id="sin-resultados-datas">NO SE ENCONTRARON DATAS DE ESTE CREADOR</div>
+    </section>
+
+    <!-- TENDENCIAS -->
+    <section id="descargas" class="seccion aportes-grid" style="flex-direction: column; align-items: center;">
+      <div class="sin-resultados visible" style="display:block">PRÓXIMAMENTE NUEVAS TENDENCIAS</div>
+    </section>
+
+    <!-- TIENDA -->
+    <section id="venta" class="seccion aportes-grid">
+      <div class="aporte-card">
+        <h3>RESHADE V1</h3>
+        <p>CREADOR: SANTI</p>
+        <div class="video-thumb"><img src="https://i.postimg.cc/G3WMCv1q/1.png" alt="RESHADE EN VENTA" width="400" height="225" loading="lazy" decoding="async"></div>
+        <a href="https://discord.gg/Bn8j5mpc5j" target="_blank" rel="noopener" class="btn-descarga btn-comprar-glow">COMPRAR</a>
+      </div>
+      <div class="aporte-card">
+        <h3>RESHADE V2</h3>
+        <p>CREADOR: SANTI</p>
+        <div class="video-thumb"><img src="https://i.postimg.cc/brtSNc8H/2.png" alt="RESHADE EN VENTA" width="400" height="225" loading="lazy" decoding="async"></div>
+        <a href="https://discord.gg/Bn8j5mpc5j" target="_blank" rel="noopener" class="btn-descarga btn-comprar-glow">COMPRAR</a>
+      </div>
+      <div class="aporte-card">
+        <h3>RESHADE V3</h3>
+        <p>CREADOR: SANTI</p>
+        <div class="video-thumb"><img src="https://i.postimg.cc/Njcg9ZtQ/sa-mp-001.png" alt="RESHADE EN VENTA" width="400" height="225" loading="lazy" decoding="async"></div>
+        <a href="https://discord.gg/Bn8j5mpc5j" target="_blank" rel="noopener" class="btn-descarga btn-comprar-glow">COMPRAR</a>
+      </div>
+    </section>
+
+  </main>
+
+  <button id="btnVolverArriba" title="Volver arriba" aria-label="Volver arriba">
+    <span class="icon-flecha">↑</span>
+  </button>
+
+  <!-- REPRODUCTOR -->
+  <div class="music-ui" id="musicPlayer">
+    <div class="disco-container"><div class="disco" id="disco"></div></div>
+    <div class="music-controls-center">
+      <button class="music-btn" id="btnRewind" title="Retroceder 10s" aria-label="Retroceder">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/></svg>
+      </button>
+      <button class="music-btn play-btn paused" id="btnPlayPause" title="Reproducir/Pausar" aria-label="Reproducir">
+        <svg id="iconPlayMusic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="iconPauseMusic" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="music-btn" id="btnForward" title="Adelantar 10s" aria-label="Adelantar">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M13 6v12l8.5-6L13 6zM4 18l8.5-6L4 6v12z"/></svg>
+      </button>
+    </div>
+    <div class="music-progress-container">
+      <span class="music-time" id="currentTime">0:00</span>
+      <div class="music-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="music-time" id="totalTime">0:00</span>
+    </div>
+    <div class="music-volume">
+      <span class="vol-icon">VOL</span>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" aria-label="Volumen">
+    </div>
+  </div>
+
+  <div id="sangre-layer" aria-hidden="true"></div>
+
+  <script>
+  (function() {
+    'use strict';
+
+    // ===== DETECCIÓN DE DISPOSITIVO =====
+    const esMovil = matchMedia('(max-width: 900px)').matches || 
+                    matchMedia('(hover: none)').matches ||
+                    /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dispositivoLimitado = esMovil || reduceMotion;
+
+    // ===== DATA DE APORTES Y DATAS (generada en JS para no inflar el HTML) =====
+    const aportes = [
+      { t:'GTA G4', p:'235MB', c:'NINGUNA', img:'https://files.catbox.moe/c5ddxw.png', yt:'https://youtu.be/-k7JtfBrwYY', dl:'https://www.mediafire.com/file/2s9vaesteerlxob/G4.rar/file' },
+      { t:'GTA R5', p:'240MB', c:'NINGUNA', img:'https://files.catbox.moe/p20yd6.png', yt:'https://youtu.be/54DiS7tDYRU', dl:'https://www.mediafire.com/file/z85nmgz13214zjd/GTA+R5.rar/file' },
+      { t:'GITIEY', p:'244MB', c:'GOLLOTIEY', img:'https://files.catbox.moe/k5o04t.png', yt:'https://youtu.be/It70y6RZfow', dl:'https://www.mediafire.com/file/6j5clx0zdd4ljkc/GITIEY.rar/file' },
+      { t:'GOLLO 4REVER', p:'276MB', c:'GOLLO 4REVER', img:'https://files.catbox.moe/ejbl56.png', yt:'https://youtu.be/AVN6wiXHKTs', dl:'https://www.mediafire.com/file/bselejy2cxm1t5d/GOLLO+4REVER.rar/file' },
+      { t:'STAR', p:'246MB', c:'gollosgameover', img:'https://files.catbox.moe/nzpaa1.png', yt:'https://youtu.be/SCmkCiSCUj0', dl:'https://www.mediafire.com/file/sc9tb0sc76ag263/STAR.rar/file' },
+      { t:'4 REVER', p:'245MB', c:'4 rever gollos', img:'https://files.catbox.moe/r9ik2z.png', yt:'https://youtu.be/U7ZCAMbA2no', dl:'https://www.mediafire.com/file/0xg9d3jgy2ubwxv/4+REVER.rar/file' },
+      { t:'FOLLOW', p:'243MB', c:'gollomods', img:'https://files.catbox.moe/t1bbpt.png', yt:'https://youtu.be/7HOpvSogHtM', dl:'https://www.mediafire.com/file/mqguc6dex1140v1/FOLLOW.rar/file' },
+      { t:'REAL 4LIFE', p:'244MB', c:'GollosReal4Life', img:'https://files.catbox.moe/4gnl7j.png', yt:'https://youtu.be/FzcmGS7NprY', dl:'https://www.mediafire.com/file/rp8vlipqxxtbvgo/REAL+4LIFE.rar/file' }
+    ];
+
+    const datas = [
+      { t:'DATA SANTI', p:'415MB', c:'NINGUNA', img:'https://files.catbox.moe/j6agxt.jpg', yt:'https://youtu.be/YlrwuKhJRwY', dl:'https://www.mediafire.com/file/69d39hrhenz4zts/DATA+GOLLO.zip/file' },
+      { t:'DATA PURPLE', p:'388MB', c:'GolloMods$$', img:'https://files.catbox.moe/f80vjc.jpg', yt:'https://youtu.be/DQT-9oXUWJs', dl:'https://www.mediafire.com/file/14tscgekz1uz4ev/DATA+PURPLE.zip/file' },
+      { t:'GOLLO ONDERTEYKER', p:'394MB', c:'GOLLO ONDERTEYKER', img:'https://files.catbox.moe/3hdwbt.jpg', yt:'https://youtu.be/raMfBxZpQfg', dl:'https://www.mediafire.com/file/buanqtnb22wl5n0/GOLLO+ONDERTEYKER.zip/file' },
+      { t:'DATA BLUE', p:'400MB', c:'$$gollomods$$', img:'https://files.catbox.moe/5g1qwc.jpg', yt:'https://youtu.be/kxsJXsu4gWU', dl:'https://www.mediafire.com/file/ylknz67n3zlgxi4/DATA+BLUE.zip/file' },
+      { t:'TKZL', p:'384MB', c:'GolloDominan', img:'https://files.catbox.moe/e9xobp.jpg', yt:'https://youtu.be/tslYLX70Ajg', dl:'https://www.mediafire.com/file/tj25agyfx92clsg/TKZL.zip/file' },
+      { t:'DATA BLUI', p:'384MB', c:'GolloBluiGtA', img:'https://files.catbox.moe/v14ysg.jpg', yt:'https://youtu.be/usmEYlD1fio', dl:'https://www.mediafire.com/file/mxlqtls5etkjspn/DATA+BLUI.zip/file' },
+      { t:'VIN 4R', p:'405MB', c:'4rever Gollo$', img:'https://i.postimg.cc/ZKzjpnm0/DATA.jpg', yt:'https://youtu.be/iRacvEskcEU', dl:'https://www.mediafire.com/file/y48sfwuj0gvhylg/VIN+4R.zip/file' },
+      { t:'DATA XTZ', p:'386MB', c:'GolloXtz', img:'https://i.postimg.cc/3R63Rkx7/1.png', yt:'https://youtu.be/8a9fSaSW9Z0', dl:'https://www.mediafire.com/file/qnni1ug83r27746/XTZ.zip/file' },
+      { t:'Gta Fz', p:'386MB', c:'GolloFz', img:'https://i.postimg.cc/g2Q98CPk/fz.png', yt:'https://youtu.be/IQnnGXwuG3w', dl:'https://www.mediafire.com/file/yvxz31g5uc8lna2/GTA+FZ.zip/file' }
+    ];
+
+    // ===== PLANTILLA DE CARD (string reutilizable) =====
+    const YT_SVG = '<svg viewBox="0 0 68 48"><path d="M66.52 7.74c-.78-2.93-3.09-5.24-6.02-6.02C55.79 0 34 0 34 0S12.21 0 7.5 1.72C4.57 2.5 2.26 4.81 1.48 7.74 0 12.45 0 24 0 24s0 11.55 1.48 16.26c.78 2.93 3.09 5.24 6.02 6.02C12.21 48 34 48 34 48s21.79 0 26.5-1.72c2.93-.78 5.24-3.09 6.02-6.02C68 35.55 68 24 68 24s0-11.55-1.48-16.26zM27 35V13l17 11-17 11z"/></svg>';
+
+    function crearCard(item) {
+      const card = document.createElement('div');
+      card.className = 'aporte-card';
+      card.dataset.creador = 'SANTI';
+      card.innerHTML =
+        '<h3>' + item.t + '</h3>' +
+        '<p>CREADOR: SANTI</p>' +
+        '<p>CONTRASEÑA: <span class="verde">' + item.c + '</span></p>' +
+        '<p>PESO: <span class="rojo">' + item.p + '</span></p>' +
+        '<a href="' + item.yt + '" target="_blank" rel="noopener" class="video-thumb">' +
+          '<img src="' + item.img + '" alt="' + item.t + '" loading="lazy" decoding="async" width="400" height="225">' +
+          '<div class="yt-button">' + YT_SVG + '</div>' +
+        '</a>' +
+        '<a href="' + item.dl + '" target="_blank" rel="noopener" class="btn-descarga">INSTALAR</a>';
+      return card;
+    }
+
+    function renderizarLista(containerId, lista) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const frag = document.createDocumentFragment();
+      lista.forEach(item => frag.appendChild(crearCard(item)));
+      container.appendChild(frag);
+    }
+
+    // ===== MENÚ =====
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+
+    function toggleMenu() {
+      const abierto = sideMenu.classList.toggle('abierto');
+      menuToggle.classList.toggle('activo', abierto);
+      menuBackdrop.classList.toggle('visible', abierto);
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    menuBackdrop.addEventListener('click', toggleMenu);
+
+    // ===== VOLVER ARRIBA =====
+    const btnVolverArriba = document.getElementById('btnVolverArriba');
+    let btnVisible = false;
+
+    window.addEventListener('scroll', function() {
+      const y = window.scrollY;
+      const debeVerse = y > 400;
+      if (debeVerse !== btnVisible) {
+        btnVisible = debeVerse;
+        btnVolverArriba.classList.toggle('visible', debeVerse);
+      }
+    }, { passive: true });
+
+    btnVolverArriba.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== AUDIO =====
+    const audio = document.getElementById('musica');
+    const disco = document.getElementById('disco');
+    const btnPlayPause = document.getElementById('btnPlayPause');
+    const iconPlayMusic = document.getElementById('iconPlayMusic');
+    const iconPauseMusic = document.getElementById('iconPauseMusic');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const progressBar = document.getElementById('progressBar');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const musicPlayer = document.getElementById('musicPlayer');
+
+    let isPlaying = false;
+    let ultimoUpdate = 0;
+
+    function formatTime(s) {
+      if (isNaN(s) || !isFinite(s)) return '0:00';
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
+    }
+
+    function setPlayUI(playing) {
+      isPlaying = playing;
+      disco.classList.toggle('girando', playing);
+      iconPlayMusic.style.display = playing ? 'none' : 'block';
+      iconPauseMusic.style.display = playing ? 'block' : 'none';
+      btnPlayPause.classList.toggle('paused', !playing);
+      btnPlayPause.setAttribute('aria-label', playing ? 'Pausar' : 'Reproducir');
+    }
+
+    function iniciarMusica() {
+      audio.volume = 0.8;
+      volumeSlider.value = 0.8;
+      musicPlayer.classList.add('visible');
+      audio.play().then(() => setPlayUI(true)).catch(() => setPlayUI(false));
+    }
+
+    audio.addEventListener('loadedmetadata', function() {
+      totalTimeEl.textContent = formatTime(audio.duration);
+    }, { once: true });
+
+    audio.addEventListener('timeupdate', function() {
+      const now = performance.now();
+      if (now - ultimoUpdate < 250) return;
+      ultimoUpdate = now;
+      if (audio.duration) {
+        progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+      }
+    });
+
+    audio.addEventListener('ended', function() {
+      audio.currentTime = 0;
+      progressFill.style.width = '0%';
+      currentTimeEl.textContent = '0:00';
+      setPlayUI(false);
+    });
+
+    btnPlayPause.addEventListener('click', function() {
+      if (isPlaying) { audio.pause(); setPlayUI(false); }
+      else { audio.play().then(() => setPlayUI(true)).catch(() => {}); }
+    });
+
+    document.getElementById('btnRewind').addEventListener('click', function() {
+      audio.currentTime = Math.max(0, audio.currentTime - 10);
+    });
+
+    document.getElementById('btnForward').addEventListener('click', function() {
+      audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+    });
+
+    progressBar.addEventListener('click', function(e) {
+      if (!audio.duration) return;
+      const rect = this.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    });
+
+    volumeSlider.addEventListener('input', function() {
+      audio.volume = parseFloat(this.value);
+    });
+
+    // ===== SANGRE (solo desktop) =====
+    const sangreLayer = document.getElementById('sangre-layer');
+    const SANGRE_MAX = 50;
+    let sangreBloqueada = false;
+
+    function limitarSangre() {
+      while (sangreLayer.children.length > SANGRE_MAX) {
+        sangreLayer.removeChild(sangreLayer.firstChild);
+      }
+    }
+
+    function crearSangre(x, y) {
+      if (dispositivoLimitado || sangreBloqueada) return;
+      sangreBloqueada = true;
+      setTimeout(() => { sangreBloqueada = false; }, 180);
+
+      const frag = document.createDocumentFragment();
+      const limpiar = [];
+
+      // Mancha principal
+      const mSize = 85 + Math.random() * 55;
+      const m = document.createElement('div');
+      m.className = 'mancha-sangre';
+      m.style.cssText = 'width:' + mSize + 'px;height:' + mSize + 'px;left:' + x + 'px;top:' + y + 'px';
+      frag.appendChild(m); limpiar.push([m, 3000]);
+
+      // Mancha secundaria
+      if (Math.random() > 0.4) {
+        const ang = Math.random() * Math.PI * 2;
+        const dist = 25 + Math.random() * 40;
+        const s2 = 22 + Math.random() * 28;
+        const m2 = document.createElement('div');
+        m2.className = 'mancha-sangre';
+        m2.style.cssText = 'width:' + s2 + 'px;height:' + s2 + 'px;left:' + (x + Math.cos(ang)*dist) + 'px;top:' + (y + Math.sin(ang)*dist*0.6 + 8) + 'px';
+        frag.appendChild(m2); limpiar.push([m2, 3000]);
+      }
+
+      // Gotas
+      const nGotas = 14 + (Math.random() * 5 | 0);
+      for (let i = 0; i < nGotas; i++) {
+        const ang = Math.random() * Math.PI * 2;
+        const d = 50 + Math.random() * 180;
+        const tx = Math.cos(ang) * d, ty = Math.sin(ang) * d * 0.7 - 15;
+        const dx = Math.cos(ang) * 20, dy = Math.sin(ang) * 20 + 60;
+        const sz = 5 + Math.random() * 16;
+        const g = document.createElement('div');
+        g.className = 'gota-sangre';
+        g.style.cssText =
+          '--tx:' + tx.toFixed(0) + 'px;--ty:' + ty.toFixed(0) + 'px;' +
+          '--dx:' + dx.toFixed(0) + 'px;--dy:' + dy.toFixed(0) + 'px;' +
+          '--size:' + sz.toFixed(0) + 'px;left:' + x + 'px;top:' + y + 'px;' +
+          'animation-delay:' + (Math.random() * 0.06).toFixed(2) + 's';
+        frag.appendChild(g); limpiar.push([g, 1250]);
+      }
+
+      sangreLayer.appendChild(frag);
+      limitarSangre();
+      limpiar.forEach(function(p) { setTimeout(function() { p[0].remove(); }, p[1]); });
+    }
+
+    // Delegación de eventos para sangre
+    const SELECTORES_SANGRE = 'button,.btn-ingresar,.side-menu-btn,.btn-descarga,.chip,.staff-card,#btnPlayPause,#btnRewind,#btnForward,#btnVolverArriba,.miembro-modal-cerrar,#menuToggle,.yt-button,.side-menu-discord';
+
+    document.addEventListener('click', function(e) {
+      if (e.target.closest(SELECTORES_SANGRE)) {
+        crearSangre(e.clientX, e.clientY);
+      }
+    }, { capture: true, passive: true });
+
+    // ===== MODAL FICHAS =====
+    const miembrosData = {
+      santi:   { nombre:'SANTI',   rol:'OWNER', img:'https://files.catbox.moe/y7ls04.webp' },
+      onix:    { nombre:'ONIX',    rol:'OWNER', img:'https://files.catbox.moe/ypep87.png' },
+      clarent: { nombre:'CLARENT', rol:'OWNER', img:'https://files.catbox.moe/mk0mbk.png' },
+      dykan:   { nombre:'DYKAN',   rol:'OWNER', img:'https://files.catbox.moe/2uj8eb.png' },
+      leon:    { nombre:'LEON',    rol:'OWNER', img:'https://files.catbox.moe/ewliry.png' }
+    };
+
+    const modalBackdrop = document.getElementById('miembroModalBackdrop');
+    const modalImg = document.getElementById('miembroModalImg');
+    const modalNombre = document.getElementById('miembroModalNombre');
+    const modalRol = document.getElementById('miembroModalRol');
+    const modalPais = document.getElementById('miembroModalPais');
+    const modalRango = document.getElementById('miembroModalRango');
+    const modalTiempo = document.getElementById('miembroModalTiempoEquipo');
+    const modalExp = document.getElementById('miembroModalExperiencia');
+    const modalEsp = document.getElementById('miembroModalEspecialidad');
+
+    let modalAbierto = false;
+    let ultimoFoco = null;
+
+    function abrirMiembro(id) {
+      const d = miembrosData[id];
+      if (!d || modalAbierto) return;
+      modalAbierto = true;
+      ultimoFoco = document.activeElement;
+
+      modalImg.src = d.img;
+      modalImg.alt = d.nombre;
+      modalNombre.textContent = d.nombre;
+      modalRol.textContent = d.rol;
+      modalPais.textContent = 'Por definir';
+      modalRango.textContent = 'Fundador';
+      modalTiempo.textContent = 'Por definir';
+      modalExp.textContent = 'Por definir';
+      modalEsp.textContent = 'Por definir';
+
+      modalBackdrop.classList.add('visible');
+      document.body.classList.add('modal-abierto');
+    }
+
+    function cerrarMiembro() {
+      if (!modalAbierto) return;
+      modalBackdrop.classList.remove('visible');
+      document.body.classList.remove('modal-abierto');
+      modalAbierto = false;
+      if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+    }
+
+    window.abrirMiembro = abrirMiembro;
+    window.cerrarMiembro = cerrarMiembro;
+
+    window.cerrarMiembroSiFondo = function(e) {
+      if (e.target === modalBackdrop) cerrarMiembro();
+    };
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modalAbierto) cerrarMiembro();
+    });
+
+    // ===== NAVEGACIÓN =====
+    window.mostrar = function(id, boton) {
+      document.querySelectorAll('.seccion').forEach(function(s) {
+        s.classList.remove('activa');
+        s.style.display = 'none';
+      });
+      const seccion = document.getElementById(id);
+      if (seccion) {
+        seccion.style.display = 'flex';
+        void seccion.offsetWidth;
+        seccion.classList.add('activa');
+      }
+      document.querySelectorAll('.side-menu-btn').forEach(function(b) { b.classList.remove('activo'); });
+      if (boton) boton.classList.add('activo');
+      if (sideMenu.classList.contains('abierto')) toggleMenu();
+    };
+
+    window.ingresar = function() {
+      const splash = document.getElementById('splash-screen');
+      const contenido = document.getElementById('contenido-principal');
+      splash.classList.add('oculto');
+
+      setTimeout(function() {
+        contenido.classList.add('visible');
+        const equipo = document.getElementById('equipo');
+        equipo.style.display = 'flex';
+        void equipo.offsetWidth;
+        equipo.classList.add('activa');
+        document.querySelectorAll('.side-menu-btn').forEach(function(b) { b.classList.remove('activo'); });
+        const primerBtn = document.querySelector('.side-menu-btn');
+        if (primerBtn) primerBtn.classList.add('activo');
+        iniciarMusica();
+
+        // Splash fuera del DOM tras la transición
+        setTimeout(function() { splash.remove(); }, 800);
+      }, 300);
+    };
+
+    // ===== FILTROS =====
+    let filtroAportes = 'todos';
+    let filtroDatas = 'todos';
+
+    function filtrar(gridId, sinResId, filtro) {
+      const busqueda = document.getElementById(gridId === 'aportes-grid-inner' ? 'buscador-aportes' : 'buscador-datas')
+        .value.toUpperCase().trim();
+      const cards = document.querySelectorAll('#' + gridId + ' .aporte-card');
+      let visibles = 0;
+
+      cards.forEach(function(card) {
+        const creador = card.dataset.creador;
+        let ok = (filtro === 'todos') || (creador === filtro);
+        if (ok && busqueda) ok = creador.includes(busqueda);
+        card.classList.toggle('oculto', !ok);
+        if (ok) visibles++;
+      });
+
+      document.getElementById(sinResId).classList.toggle('visible', visibles === 0);
+    }
+
+    window.filtrarAportes = function() { filtrar('aportes-grid-inner', 'sin-resultados-aportes', filtroAportes); };
+    window.filtrarDatas = function() { filtrar('datas-grid-inner', 'sin-resultados-datas', filtroDatas); };
+
+    window.filtrarAportesChip = function(f, el) {
+      filtroAportes = f;
+      document.querySelectorAll('#aportes .chip').forEach(function(c) { c.classList.remove('activo'); });
+      el.classList.add('activo');
+      document.getElementById('buscador-aportes').value = '';
+      window.filtrarAportes();
+    };
+
+    window.filtrarDatasChip = function(f, el) {
+      filtroDatas = f;
+      document.querySelectorAll('#datas .chip').forEach(function(c) { c.classList.remove('activo'); });
+      el.classList.add('activo');
+      document.getElementById('buscador-datas').value = '';
+      window.filtrarDatas();
+    };
+
+    // ===== GENERAR PARTÍCULAS DE FUEGO (solo desktop) =====
+    function generarFuego() {
+      if (dispositivoLimitado) return;
+      const cont = document.getElementById('fuego-ambiente');
+      const cantidad = 8;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < cantidad; i++) {
+        const p = document.createElement('span');
+        p.className = 'particula' + (i % 3 === 0 ? ' chica' : i % 3 === 1 ? ' grande' : '');
+        p.style.left = (3 + (i * 12)) + '%';
+        p.style.animationDuration = (8 + Math.random() * 4).toFixed(1) + 's';
+        p.style.animationDelay = (Math.random() * 6).toFixed(1) + 's';
+        frag.appendChild(p);
+      }
+      cont.appendChild(frag);
+    }
+
+    // ===== PAUSAR ANIMACIONES CUANDO LA PESTAÑA NO ES VISIBLE =====
+    document.addEventListener('visibilitychange', function() {
+      document.body.classList.toggle('tab-oculta', document.hidden);
+      if (document.hidden) {
+        if (isPlaying) audio.pause();
+      } else if (isPlaying) {
+        audio.play().catch(function() {});
+      }
+    });
+
+    // ===== PAUSAR VIDEO FUERA DE PANTALLA =====
+    const video = document.getElementById('video-fondo');
+    if (dispositivoLimitado || reduceMotion) {
+      video.remove();
+    } else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) video.play().catch(function() {});
+          else video.pause();
+        });
+      }, { threshold: 0.01 }).observe(video);
+    }
+
+    // ===== INICIALIZACIÓN =====
+    function init() {
+      // Renderizar cards
+      renderizarLista('aportes-grid-inner', aportes);
+      renderizarLista('datas-grid-inner', datas);
+
+      // Generar fuego
+      generarFuego();
+
+      // Precargar imágenes del modal (al pasar el mouse por las cards)
+      document.querySelectorAll('.staff-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+          const idx = Array.from(card.parentNode.children).indexOf(card);
+          const keys = ['santi', 'onix', 'clarent', 'dykan', 'leon'];
+          const d = miembrosData[keys[idx]];
+          if (d) {
+            const img = new Image();
+            img.src = d.img;
+          }
+        }, { once: true, passive: true });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
