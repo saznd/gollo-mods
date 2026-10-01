@@ -21,8 +21,8 @@
     img { max-width: 100%; height: auto; display: block; }
     #video-fondo { position: fixed; inset: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 0; pointer-events: none; transform: translateZ(0); }
     .overlay { position: fixed; inset: 0; background:
-        radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.4) 100%),
-        rgba(0,0,0,.78); z-index: 1; pointer-events: none; }
+        radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.45) 100%),
+        rgba(0,0,0,.38); z-index: 1; pointer-events: none; }
     #contenido-principal { display: none; position: relative; z-index: 2; padding: 110px 15px 140px; max-width: 1200px; margin: 0 auto; }
     #contenido-principal.visible { display: block; }
     .titulo { font-family: 'Forum', serif; font-weight: 900; font-size: clamp(2.5rem, 8vw, 4.5rem); text-align: center; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; padding: 20px 0 5px; letter-spacing: 2px; }
@@ -170,7 +170,6 @@
     .music-ui { gap: 10px; padding: 8px 14px; }
     .music-volume input[type="range"] { width: 55px; }
     .music-progress-container { min-width: 120px; }
-    #video-fondo { display: none !important; }
     }
 @media (max-width: 700px) {
     .aportes-grid-inner,
@@ -424,8 +423,8 @@
 </head>
 <body>
 
-  <video autoplay muted loop playsinline preload="none" id="video-fondo" aria-hidden="true">
-    <source src="https://files.catbox.moe/zwr7l5.mp4" type="video/mp4">
+  <video autoplay muted loop playsinline webkit-playsinline preload="auto" id="video-fondo" aria-hidden="true">
+    <source src="https://files.catbox.moe/ehuz9t.mp4" type="video/mp4">
   </video>
   <div class="overlay" aria-hidden="true"></div>
 
@@ -485,7 +484,7 @@
   <main id="contenido-principal">
 
     <audio id="musica" loop preload="none">
-      <source src="https://files.catbox.moe/jwqn2p.mp3" type="audio/mpeg">
+      <source src="https://files.catbox.moe/c8si3g.mp3" type="audio/mpeg">
     </audio>
 
     <h1 class="titulo">SECRETT MODS</h1>
@@ -652,7 +651,7 @@
     const STAFF_INFO = {
       santi:   { nombre: 'SANTI',   rol: 'Owner', pais: 'Costa Rica', bandera: '🇨🇷', img: 'https://files.catbox.moe/q5sjmy.png', foto: 'https://files.catbox.moe/pvjcun.jpg', lema: 'Dirección ejecutiva', bio: 'Creador de GTA SECRETT y de la data Amarillo. Parte del núcleo que mantiene viva la comunidad.', rasgos: ['Modder', 'Creador de datas', 'Dirección'] },
       clarent: { nombre: 'CLARENT', rol: 'Owner', pais: 'Colombia',   bandera: '🇨🇴', img: 'https://files.catbox.moe/mk0mbk.png', foto: 'https://files.catbox.moe/msyfsl.jpg', lema: 'Dirección ejecutiva', bio: 'Creador del pack SECRET MODS. Parte de la dirección ejecutiva de la comunidad.', rasgos: ['Modder', 'Dirección'] },
-      thos:    { nombre: 'THOS',    rol: 'Sub Owner', pais: 'Secret Mods', bandera: '⭐', img: 'https://files.catbox.moe/yyw89z.webp', foto: 'https://files.catbox.moe/yyw89z.webp', lema: 'Dirección ejecutiva', bio: 'Sub Owner de la comunidad. Parte del equipo que ayuda a mantener todo en marcha.', rasgos: ['Sub Owner', 'Dirección'] }
+      thos:    { nombre: 'THOS',    rol: 'Sub Owner', pais: 'Colombia', bandera: '🇨🇴', img: 'https://files.catbox.moe/yyw89z.webp', foto: 'https://files.catbox.moe/nrlaxj.jpg', lema: 'Dirección ejecutiva', bio: 'Sub Owner de la comunidad. Parte del equipo que ayuda a mantener todo en marcha.', rasgos: ['Sub Owner', 'Dirección'] }
     };
 
     // ===== APORTES (formato simplificado) =====
@@ -1083,7 +1082,7 @@
       iniciarMusica();
 
       const video = document.getElementById('video-fondo');
-      if (video && !esMovil) {
+      if (video) {
         video.play().catch(function() {
           setTimeout(function() { video.play().catch(function(){}); }, 500);
         });
@@ -1135,7 +1134,7 @@
         if (video && !video.paused) video.pause();
       } else {
         if (isPlaying) audio.play().catch(function() {});
-        if (video && !esMovil) video.play().catch(function() {});
+        if (video) video.play().catch(function() {});
       }
     });
 
@@ -1153,26 +1152,19 @@
 
       const video = document.getElementById('video-fondo');
       if (video) {
-        if (esMovil) {
-          // En móvil el video de fondo pesa demasiado: se retira por completo
-          // (deja de decodificar en vez de solo ocultarse con CSS).
-          video.pause();
-          video.removeAttribute('src');
-          video.querySelectorAll('source').forEach(function(s) { s.remove(); });
-          video.load();
-        } else {
-          const intentarPlay = function() {
-            if (video.paused) {
-              video.play().catch(function() {
-                setTimeout(function() { video.play().catch(function(){}); }, 1000);
-              });
-            }
-          };
-          intentarPlay();
-          video.addEventListener('loadeddata', intentarPlay, { once: true });
-          video.addEventListener('canplay', intentarPlay, { once: true });
-          document.addEventListener('click', intentarPlay, { once: true });
-        }
+        const intentarPlay = function() {
+          if (video.paused) {
+            video.play().catch(function() {
+              setTimeout(function() { video.play().catch(function(){}); }, 1000);
+            });
+          }
+        };
+        video.muted = true;
+        video.load();
+        intentarPlay();
+        video.addEventListener('loadeddata', intentarPlay, { once: true });
+        video.addEventListener('canplay', intentarPlay, { once: true });
+        ['click', 'touchstart'].forEach(function(ev) { document.addEventListener(ev, intentarPlay, { once: true, passive: true }); });
       }
     }
     if (document.readyState === 'loading') {
