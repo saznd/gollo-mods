@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Feliz cumpleaños, Papá</title>
+<style>
+  :root{ --txt:#eef2ff; --dorado:#ffd98a; --azul:#8ab4ff; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:#03030c;color:var(--txt);
+    font-family:"Georgia","Times New Roman",serif;-webkit-tap-highlight-color:transparent}
+
+  /* Fondo: una sola capa que solo se traslada (barato para la GPU) */
+  .bg{position:fixed;inset:-8%;will-change:transform;
+    background:
+      radial-gradient(ellipse 55% 45% at 20% 25%, rgba(88,60,180,.38), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 72%, rgba(20,90,170,.34), transparent 70%),
+      radial-gradient(ellipse 38% 32% at 66% 16%, rgba(190,60,140,.2), transparent 70%),
+      radial-gradient(ellipse at 50% 50%, #0a0a22 0%, #03030c 80%);
+    animation:deriva 50s ease-in-out infinite alternate}
+  @keyframes deriva{from{transform:translate3d(-2%,1%,0)}to{transform:translate3d(2%,-1%,0)}}
+  canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+
+  .pantalla{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:24px;transition:opacity 1.2s ease}
+  .pantalla.oculta{opacity:0;pointer-events:none}
+
+  /* ---------- INICIO ---------- */
+  #inicio .pre{letter-spacing:.4em;font-size:.72rem;text-transform:uppercase;color:var(--azul);
+    animation:aparece 2s .3s both}
+  #inicio h1{font-weight:400;font-size:clamp(2.1rem,8vw,4.6rem);line-height:1.1;margin:18px 0 12px;
+    background:linear-gradient(90deg,#fff 0%,var(--dorado) 50%,#fff 100%);background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:aparece 2s .6s both, brillo 8s linear infinite}
+  .orn{display:flex;align-items:center;gap:14px;color:var(--dorado);font-size:.8rem;animation:aparece 2s .9s both}
+  .orn i{display:block;width:clamp(40px,12vw,90px);height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,217,138,.8))}
+  .orn i:last-child{transform:scaleX(-1)}
+  #inicio .sub{font-size:clamp(1rem,3.2vw,1.25rem);color:#c9d3ff;font-style:italic;margin-top:12px;
+    animation:aparece 2s 1s both}
+  #inicio .num{font-size:clamp(5.5rem,24vw,11rem);font-weight:400;line-height:1;margin-top:10px;
+    color:rgba(255,217,138,.06);-webkit-text-stroke:1.5px rgba(255,217,138,.75);
+    text-shadow:0 0 36px rgba(255,217,138,.25);
+    animation:aparece 2.5s 1.2s both, flota 7s 3.7s ease-in-out infinite}
+  @keyframes brillo{to{background-position:200% center}}
+  @keyframes flota{50%{transform:translateY(-8px)}}
+  @keyframes aparece{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* ---------- BOTÓN CUADRADO ---------- */
+  button{font-family:inherit;cursor:pointer;border:none;color:var(--txt)}
+  .btn{position:relative;margin-top:38px;padding:18px 46px;border-radius:2px;
+    font-size:.92rem;letter-spacing:.3em;text-transform:uppercase;
+    background:linear-gradient(135deg,rgba(255,217,138,.16),rgba(138,180,255,.08));
+    border:1px solid rgba(255,217,138,.55);
+    box-shadow:0 0 26px rgba(255,217,138,.18), inset 0 0 18px rgba(255,217,138,.06);
+    transition:box-shadow .35s, background .35s, letter-spacing .35s;
+    animation:aparece 2s 1.8s both}
+  .btn .lbl{position:relative;z-index:1}
+  .btn .shine{position:absolute;inset:0;overflow:hidden;border-radius:2px}
+  .btn .shine::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-20deg);animation:barrido 4.5s 3s ease-in-out infinite}
+  @keyframes barrido{0%{left:-60%}35%,100%{left:130%}}
+  /* esquinas decorativas */
+  .btn::before,.btn::after{content:"";position:absolute;width:12px;height:12px;border:2px solid var(--dorado);
+    transition:.3s}
+  .btn::before{top:-6px;left:-6px;border-right:none;border-bottom:none}
+  .btn::after{bottom:-6px;right:-6px;border-left:none;border-top:none}
+  .btn:hover,.btn:focus-visible{background:linear-gradient(135deg,rgba(255,217,138,.3),rgba(138,180,255,.15));
+    box-shadow:0 0 44px rgba(255,217,138,.45), inset 0 0 22px rgba(255,217,138,.12);letter-spacing:.34em;outline:none}
+  .btn:hover::before,.btn:hover::after{width:20px;height:20px}
+  .btn:active{background:rgba(255,217,138,.35)}
+
+  /* ---------- EXPLORAR ---------- */
+  #explorar{justify-content:flex-end;padding:0;pointer-events:none}
+  .caja{width:100%;padding:36px 24px max(32px,env(safe-area-inset-bottom));
+    background:linear-gradient(to top,rgba(3,3,12,.82),rgba(3,3,12,0));
+    opacity:0;transition:opacity 2s 2.6s}
+  #explorar:not(.oculta) .caja{opacity:1}
+  #explorar h2{font-weight:400;font-size:clamp(1.3rem,5vw,2.1rem);color:var(--dorado);
+    text-shadow:0 0 18px rgba(255,217,138,.45)}
+  #explorar p{max-width:540px;margin:12px auto 0;color:#d5dcff;font-style:italic;line-height:1.65;
+    font-size:clamp(.92rem,3vw,1.08rem)}
+  .caja .orn{justify-content:center;margin-top:14px;animation:none}
+  .volver{position:fixed;top:max(18px,env(safe-area-inset-top));left:18px;padding:10px 18px;border-radius:2px;
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,217,138,.4);
+    pointer-events:auto;opacity:0;transition:opacity 1.5s 3s, background .3s}
+  #explorar:not(.oculta) .volver{opacity:.85}
+  .volver:hover{opacity:1!important;background:rgba(255,217,138,.18)}
+
+  @media (prefers-reduced-motion:reduce){ .bg,.btn .shine::after,#inicio .num{animation:none} }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<canvas id="c"></canvas>
+
+<section id="inicio" class="pantalla">
+  <div class="pre">Un regalo desde las estrellas</div>
+  <h1 id="titulo">Feliz cumpleaños, Papá</h1>
+  <div class="orn"><i></i>✦<i></i></div>
+  <div class="sub">Jueves 22 de octubre de 2026</div>
+  <div class="num">40</div>
+  <button class="btn" id="btnExplorar"><span class="shine"></span><span class="lbl">Explorar universo</span></button>
+</section>
+
+<section id="explorar" class="pantalla oculta">
+  <button class="volver" id="btnVolver">← Volver</button>
+  <div class="caja">
+    <h2 id="tituloExp"></h2>
+    <div class="orn"><i></i>✦<i></i></div>
+    <p id="mensaje"></p>
+  </div>
+</section>
+
+<script>
+/* ============ PERSONALIZA ESTO ============ */
+const NOMBRE  = "Papá";
+const MENSAJE = "Feliz Cumpleaños papá se que debe ser difícil entrar en la época de la cuarta década pero quiero desearte que sea la cuarta de 10 o más décadas feliz cumpleaños y gracias por ser el mejor papá que pueda existir se que no soy el mejor hijo pero trato de serlo a diario aún que aveces no lo parezca es complicado y aveces me cuesta pero creeme que lo intento. " +
+                "TE AMO PAPÁ.";
+/* ========================================== */
+
+document.getElementById('titulo').textContent = "Feliz cumpleaños, " + NOMBRE;
+document.getElementById('tituloExp').textContent = "✦ 40 años de luz, " + NOMBRE + " ✦";
+document.getElementById('mensaje').textContent = MENSAJE;
+
+const cv = document.getElementById('c'), ctx = cv.getContext('2d', {alpha:true});
+let W, H, DPR;
+
+/* ---- Sprites pre-renderizados (evita crear gradientes cada frame) ---- */
+function sprite(stops, size=64){
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const g = c.getContext('2d'), r = size/2;
+  const gr = g.createRadialGradient(r,r,0,r,r,r);
+  stops.forEach(([o,col])=>gr.addColorStop(o,col));
+  g.fillStyle = gr; g.fillRect(0,0,size,size);
+  return c;
+}
+const glowOro   = sprite([[0,'rgba(255,248,225,1)'],[.2,'rgba(255,217,138,.55)'],[1,'rgba(255,217,138,0)']]);
+const glowAzul  = sprite([[0,'rgba(220,235,255,1)'],[.25,'rgba(138,180,255,.4)'],[1,'rgba(138,180,255,0)']]);
+const nebulosa  = sprite([[0,'rgba(140,100,255,.5)'],[.5,'rgba(60,110,220,.18)'],[1,'rgba(60,110,220,0)']],256);
+
+/* ---- Estrellas de fondo ---- */
+const colores = ['rgb(255,255,255)','rgb(200,220,255)','rgb(255,235,200)','rgb(255,205,225)'];
+let stars = [];
+function nuevaEstrella(z){
+  return {x:(Math.random()-.5)*2400, y:(Math.random()-.5)*2400,
+          z: z ?? Math.random()*1000+1, c:colores[Math.random()*4|0], t:Math.random()*6.28};
+}
+function resize(){
+  DPR = Math.min(window.devicePixelRatio||1, 1.5);
+  W = innerWidth; H = innerHeight;
+  cv.width = W*DPR; cv.height = H*DPR;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  const N = W < 700 ? 320 : 520;
+  stars = Array.from({length:N}, ()=>nuevaEstrella());
+  buildConstellation();
+}
+addEventListener('resize', resize);
+
+let modo = 'inicio', vel = .5, velObj = .5, reveal = 0;
+let mx = 0, my = 0, cmx = 0, cmy = 0;
+addEventListener('pointermove', e=>{ mx = e.clientX/innerWidth-.5; my = e.clientY/innerHeight-.5; });
+
+/* ---- Constelación "40" ---- */
+let pts = [], links = [], orbit = [];
+function buildConstellation(){
+  const u = [], L = [];
+  const add = (x,y)=>{ u.push([x,y]); return u.length-1; };
+  const a=add(.62,0), b=add(0,.68), c=add(.5,.68), d=add(.88,.68), e=add(.62,1), f=add(.62,.68), g=add(.62,.3);
+  L.push([a,b],[b,c],[c,f],[f,d],[a,g],[g,f],[f,e]);
+  const cx=1.9, cy=.5, rx=.47, ry=.5, n=12, ring=[];
+  for(let i=0;i<n;i++){ const t=i/n*Math.PI*2-Math.PI/2; ring.push(add(cx+Math.cos(t)*rx, cy+Math.sin(t)*ry)); }
+  for(let i=0;i<n;i++) L.push([ring[i], ring[(i+1)%n]]);
+  const s = Math.min(W/3.1, H/3.1, 260);
+  pts = u.map(([x,y],i)=>({x:(x-1.2)*s, y:(y-.5)*s, z:Math.sin(i*1.7)*s*.25,
+                           r:2+Math.random()*2.2, ph:Math.random()*6.28}));
+  links = L;
+  const no = W < 700 ? 55 : 80;
+  orbit = Array.from({length:no}, ()=>({r:s*(.9+Math.random()*1.6), a:Math.random()*6.28,
+    w:(.15+Math.random()*.5)*(Math.random()<.5?-1:1), tilt:(Math.random()-.5)*1.2,
+    sz:.8+Math.random()*1.8, c:colores[Math.random()*4|0], ph:Math.random()*6.28}));
+}
+
+/* ---- Estrellas fugaces ---- */
+const fugaces = [];
+function lanzaFugaz(){
+  fugaces.push({x:Math.random()*W*.9+W*.1, y:Math.random()*H*.5, vx:-(6+Math.random()*6), vy:3+Math.random()*3, vida:1});
+}
+
+/* ---- Bucle ---- */
+let prev = performance.now(), t = 0;
+function frame(now){
+  const dt = Math.min((now-prev)/1000, .05); prev = now; t += dt;
+  const k60 = dt*60;
+  ctx.clearRect(0,0,W,H);
+
+  vel += (velObj-vel)*Math.min(1, dt*1.8);
+  cmx += (mx-cmx)*.05; cmy += (my-cmy)*.05;
+
+  /* Fondo estelar */
+  const f = Math.min(W,H)*.55, cx = W/2 - cmx*60, cy = H/2 - cmy*60;
+  const warp = vel > 4;
+  if(warp){ ctx.lineCap = 'round'; }
+  for(let i=0;i<stars.length;i++){
+    const s = stars[i], pz = s.z;
+    s.z -= vel*k60;
+    if(s.z < 1){ stars[i] = nuevaEstrella(1000); continue; }
+    const kk = f/s.z, sx = cx + s.x*kk, sy = cy + s.y*kk;
+    if(sx<-20||sx>W+20||sy<-20||sy>H+20){ s.z = 1000; continue; }
+    const size = Math.max(.6, (1-s.z/1000)*2.6);
+    const al = Math.min(1,(1-s.z/1000)*1.6) * (.7 + .3*Math.sin(t*2+s.t));
+    ctx.globalAlpha = al;
+    if(warp){
+      const pk = f/pz;
+      ctx.strokeStyle = s.c; ctx.lineWidth = size;
+      ctx.beginPath(); ctx.moveTo(cx+s.x*pk, cy+s.y*pk); ctx.lineTo(sx,sy); ctx.stroke();
+    } else {
+      ctx.fillStyle = s.c; ctx.fillRect(sx-size/2, sy-size/2, size, size);
+    }
+  }
+  ctx.globalAlpha = 1;
+
+  /* Estrellas fugaces */
+  if(Math.random() < (modo==='explorar'?.01:.003)) lanzaFugaz();
+  ctx.lineCap = 'round'; ctx.lineWidth = 2;
+  for(let i=fugaces.length-1;i>=0;i--){
+    const m = fugaces[i];
+    m.x += m.vx*k60; m.y += m.vy*k60; m.vida -= .018*k60;
+    if(m.vida<=0){ fugaces.splice(i,1); continue; }
+    ctx.strokeStyle = `rgba(255,255,255,${m.vida*.8})`;
+    ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(m.x-m.vx*8,m.y-m.vy*8); ctx.stroke();
+  }
+
+  /* Constelación */
+  reveal += ((modo==='explorar'?1:0)-reveal)*Math.min(1,dt*(modo==='explorar'?.7:3));
+  if(reveal > .01){
+    const ox = Math.sin(t*.22)*W*.12 - cmx*40, oy = Math.sin(t*.31+1)*H*.07 - cmy*30 - H*.06;
+    const ang = Math.sin(t*.25)*.7, ca = Math.cos(ang), sa = Math.sin(ang);
+    const D = 800, zoom = .55 + .45*reveal + Math.sin(t*.18)*.06;
+    const proj = (p)=>{
+      const x = p.x*ca + p.z*sa, z = -p.x*sa + p.z*ca, kk = D/(D+z)*zoom;
+      return {x: W/2+ox+x*kk, y: H/2+oy+p.y*kk, k:kk};
+    };
+    ctx.globalAlpha = reveal;
+
+    // nebulosa detrás
+    const ns = Math.min(W,H)*1.5;
+    ctx.globalAlpha = reveal*.55;
+    ctx.drawImage(nebulosa, W/2+ox-ns/2, H/2+oy-ns/2, ns, ns);
+    ctx.globalAlpha = reveal;
+
+    // estrellas orbitando
+    for(const o of orbit){
+      const a = o.a + t*o.w;
+      const q = proj({x:Math.cos(a)*o.r, y:Math.sin(a)*o.r*Math.sin(o.tilt)*.6, z:Math.sin(a)*o.r*.8});
+      ctx.globalAlpha = reveal*(.3+.55*Math.sin(t*2.5+o.ph)**2)*(.5+.5*q.k);
+      ctx.fillStyle = o.c;
+      const s2 = o.sz*q.k*2.2; ctx.fillRect(q.x-s2/2, q.y-s2/2, s2, s2);
+    }
+    ctx.globalAlpha = reveal;
+
+    const P = pts.map(proj);
+
+    // líneas (un solo trazo, sin sombras)
+    ctx.strokeStyle = 'rgba(255,225,160,.55)'; ctx.lineWidth = 1.3;
+    ctx.beginPath();
+    for(const [i,j] of links){ ctx.moveTo(P[i].x,P[i].y); ctx.lineTo(P[j].x,P[j].y); }
+    ctx.stroke();
+    // chispas viajando
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    links.forEach(([i,j],n)=>{
+      const u = (t*.35 + n*.13) % 1, x = P[i].x+(P[j].x-P[i].x)*u, y = P[i].y+(P[j].y-P[i].y)*u;
+      ctx.moveTo(x+1.6,y); ctx.arc(x,y,1.6,0,6.283);
+    });
+    ctx.fill();
+
+    // estrellas
+    for(let i=0;i<P.length;i++){
+      const q = P[i], p = pts[i], pulse = .75 + .25*Math.sin(t*2.2+p.ph), r = p.r*q.k*pulse;
+      const gs = r*16;
+      ctx.drawImage(i%3===0 ? glowAzul : glowOro, q.x-gs/2, q.y-gs/2, gs, gs);
+    }
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    for(let i=0;i<P.length;i++){
+      const q = P[i], p = pts[i], r = p.r*q.k*(.75+.25*Math.sin(t*2.2+p.ph));
+      ctx.moveTo(q.x+r*.8,q.y); ctx.arc(q.x,q.y,r*.8,0,6.283);
+    }
+    ctx.fill();
+    // destellos en cruz
+    ctx.strokeStyle = 'rgba(255,255,255,.4)'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for(let i=0;i<P.length;i++){
+      const q = P[i], r = pts[i].r*q.k*3.5;
+      ctx.moveTo(q.x-r,q.y); ctx.lineTo(q.x+r,q.y); ctx.moveTo(q.x,q.y-r); ctx.lineTo(q.x,q.y+r);
+    }
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---- Navegación ---- */
+const inicio = document.getElementById('inicio'), explorar = document.getElementById('explorar');
+document.getElementById('btnExplorar').onclick = ()=>{
+  modo = 'explorar'; inicio.classList.add('oculta'); explorar.classList.remove('oculta');
+  vel = 40; velObj = 1.6;
+};
+document.getElementById('btnVolver').onclick = ()=>{
+  modo = 'inicio'; explorar.classList.add('oculta'); inicio.classList.remove('oculta'); velObj = .5;
+};
+
+resize();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
